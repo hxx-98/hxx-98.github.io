@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>IDEA新建和导入Java项目 | Hxx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="IDEA项目结构 新建Java项目 New Project—-&gt;Empty Project，点击Next     填入项目名称，选择项目存放路径 ，点击Finish    添加模块Modules，点击 + 号，默认Java模块，检查SDK，点击Next    填入Module名称，不要使用中文，点击Finish    确认模块配置，点击OK    左侧目录中，点开Project，右击src，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDEA新建和导入Java项目">
+<meta property="og:url" content="http://hxx-98.github.io/2020/08/11/IDEA%E6%96%B0%E5%BB%BA%E5%92%8C%E5%AF%BC%E5%85%A5Java%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Hxx">
+<meta property="og:description" content="IDEA项目结构 新建Java项目 New Project—-&gt;Empty Project，点击Next     填入项目名称，选择项目存放路径 ，点击Finish    添加模块Modules，点击 + 号，默认Java模块，检查SDK，点击Next    填入Module名称，不要使用中文，点击Finish    确认模块配置，点击OK    左侧目录中，点开Project，右击src，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA1.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA2.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA3.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA4.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA5.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA6.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA7.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA8.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA9.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/psvm.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/sout.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/run.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%85%B3%E9%97%AD%E9%A1%B9%E7%9B%AE.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%89%93%E5%BC%80%E5%B7%B2%E6%9C%89%E9%A1%B9%E7%9B%AE.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%971.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97.PNG">
+<meta property="article:published_time" content="2020-08-11T02:47:07.000Z">
+<meta property="article:modified_time" content="2020-08-11T10:14:13.595Z">
+<meta property="article:author" content="hxx-98">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.PNG">
+  
+    <link rel="alternate" href="/atom.xml" title="Hxx" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hxx</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hxx-98.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-IDEA新建和导入Java项目" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/11/IDEA%E6%96%B0%E5%BB%BA%E5%92%8C%E5%AF%BC%E5%85%A5Java%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time datetime="2020-08-11T02:47:07.000Z" itemprop="datePublished">2020-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IDEA新建和导入Java项目
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="IDEA项目结构"><a href="#IDEA项目结构" class="headerlink" title="IDEA项目结构"></a>IDEA项目结构</h1><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.PNG"></p>
+<h1 id="新建Java项目"><a href="#新建Java项目" class="headerlink" title="新建Java项目"></a>新建Java项目</h1><ol>
+<li><p>New Project—-&gt;Empty Project，点击Next</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA1.PNG"></p>
+</li>
+</ol>
+<ol start="2">
+<li>填入项目名称，选择项目存放路径 ，点击Finish</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA2.PNG"></p>
+<ol start="3">
+<li><strong>添加模块Modules</strong>，点击 + 号，默认Java模块，检查SDK，点击Next</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA3.PNG"></p>
+<ol start="4">
+<li>填入Module名称，不要使用中文，点击Finish</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA4.PNG"></p>
+<ol start="5">
+<li>确认模块配置，点击OK</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA5.PNG"></p>
+<ol start="6">
+<li>左侧目录中，点开Project，右击src，选择<strong>new一个package</strong></li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA6.PNG"></p>
+<ol start="6">
+<li>给包命名，只能出现英文小写字母、数字、英文句点。点击回车</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA7.PNG"></p>
+<ol start="7">
+<li>右击包名称，<strong>新建Java class</strong>，给类命名</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA8.PNG"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%96%B0%E5%BB%BA9.PNG"></p>
+<ol start="8">
+<li>编辑HelloWorld.java文件，加入Main类（输入psvm，点击回车可以直接生成）</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/psvm.PNG"></p>
+<ol start="9">
+<li>在Main中简单输出一个字符串（输入sout可以快捷出现代码）</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/sout.PNG"></p>
+<ol start="10">
+<li>HelloWorld.java空白处右键，选择run HelloWorld.main()，点击页面下方的Terminal可看到执行结果</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/run.png"></p>
+<h1 id="关闭当前Java项目"><a href="#关闭当前Java项目" class="headerlink" title="关闭当前Java项目"></a>关闭当前Java项目</h1><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%85%B3%E9%97%AD%E9%A1%B9%E7%9B%AE.PNG"></p>
+<h1 id="打开已有Java项目"><a href="#打开已有Java项目" class="headerlink" title="打开已有Java项目"></a>打开已有Java项目</h1><ul>
+<li>点击open or import（在文件名旁边有个黑色框框）</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%89%93%E5%BC%80%E5%B7%B2%E6%9C%89%E9%A1%B9%E7%9B%AE.PNG"></p>
+<h1 id="导入已有Java模块"><a href="#导入已有Java模块" class="headerlink" title="导入已有Java模块"></a>导入已有Java模块</h1><ul>
+<li>点击file—&gt;Project Structure，点击Modules下的+号，选择import Module</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%971.png"></p>
+<ul>
+<li>选择对应的模块文件，一直选择下一步就可以</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97.PNG"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/11/IDEA%E6%96%B0%E5%BB%BA%E5%92%8C%E5%AF%BC%E5%85%A5Java%E9%A1%B9%E7%9B%AE/" data-id="cknhdl54d0014y0s6g0bpc9kh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/08/11/IDEA%E4%B9%8B%E5%BF%AB%E6%8D%B7%E9%94%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          IDEA之快捷键
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/11/java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java基础语法笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">Java设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Java设计模式</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/SSM/" style="font-size: 15px;">SSM</a> <a href="/tags/c/" style="font-size: 16.67px;">c++</a> <a href="/tags/javaweb/" style="font-size: 18.33px;">javaweb</a> <a href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" style="font-size: 13.33px;">《数据库系统概论》</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hxx-98<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

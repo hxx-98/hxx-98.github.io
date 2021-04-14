@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Fileter过滤器 | Hxx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 基本定义 过滤器的作用 一般用于完成通用操作。如登陆验证、同意编码处理、敏感字符过滤   快速入门 定义一个类，实现接口Filter，包为javax.servlet 复写方法doFilter 配置拦截路径：配置web.xml或注解配置    12345678910111213141516171819@WebFilter(&quot;&#x2F;*&quot;)&#x2F;&#x2F;注解配置，访问所有资源之前，都会执行该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fileter过滤器">
+<meta property="og:url" content="http://hxx-98.github.io/2021/03/22/Fileter%E8%BF%87%E6%BB%A4%E5%99%A8/index.html">
+<meta property="og:site_name" content="Hxx">
+<meta property="og:description" content="1. 基本定义 过滤器的作用 一般用于完成通用操作。如登陆验证、同意编码处理、敏感字符过滤   快速入门 定义一个类，实现接口Filter，包为javax.servlet 复写方法doFilter 配置拦截路径：配置web.xml或注解配置    12345678910111213141516171819@WebFilter(&quot;&#x2F;*&quot;)&#x2F;&#x2F;注解配置，访问所有资源之前，都会执行该">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-22T01:09:23.000Z">
+<meta property="article:modified_time" content="2021-03-22T14:33:43.161Z">
+<meta property="article:author" content="hxx-98">
+<meta property="article:tag" content="javaweb">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hxx" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hxx</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hxx-98.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Fileter过滤器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/22/Fileter%E8%BF%87%E6%BB%A4%E5%99%A8/" class="article-date">
+  <time datetime="2021-03-22T01:09:23.000Z" itemprop="datePublished">2021-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Fileter过滤器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-基本定义"><a href="#1-基本定义" class="headerlink" title="1. 基本定义"></a>1. 基本定义</h1><ol>
+<li>过滤器的作用<ul>
+<li>一般用于完成通用操作。如登陆验证、同意编码处理、敏感字符过滤</li>
+</ul>
+</li>
+<li>快速入门<ul>
+<li>定义一个类，实现接口Filter，包为javax.servlet</li>
+<li>复写方法doFilter</li>
+<li>配置拦截路径：配置web.xml或注解配置</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&quot;/*&quot;)</span><span class="comment">//注解配置，访问所有资源之前，都会执行该过滤器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterDemo1</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;过滤器。。。。&quot;</span>);</span><br><span class="line">        <span class="comment">//放行</span></span><br><span class="line">        filterChain.doFilter(servletRequest,servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-过滤器细节"><a href="#2-过滤器细节" class="headerlink" title="2. 过滤器细节"></a>2. 过滤器细节</h1><h2 id="2-1-web-xml配置"><a href="#2-1-web-xml配置" class="headerlink" title="2.1 web.xml配置"></a>2.1 web.xml配置</h2><ul>
+<li>在web.xml中的web-app标签体内加入下面代码</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>cn.hxx.web.FilterDemo1<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--拦截路径--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>WebFilter注解源码：@webFilter用于将注解过滤器，该注解在部署时被容器处理，容器根据具体的属性将相应的类部署为过滤器。该注解有以下属性，均有默认值。但是value、urlPatterns、servletNames三者至少包含一个，且value和urlPatterns一般不要同时赋值，如果同时指定，通常忽略value的取值</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> WebFilter &#123;</span><br><span class="line">    <span class="function">String <span class="title">description</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;<span class="comment">//该过滤器的描述信息，等价与&lt;description&gt;标签</span></span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">displayName</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;<span class="comment">//该过滤器的显示名，通常配合工具使用，等价与&lt;displayName&gt;标签</span></span><br><span class="line"></span><br><span class="line">    WebInitParam[] initParams() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定一组过滤器初始化参数,等价于&lt;init-param&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">filterName</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;<span class="comment">//指定过滤器的name属性，等价于&lt;filter-name&gt;属性</span></span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">smallIcon</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">largeIcon</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    String[] servletNames() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定过滤器将应用于哪些servlet。取值是@WebServlet中的name属性的取值，或者是web.xml中&lt;servlet-name&gt;的取值</span></span><br><span class="line"></span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//等价于urlPatterns</span></span><br><span class="line"></span><br><span class="line">    String[] urlPatterns() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定一组过滤器的URL匹配模式，等价于&lt;url-pattern&gt;标签</span></span><br><span class="line"></span><br><span class="line">    DispatcherType[] dispatcherTypes() <span class="keyword">default</span> &#123;DispatcherType.REQUEST&#125;;<span class="comment">//指定过滤器的转发模式，包括：ASYNC、ERROR、FORWORD、INCLUDE、REQUEST</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">asyncSupported</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;<span class="comment">//声明过滤器是否支持异步操作模式，等价于&lt;async-support&gt;标签</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2过滤器执行流程"><a href="#2-2过滤器执行流程" class="headerlink" title="2.2过滤器执行流程"></a>2.2过滤器执行流程</h2><p>客户端请求A资源，先执行过滤器放行之前的代码，过滤器放行后执行A资源，然后执行放行代码下的程序</p>
+<ol>
+<li><p>执行过滤器</p>
+</li>
+<li><p>执行放行后的资源</p>
+</li>
+<li><p>执行过滤器放行代码下的代码</p>
+</li>
+</ol>
+<h2 id="2-3过滤器生命周期方法"><a href="#2-3过滤器生命周期方法" class="headerlink" title="2.3过滤器生命周期方法"></a>2.3过滤器生命周期方法</h2><ol>
+<li><p>init方法：服务器启动后，会创建Filter对象，然后调用init方法。用于加载资源</p>
+</li>
+<li><p>dofilter方法：每一次请求被拦截资源时，会执行该方法</p>
+</li>
+<li><p>destroy方法：服务器正常关闭，Filter对象被销毁，会执行destroy方法。用于释放资源</p>
+</li>
+</ol>
+<h2 id="2-4过滤器配置详解"><a href="#2-4过滤器配置详解" class="headerlink" title="2.4过滤器配置详解"></a>2.4过滤器配置详解</h2><ol>
+<li><p><strong>拦截路径的配置</strong></p>
+<ul>
+<li><p><strong>配置1</strong>：具体的资源路径：/index.jsp 或   /findServlet 只有访问该资源时，过滤器才会被执行</p>
+</li>
+<li><p><strong>配置2</strong>：目录拦截：/user/*   访问/user下的所有资源时，过滤器都会被执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/user/CheckCodeServlet&quot;)</span></span><br><span class="line"><span class="meta">@WebServlet(&quot;/user/failServlet&quot;)</span></span><br><span class="line"><span class="comment">//在web目录下还可以建立user子目录，里面也可以存放资源</span></span><br><span class="line"><span class="meta">@WebFilter(&quot;/user/*&quot;)</span></span><br><span class="line"><span class="comment">//访问servlet和访问user目录下的资源都会执行该过滤器</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置3</strong>：后缀名拦截：*.jsp   访问所有后缀名为jsp资源时，过滤器都会被执行</p>
+</li>
+<li><p><strong>配置4</strong>：/*   拦截所有资源</p>
+</li>
+</ul>
+</li>
+<li><p><strong>拦截方式的配置：资源被访问的方式</strong></p>
+<ul>
+<li><p><strong>配置1</strong>：注解配置dispatcherTypes，数组，可配置多个选项 </p>
+<p>(1) REQUEST：默认值，浏览器直接请求资源</p>
+<p>(2) FORWARD：转发访问资源</p>
+<p>(3) INCLUDE：包含访问资源</p>
+<p>(4) ERROR：错误跳转资源</p>
+<p>(5) ASYNC：异步访问资源</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter(value = &quot;/index.jsp&quot;,dispatcherTypes = &#123;DispatcherType.REQUEST,DispatcherType.FORWARD&#125;)</span>java</span><br><span class="line"><span class="comment">//转发到index.jsp 和 直接访问index.jsp 都会执行该过滤器</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-5过滤器链（配置多个过滤器）"><a href="#2-5过滤器链（配置多个过滤器）" class="headerlink" title="2.5过滤器链（配置多个过滤器）"></a>2.5过滤器链（配置多个过滤器）</h2><ul>
+<li><p>执行顺序：有两个过滤器：过滤器1、过滤器2</p>
+<ol>
+<li>过滤器1</li>
+<li>过滤器2</li>
+<li>资源</li>
+<li>过滤器2</li>
+<li>过滤器1</li>
+</ol>
+</li>
+<li><p><strong>过滤器先后顺序</strong></p>
+<ol>
+<li><p><strong>注解配置：按照类名的字符串比较规则比较，值小的先执行</strong></p>
+<p>如：AFilter  和  BFilter</p>
+</li>
+<li><p><strong>web.xml配置：filter-mapping谁定义在上面，谁先执行</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/03/22/Fileter%E8%BF%87%E6%BB%A4%E5%99%A8/" data-id="cknhdl588008ky0s63c1pcp9k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/23/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8FProxy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          代理模式Proxy
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/02/%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">三层架构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">Java设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Java设计模式</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/SSM/" style="font-size: 15px;">SSM</a> <a href="/tags/c/" style="font-size: 16.67px;">c++</a> <a href="/tags/javaweb/" style="font-size: 18.33px;">javaweb</a> <a href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" style="font-size: 13.33px;">《数据库系统概论》</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hxx-98<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

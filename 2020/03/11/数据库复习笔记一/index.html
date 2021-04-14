@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>《数据库系统概论》(王珊  萨师煊)复习笔记（一） | Hxx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第一章 绪论1 数据库技术发展 层次数据库技术：Rockwell公司与IBM公司合作研制了基于层次模型的数据管理系统IMS 网状数据库技术：通用电气公司的Charles Bachman主持设计与实现了网状模型的数据库管理系统IDS；CODASYL下属的数据库任务组DBTG提出的网状数据库模型以及数据定义和数据操纵语言即DDL和DML的规范说明，推出了DBTG报告； 关系数据库技术：IBM公司San">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《数据库系统概论》(王珊  萨师煊)复习笔记（一）">
+<meta property="og:url" content="http://hxx-98.github.io/2020/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/index.html">
+<meta property="og:site_name" content="Hxx">
+<meta property="og:description" content="第一章 绪论1 数据库技术发展 层次数据库技术：Rockwell公司与IBM公司合作研制了基于层次模型的数据管理系统IMS 网状数据库技术：通用电气公司的Charles Bachman主持设计与实现了网状模型的数据库管理系统IDS；CODASYL下属的数据库任务组DBTG提出的网状数据库模型以及数据定义和数据操纵语言即DDL和DML的规范说明，推出了DBTG报告； 关系数据库技术：IBM公司San">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%AF%B9%E5%AE%A2%E8%A7%82%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%8A%BD%E8%B1%A1%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E8%81%94%E7%B3%BB%E5%B1%9E%E6%80%A7%E5%9B%BE.PNG">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E7%BA%A7%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%B8%89%E7%BA%A7%E6%A8%A1%E5%BC%8F%E4%B8%BE%E4%BE%8B.png">
+<meta property="article:published_time" content="2020-03-11T02:30:58.000Z">
+<meta property="article:modified_time" content="2020-03-11T13:53:18.832Z">
+<meta property="article:author" content="hxx-98">
+<meta property="article:tag" content="《数据库系统概论》">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F.PNG">
+  
+    <link rel="alternate" href="/atom.xml" title="Hxx" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hxx</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hxx-98.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库复习笔记一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" class="article-date">
+  <time datetime="2020-03-11T02:30:58.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《数据库系统概论》(王珊  萨师煊)复习笔记（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第一章-绪论"><a href="#第一章-绪论" class="headerlink" title="第一章 绪论"></a>第一章 绪论</h1><h2 id="1-数据库技术发展"><a href="#1-数据库技术发展" class="headerlink" title="1 数据库技术发展"></a>1 数据库技术发展</h2><ul>
+<li>层次数据库技术：Rockwell公司与IBM公司合作研制了基于层次模型的数据管理系统IMS</li>
+<li>网状数据库技术：通用电气公司的Charles Bachman主持设计与实现了网状模型的数据库管理系统IDS；CODASYL下属的数据库任务组DBTG提出的网状数据库模型以及数据定义和数据操纵语言即DDL和DML的规范说明，推出了DBTG报告；</li>
+<li>关系数据库技术：IBM公司San Jose实验室的研究员Edgar F.Codd提出了关系数据模型</li>
+<li>新一代数据库技术<ol>
+<li>面向对象数据库</li>
+<li>XML数据库</li>
+<li>网络数据库、嵌入式移动数据库、多媒体数据库、知识数据库、模糊数据库……</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-数据库系统概述"><a href="#2-数据库系统概述" class="headerlink" title="2 数据库系统概述"></a>2 数据库系统概述</h2><h3 id="2-1-四个基本概念"><a href="#2-1-四个基本概念" class="headerlink" title="2.1 四个基本概念"></a>2.1 四个基本概念</h3><ul>
+<li><p><strong>数据(Data)</strong></p>
+<ol>
+<li><p>数据库中存储的基本对象，描述事物的符号记录</p>
+</li>
+<li><p>数据的种类</p>
+<p>侠义：数字</p>
+<p>广义：文字、图形、图象、声音</p>
+</li>
+<li><p>数据与其语义不可分</p>
+<p>例如：93是一个数据，语义可以是学生某门课的成绩</p>
+</li>
+<li><p>记录是计算机中表示和存储数据的一种格式，是有结构的数据</p>
+</li>
+</ol>
+</li>
+<li><p><strong>数据库(DB)</strong></p>
+<p>​        长期储存在计算机内，有组织的、可共享的大量数据的集合</p>
+</li>
+<li><p><strong>数据库管理系统(DBMS)</strong></p>
+<ol>
+<li><p>位于用户和操作系统之间的一层数据管理软件，是基础软件，一个大型复杂的软件系统。科学的组织和存储数据、高效的获取和维护数据。</p>
+</li>
+<li><p>主要功能</p>
+<ul>
+<li>数据定义功能</li>
+</ul>
+<p>​         提供数据定义语言(DDL)，及其翻译处理程序<br>​         定义数据库中的数据对象</p>
+<ul>
+<li><p>数据操纵功能</p>
+<p>  提供数据操纵语言(DML)，及其编译程序<br>​  操纵数据实现对数据库的基本操作(查询、插入、删除和修改)</p>
+</li>
+<li><p>数据组织、存储和管理<br>​分类组织、存储和管理各种数据；  确定组织数据的文件结构和存取；实现数据之间的联系；提供多种存取方法提高存取效率</p>
+</li>
+<li><p>数据库的运行管理</p>
+<p>保证数据的安全性、完整性； 多用户对数据的并发使用； 发生故障后的系统恢复</p>
+</li>
+<li><p>数据库的建立和维护功能(实用程序)</p>
+<p> 数据库数据批量装载； 数据库转储；介质故障恢复； 数据库的重组织；性能监视等</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>数据库系统(DBS)</strong></p>
+<p>在计算机系统中引入数据库后的系统构成，包括数据库、数据库管理系统、应用系统、数据库管理员</p>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F.PNG"></p>
+<h3 id="2-2-数据管理技术的产生和发展"><a href="#2-2-数据管理技术的产生和发展" class="headerlink" title="2.2 数据管理技术的产生和发展"></a>2.2 数据管理技术的产生和发展</h3><ul>
+<li><p>数据管理：对数据进行分类、组织、编码、存储、检索和维护</p>
+</li>
+<li><p><strong>发展</strong></p>
+<ol>
+<li><p>人工管理阶段：数据不保存；应用程序管理数据；数据不共享，冗余度极大；数据不具有独立性</p>
+</li>
+<li><p>文件系统阶段：</p>
+<p>优点： 数据可长期保存；应用程序管理数据 ；文件系统管理数据<br>缺点：数据共享性差、冗余度大；数据独立性差</p>
+</li>
+<li><p>数据库系统阶段</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-3-数据库系统的特点"><a href="#2-3-数据库系统的特点" class="headerlink" title="2.3 数据库系统的特点"></a>2.3 数据库系统的特点</h3><ul>
+<li><p>数据结构化</p>
+<p>文件系统：每个文件内部是有结构的，但是记录之间没有联系</p>
+<p>关系数据库：不仅数据内部结构化，整体也是结构化的，数据之间具有联系</p>
+</li>
+<li><p>数据的共享性高，冗余度低，易扩充</p>
+</li>
+<li><p>数据独立性高</p>
+<ol>
+<li><p>物理独立性</p>
+<p>指用户的应用程序与存储在磁盘上的数据库中数据是相互独立的。当数据的物理存储改变了，应用程序不用改变。</p>
+</li>
+<li><p>逻辑独立性<br>指用户的应用程序与数据库的逻辑结构是相互独立的。数据的逻辑结构改变了，用户程序也可以不变。</p>
+</li>
+<li><p>数据独立性是由DBMS的二级映像功能来保证的</p>
+</li>
+</ol>
+</li>
+<li><p>数据由DBMS统一管理和控制</p>
+<ol>
+<li><p>数据的安全性（Security）保护<br>保护数据，以防止不合法的使用造成的数据的泄密和破坏。</p>
+</li>
+<li><p>数据的完整性（Integrity）检查<br>将数据控制在有效的范围内，或保证数据之间满足一定的关系。</p>
+</li>
+<li><p>并发（Concurrency）控制<br>对多用户的并发操作加以控制和协调，防止相互干扰而得到错误的结果。</p>
+</li>
+<li><p>数据库恢复（Recovery）</p>
+<p>将数据库从错误状态恢复到某一已知的正确状态。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-数据模型"><a href="#3-数据模型" class="headerlink" title="3 数据模型"></a>3 数据模型</h2><h3 id="3-1-两大数据模型"><a href="#3-1-两大数据模型" class="headerlink" title="3.1 两大数据模型"></a>3.1 两大数据模型</h3><ul>
+<li>在数据库中用数据模型这个工具来来<strong>抽象、表示和处理</strong>现实世界中的事物。通俗地讲数据模型就是现实世界的模拟。</li>
+<li>数据模型应满足三方面要求：能比较真实地模拟现实世界，容易为人所理解，便于在计算机上实现</li>
+<li>分类<ol>
+<li>概念模型（信息模型）：它是按<strong>用户</strong>的观点来对数据和信息建模，用于数据库设计。 </li>
+<li>逻辑模型和物理模型：按<strong>计算机系统</strong>的观点对数据建模，用于DBMS的实现。<ul>
+<li>逻辑模型主要包括网状模型、层次模型、关系模型、面向对象模型等，按计算机系统的观点对数据建模，用于DBMS实现。</li>
+<li>物理模型是对数据最底层的抽象，描述数据在系统内部的表示方式和存取方法，在磁盘或磁带上的存储方式和存取方法。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%AF%B9%E5%AE%A2%E8%A7%82%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%8A%BD%E8%B1%A1%E8%BF%87%E7%A8%8B.PNG"></p>
+<h3 id="3-2-数据模型的组成要素"><a href="#3-2-数据模型的组成要素" class="headerlink" title="3.2 数据模型的组成要素"></a>3.2 数据模型的组成要素</h3><ul>
+<li><strong>数据结构</strong></li>
+<li><strong>数据操作</strong></li>
+<li><strong>完整性约束条件</strong></li>
+</ul>
+<h3 id="3-3-概念模型"><a href="#3-3-概念模型" class="headerlink" title="3.3 概念模型"></a>3.3 概念模型</h3><ul>
+<li>信息世界的基本概念<ol>
+<li>实体（Entity）：客观存在并可相互区别的事物称为实体，可以是具体的人、事、物或抽象的概念。</li>
+<li>属性（Attribute）：实体所具有的某一特性称为属性。一个实体可以由若干个属性来刻画。  </li>
+<li>码（Key）：唯一标识实体的属性集称为码。</li>
+<li>域（Domain）：属性的取值范围称为该属性的域。 </li>
+<li>实体型（Entity Type）：用<strong>实体名及其属性名集合</strong>来抽象和刻画<strong>同类实体</strong>称为实体型。例如：学生（学号、姓名、性别）</li>
+<li>实体集（Entity Set）：同一类型实体的集合称为实体集</li>
+<li>联系（Relationship）：现实世界中事物内部以及事物之间的联系在信息世界中反映为<strong>实体内部的联系和实体之间</strong>的联系。<ul>
+<li>实体内部的联系通常是指组成实体的各属性之间的联系</li>
+<li>实体之间的联系通常是指不同实体集之间的联系</li>
+<li>一对一联系（1:1）、一对多联系（1:n）、多对多联系（m:n）</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>实体 — 联系方法（E-R方法、E-R模型）<ol>
+<li>实体型：用矩形表示，矩形框内写实体名</li>
+<li>属性：用椭圆表示，并用无向边将其与相应的实体连接起来</li>
+<li>联系：用菱形表示，菱形框内写明联系名，并用无向边分别与有关实体连接起来，同时在无向边旁标上联系的类型（1:1、1:n或m:n）</li>
+<li>联系的属性：联系本身也是一种实体型，也   可以有属性。如果一个联系具有属性，则这些属性也要用无向边与该联系连接起来 </li>
+</ol>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E8%81%94%E7%B3%BB%E5%B1%9E%E6%80%A7%E5%9B%BE.PNG"></p>
+<h3 id="3-4-最常用的数据模型"><a href="#3-4-最常用的数据模型" class="headerlink" title="3.4 最常用的数据模型"></a>3.4 最常用的数据模型</h3><ul>
+<li><p>层次模型：用<strong>树形结构</strong>来表示各类实体以及实体间的联系</p>
+</li>
+<li><p>网状模型：采用<strong>网状模型</strong>作为数据的组织方式 </p>
+</li>
+<li><p>关系模型：采用<strong>关系模型</strong>作为数据的组织方式</p>
+<ol>
+<li><p>在用户观点下，关系模型中数据的逻辑结构是一张二维表，它由行和列组成。</p>
+<table>
+<thead>
+<tr>
+<th>学号</th>
+<th>姓名</th>
+<th>年龄</th>
+<th>性别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0001</td>
+<td>张三</td>
+<td>16</td>
+<td>男</td>
+</tr>
+<tr>
+<td>0002</td>
+<td>李四</td>
+<td>18</td>
+<td>男</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>数据结构</p>
+<ul>
+<li>关系：一个关系对应通常说的一张表</li>
+<li>元组（Tuple）：表中的一行即为一个元组</li>
+<li>属性（Attribute）：表中的一列即为一个属性，给每一个属性起一个名称即属性</li>
+<li>主码（Key）：表中的某个属性组，它可以唯一确定一个元组。</li>
+</ul>
+</li>
+<li><p>域（Domain）：属性的取值范围。</p>
+<ul>
+<li>分量：元组中的一个属性值。</li>
+<li>关系模式：对关系的描述，关系名（属性1，属性2，…，属性n）</li>
+</ul>
+</li>
+<li><p><strong>关系的完整性约束条件</strong></p>
+<ul>
+<li><strong>实体完整性</strong></li>
+<li><strong>参照完整性</strong></li>
+<li><strong>用户定义的完整性</strong></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-数据库系统结构"><a href="#4-数据库系统结构" class="headerlink" title="4 数据库系统结构"></a>4 数据库系统结构</h2><h3 id="4-1-分类"><a href="#4-1-分类" class="headerlink" title="4.1 分类"></a>4.1 分类</h3><ul>
+<li><p>从最终用户角度：</p>
+<ol>
+<li><p>单用户结构</p>
+<p>整个数据库系统(应用程序、DBMS、数据)装在一台计算机上，为一个用户独占，不同机器之间不能共享数据。</p>
+</li>
+<li><p>主从式结构</p>
+<ul>
+<li>一个主机带多个终端的多用户结构</li>
+<li>数据库系统，包括应用程序、DBMS、数据，都集中存放在主机上，所有处理任务都由主机来完成。各个用户通过主机的终端并发地存取数据库，共享数据资源。</li>
+<li>优点<br>易于管理、控制与维护。</li>
+<li>缺点<br>当终端用户数目增加到一定程度后，主机的任务会过分繁重，成为瓶颈，从而使系统性能下降。<br>系统的可靠性依赖主机,当主机出现故障时，整个系统都不能使用。</li>
+</ul>
+</li>
+<li><p>分布式结构</p>
+<ul>
+<li>数据库中的数据在<strong>逻辑上是一个整体，但物理地分布</strong>在计算机网络的不同结点上。</li>
+<li>网络中的每个结点都可以独立处理本地数据库中的数据，执行局部应用</li>
+<li>同时也可以同时存取和处理多个异地数据库中的数据，执行全局应用</li>
+<li>优点<br>适应了地理上分散的公司、团体和组织对于数据库应用的需求。</li>
+<li>缺点<br>数据的分布存放给数据的处理、管理与维护带来困难。<br>当用户需要经常访问远程数据时，系统效率会明显地受到网络传输的制约。</li>
+</ul>
+</li>
+<li><p>客户／服务器</p>
+<ul>
+<li>把DBMS功能和应用分开<br>网络中某个（些）结点上的计算机专门用于执行DBMS功能，称为<strong>数据库服务器</strong>，简称服务器，其他结点上的计算机安装DBMS的外围应用开发工具，用户的应用系统，称为<strong>客户机</strong></li>
+<li>集中的服务器结构<br>一台数据库服务器，多台客户机</li>
+<li>分布的服务器结构<br>在网络中有多台数据库服务器<br>分布的服务器结构是客户／服务器与分布式数据库的结合</li>
+</ul>
+</li>
+<li><p>浏览器／应用服务器／数据库服务器多层结构</p>
+<ul>
+<li><p>客户端：<br>浏览器软件、用户界面</p>
+<p> 浏览器的界面统一，广大用户容易掌握</p>
+<p>大大减少了培训时间与费用。</p>
+</li>
+<li><p>服务器端分为两部分：<br>Web服务器、应用服务器<br>数据库服务器等</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>从数据库管理系统角度，数据库系统通常采用三级模式结构，是数据库系统内部的系统结构 </p>
+</li>
+</ul>
+<h3 id="4-2-数据库系统的三级模式结构"><a href="#4-2-数据库系统的三级模式结构" class="headerlink" title="4.2 数据库系统的三级模式结构"></a>4.2 数据库系统的三级模式结构</h3><ul>
+<li>结构图</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E7%BA%A7%E6%A8%A1%E5%BC%8F.png"></p>
+<ul>
+<li>模式<ol>
+<li>模式（逻辑模式）<br><strong>数据库中全体数据的逻辑结构和特征的描述</strong><br>所有用户的公共数据视图，综合了所有用户的需求<br>一个数据库只有一个模式</li>
+<li>模式的地位：是数据库系统模式结构的中间层<br>与数据的物理存储细节和硬件环境无关<br>与具体的应用程序、开发工具及高级程序设计语言无关</li>
+<li>模式的定义<br>数据的逻辑结构（数据项的名字、类型、取值范围等）<br>数据之间的联系<br>数据有关的安全性、完整性要求</li>
+</ol>
+</li>
+<li>外模式（子模式、用户模式）<ol>
+<li><strong>数据库用户（包括应用程序员和最终用户）使用的局部数据的逻辑结构和特征的描述</strong>，数据库用户的数据视图，是与某一应用有关的数据的逻辑表示</li>
+<li>外模式的地位：介于模式与应用之间<ul>
+<li>模式与外模式的关系：一对多<br>外模式通常是模式的子集。<br>一个数据库可以有多个外模式。反映了不同的用户的应用需求、看待数据的方式、对数据保密的要求。<br>对模式中同一数据，在外模式中的结构、类型、长度、保密级别等都可以不同。</li>
+<li>外模式与应用的关系：一对多<br>同一外模式也可以为某一用户的多个应用系统所使用<br>但一个应用程序只能使用一个外模式</li>
+</ul>
+</li>
+<li>外模式的用途<ul>
+<li>保证数据库安全性的一个有力措施</li>
+<li>每个用户只能看见和访问所对应的外模式中的数据</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>内模式（存储模式）<ol>
+<li><strong>是数据物理结构和存储方式的描述</strong></li>
+<li><strong>是数据在数据库内部的表示方式</strong></li>
+</ol>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%B8%89%E7%BA%A7%E6%A8%A1%E5%BC%8F%E4%B8%BE%E4%BE%8B.png"></p>
+<h3 id="4-3-数据库二级映像功能与数据独立性"><a href="#4-3-数据库二级映像功能与数据独立性" class="headerlink" title="4.3 数据库二级映像功能与数据独立性"></a>4.3 数据库二级映像功能与数据独立性</h3><ul>
+<li><p>二级映象在DBMS内部实现这三个抽象层次的联系和转换</p>
+<ol>
+<li><p>外模式／模式映像</p>
+<ul>
+<li>每一个外模式，数据库系统都有一个外模式／模式映象，定义外模式与模式之间的对应关系</li>
+<li>当模式改变时，数据库管理员修改有关的外模式／模式映象，使外模式保持不变</li>
+<li>应用程序是依据数据的外模式编写的，从而应用程序不必修改，保证了数据与程序的逻辑独立性，简称<strong>数据的逻辑独立性</strong>。</li>
+</ul>
+</li>
+<li><p>模式／内模式映像 </p>
+<ul>
+<li><p>模式／内模式映象定义了数据全局逻辑结构与存储结构之间的对应关系。例如，说明逻辑记录和字段在内部是如何表示的</p>
+</li>
+<li><p>数据库中模式／内模式映象是唯一的，该映象定义通常包含在模式描述中</p>
+</li>
+<li><p>当数据库的存储结构改变了（例如选用了另一种存储结构），数据库管理员修改模式／内模式映象，使模式保持不变</p>
+</li>
+<li><p>应用程序不受影响。保证了数据与程序的物理独立性，简称<strong>数据的物理独立性</strong>。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/" data-id="cknhdl573006ry0s68zs3bogd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          《数据库系统概论》(王珊  萨师煊)复习笔记（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/05/deque/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">deque</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">Java设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Java设计模式</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/SSM/" style="font-size: 15px;">SSM</a> <a href="/tags/c/" style="font-size: 16.67px;">c++</a> <a href="/tags/javaweb/" style="font-size: 18.33px;">javaweb</a> <a href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" style="font-size: 13.33px;">《数据库系统概论》</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hxx-98<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

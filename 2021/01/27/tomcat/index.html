@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>tomcat项目部署 | Hxx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.web服务器软件 服务器：安装了服务器软件的计算机  web服务器：接收用户请求，处理请求，做出响应  在web服务器中可以部署web项目，让用户通过浏览器来访问这些项目  web容器：动态资源的运行环境  常见的Java相关的web服务器软件 weblogic：Oracle公司，大型的Javaee服务器，支持所有的javaee规范 websphere：IBM公司 JBOSS： tomcat：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tomcat项目部署">
+<meta property="og:url" content="http://hxx-98.github.io/2021/01/27/tomcat/index.html">
+<meta property="og:site_name" content="Hxx">
+<meta property="og:description" content="1.web服务器软件 服务器：安装了服务器软件的计算机  web服务器：接收用户请求，处理请求，做出响应  在web服务器中可以部署web项目，让用户通过浏览器来访问这些项目  web容器：动态资源的运行环境  常见的Java相关的web服务器软件 weblogic：Oracle公司，大型的Javaee服务器，支持所有的javaee规范 websphere：IBM公司 JBOSS： tomcat：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%906.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E9%9B%86%E6%88%90Tomcat.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%902.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%903.png">
+<meta property="og:image" content="c:/Users/97130/AppData/Roaming/Typora/typora-user-images/image-20210129180629717.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%905.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/run.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/run2.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE1.png">
+<meta property="article:published_time" content="2021-01-27T10:18:02.000Z">
+<meta property="article:modified_time" content="2021-01-30T02:29:52.701Z">
+<meta property="article:author" content="hxx-98">
+<meta property="article:tag" content="javaweb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%906.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hxx" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hxx</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hxx-98.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-tomcat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/27/tomcat/" class="article-date">
+  <time datetime="2021-01-27T10:18:02.000Z" itemprop="datePublished">2021-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      tomcat项目部署
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-web服务器软件"><a href="#1-web服务器软件" class="headerlink" title="1.web服务器软件"></a>1.web服务器软件</h1><ul>
+<li><p>服务器：安装了服务器软件的计算机</p>
+</li>
+<li><p>web服务器：接收用户请求，处理请求，做出响应</p>
+</li>
+<li><p>在web服务器中可以部署web项目，让用户通过浏览器来访问这些项目</p>
+</li>
+<li><p>web容器：动态资源的运行环境</p>
+</li>
+<li><p>常见的Java相关的web服务器软件</p>
+<p>weblogic：Oracle公司，大型的Javaee服务器，支持所有的javaee规范</p>
+<p>websphere：IBM公司</p>
+<p>JBOSS：</p>
+<p>tomcat：Apache组织、servlet/JSP</p>
+</li>
+</ul>
+<h1 id="2-tomcat"><a href="#2-tomcat" class="headerlink" title="2.tomcat"></a>2.tomcat</h1><ol>
+<li><p>启动：双击bin目录下的startup.bat</p>
+<ul>
+<li>若出现黑窗口一闪而过是因为没有正确配置JAVA_HOME环境变量</li>
+<li>启动报错，找到占用的端口号和对应的进程，杀死该进程。<ul>
+<li>在cmd中输入netstat -ano，找到 IP:端口号 如127.0.0.1:8080，以及对应的PID，在任务管理器中将对应的进程关闭</li>
+<li>修改自身的端口号：在tomcat安装目录中的conf目录下找到sever.xml文件，将其中port进行修改</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>访问：在浏览器中输入<a target="_blank" rel="noopener" href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a>  或者<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a>  </p>
+</li>
+<li><p>关闭</p>
+<ul>
+<li>双击bin目录下的shutdown.bat</li>
+<li>或者按ctrl+c</li>
+</ul>
+</li>
+<li><p>配置：部署项目的方式</p>
+<ul>
+<li><p>直接将项目放到tomcat安装目录下的webapps目录下。</p>
+<ul>
+<li><p>例如：创建hello文件夹，文件夹下编写一个helloworld.html文件，启动tomcat，在浏览器中输入localhost:8080/hello/helloworld.html，就可以访问这个静态资源文件。</p>
+<p>/hello:项目的访问路径—&gt;虚拟目录</p>
+</li>
+</ul>
+</li>
+<li><p>将项目工程直接打包成war包，放入webapps目录下，浏览器访问，tomcat会自动解压该包。如果没有的话，就重启一下tomcat</p>
+<ul>
+<li>例如将上面的helloworld.html压缩成hello.war文件，放到webapps目录下，解压后出现hello目录，下面存放helloword.html</li>
+</ul>
+</li>
+<li><p>配置conf/sever.xml文件</p>
+<p>在 <code>&lt;Host&gt;</code> 标签体中配置，其中docBase代表项目存放的路径，path为虚拟目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--部署项目--&gt;</span><br><span class="line">&lt;Context docBase&#x3D;&quot;E:\JAVA\JavaScript\HTML\hello&quot; path&#x3D;&quot;&#x2F;hxx&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例如：上面在hello文件夹中存放了helloworld.html文件，启动tomcat后，在浏览器中输入：localhost:8080/hxx/helloworld.html</li>
+</ul>
+</li>
+<li><p>热部署方式：在conf\Catalina\localhost目录下创建任意名称的xml文件，在文件中编写 <code>&lt;Context docBase=&quot;E:\JAVA\JavaScript\HTML\hello&quot; /&gt;</code> ，同样的docBase是项目的位置，虚拟目录是xml文件的名字。</p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>例如创建hxx.xml，然后再上面docBase目录下编写一个helloworld.html文件，启动tomcat，再浏览器中输入：localhost:8080/hxx/helloworld.html</li>
+</ul>
+<h1 id="3-与IDEA集成-创建部署web项目"><a href="#3-与IDEA集成-创建部署web项目" class="headerlink" title="3.与IDEA集成,创建部署web项目"></a>3.与IDEA集成,创建部署web项目</h1><ul>
+<li><p>静态项目和动态项目</p>
+<ul>
+<li><p>目录结构</p>
+<p>Java动态项目的目录结构：</p>
+<p>–项目根目录</p>
+<p>​    –WEB-INF目录</p>
+<p>​        –web.xml:web项目的核心配置文件，只有这个文件的是静态项目</p>
+<p>​        –classes：防止字节码文件目录</p>
+<p>​        –lib目录：放置以来的jar包</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1在IDEA2020-项目中中加入tomcat服务"><a href="#3-1在IDEA2020-项目中中加入tomcat服务" class="headerlink" title="3.1在IDEA2020 项目中中加入tomcat服务"></a>3.1<strong>在IDEA2020 项目中中加入tomcat服务</strong></h2><ul>
+<li>点击项目菜单栏中的Edit/Add Configurations，<strong>在Templates中选择Tomcat Sever下的 Local，并在deployment中添加Artifacts</strong></li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%906.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E9%9B%86%E6%88%90Tomcat.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%902.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%903.png"></p>
+<h2 id="3-2创建javaweb项目"><a href="#3-2创建javaweb项目" class="headerlink" title="3.2创建javaweb项目"></a><strong>3.2创建javaweb项目</strong></h2><ul>
+<li>创建一个空项目，新建一个java module：test，右键test，选择add framework support，添加web application</li>
+</ul>
+<p><img src="C:\Users\97130\AppData\Roaming\Typora\typora-user-images\image-20210129180629717.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%905.png"></p>
+<ul>
+<li><p>web项目目录结构和运行</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/run.png"></p>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/run2.png"></p>
+<h2 id="3-3-热部署"><a href="#3-3-热部署" class="headerlink" title="3.3 热部署"></a>3.3 热部署</h2><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE1.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/01/27/tomcat/" data-id="cknhdl563004my0s652cnckxp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/30/Servlet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Servlet基本原理和配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/27/Jsoup%E8%A7%A3%E6%9E%90%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Jsoup解析器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">Java设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Java设计模式</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/SSM/" style="font-size: 15px;">SSM</a> <a href="/tags/c/" style="font-size: 16.67px;">c++</a> <a href="/tags/javaweb/" style="font-size: 18.33px;">javaweb</a> <a href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" style="font-size: 13.33px;">《数据库系统概论》</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hxx-98<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

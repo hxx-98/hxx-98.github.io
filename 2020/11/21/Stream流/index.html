@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Stream流 | Hxx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 引言 I&#x2F;O流是用于读写，Stream用于对数组和集合进行简化操作。我们可以将集合和数组转换成Stream流，使用Stream流中的方法对其中的元素进行操作。  1234567891011public static void main(String[] args) &amp;#123;        List&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stream流">
+<meta property="og:url" content="http://hxx-98.github.io/2020/11/21/Stream%E6%B5%81/index.html">
+<meta property="og:site_name" content="Hxx">
+<meta property="og:description" content="1 引言 I&#x2F;O流是用于读写，Stream用于对数组和集合进行简化操作。我们可以将集合和数组转换成Stream流，使用Stream流中的方法对其中的元素进行操作。  1234567891011public static void main(String[] args) &amp;#123;        List&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-21T02:09:15.000Z">
+<meta property="article:modified_time" content="2020-12-03T12:43:22.685Z">
+<meta property="article:author" content="hxx-98">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hxx" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hxx</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hxx-98.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Stream流" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/21/Stream%E6%B5%81/" class="article-date">
+  <time datetime="2020-11-21T02:09:15.000Z" itemprop="datePublished">2020-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Stream流
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1 引言"></a>1 引言</h1><ul>
+<li>I/O流是用于读写，Stream用于对数组和集合进行简化操作。我们可以将集合和数组转换成Stream流，使用Stream流中的方法对其中的元素进行操作。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;hxx&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;hq&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;qzy&quot;</span>);</span><br><span class="line">        <span class="comment">//使用Stream流的方式遍历集合，对集合中的数据进行过滤</span></span><br><span class="line">        list.stream()</span><br><span class="line">                .filter(name-&gt;name.startsWith(<span class="string">&quot;h&quot;</span>))</span><br><span class="line">                .filter(name-&gt;name.length()==<span class="number">3</span>)</span><br><span class="line">                .forEach(name-&gt;System.out.println(name));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-流式思想概述"><a href="#2-流式思想概述" class="headerlink" title="2 流式思想概述"></a>2 流式思想概述</h1><ul>
+<li><p>Stream流是一个集合元素的函数模型，并不是集合，也不是数据结构，其本身并不存储任何元素或其地址值</p>
+</li>
+<li><p>Stream是一个来自数据源的元素队列</p>
+<ul>
+<li>元素是特定类型的对象，形成一个队列。</li>
+<li>数据源可以是集合、数组</li>
+</ul>
+</li>
+<li><p>和之前的Collection相比，Stream操作还有两个基础的特征：</p>
+<ul>
+<li><p>Pipelining：中间操作都会返回流对象本身。这样多个操作可以串联成一个管道，如同流式风格。这样可以对操作进行优化，比如<strong>延迟执行和短路</strong></p>
+</li>
+<li><p>内部迭代：以前对集合遍历都是通过iterator或者增强for的方式，显式的在集合外部进行迭代，即外部迭代。Stream提供了内部迭代的方式，流可以直接调用遍历方法</p>
+</li>
+</ul>
+</li>
+<li><p>Stream属于管道流，只能使用一次。第一个Stream流调用完毕，数据会流转到下一个Stream上。而这时第一个Stream流已经使用完毕并且关闭。</p>
+</li>
+<li><p>使用流的步骤：</p>
+<ul>
+<li>获取一个数据源</li>
+<li>数据转换：每次转换原有Stream对象不改变，返回一个新的Stream对象（可以有多次转换）。</li>
+<li>执行操作获取想要的结果</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-获取流"><a href="#3-获取流" class="headerlink" title="3 获取流"></a>3 获取流</h1><ul>
+<li><p>获取流的方式：</p>
+<ul>
+<li>所有的Collection都可以通过stream默认方法获取流</li>
+<li>Stream接口的静态方法<code>of</code> 可以获取数组对应的流</li>
+</ul>
+</li>
+<li><p><code>java.util.Collection</code> 接口中加入了default方法 <code>stream</code> 来获取流，所以其所有实现类都可获取流</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;		</span><br><span class="line">		<span class="comment">//将集合转换为stream</span></span><br><span class="line">        List&lt;String&gt; list1 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Stream&lt;String&gt; stream1 = list1.stream();</span><br><span class="line">    </span><br><span class="line">        Set&lt;String&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        Stream&lt;String&gt; stream2 = set.stream();</span><br><span class="line">    </span><br><span class="line">        Map&lt;String,String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//获取键，存储到一个set集合中</span></span><br><span class="line">        Set&lt;String&gt; set1 = map.keySet();</span><br><span class="line">        Stream&lt;String&gt; stream3 = set1.stream();</span><br><span class="line">        <span class="comment">//获取值，存储到Collection集合中</span></span><br><span class="line">        Collection&lt;String&gt; values = map.values();</span><br><span class="line">        Stream&lt;String&gt; stream4 = values.stream();</span><br><span class="line">        <span class="comment">//获取键值对</span></span><br><span class="line">        Set&lt;Map.Entry&lt;String, String&gt;&gt; entryset = map.entrySet();</span><br><span class="line">        Stream&lt;Map.Entry&lt;String, String&gt;&gt; stream5 = entryset.stream();</span><br><span class="line">    </span><br><span class="line">		<span class="comment">//将数组转换为stream流</span></span><br><span class="line">        Stream&lt;Integer&gt; integerStream = Stream.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        Integer[]arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">        Stream&lt;Integer&gt; arr1 = Stream.of(arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-常用方法"><a href="#4-常用方法" class="headerlink" title="4 常用方法"></a>4 常用方法</h1><ul>
+<li>延迟方法：返回值类型仍然是<code>Stream</code>接口自身类型的方法，支持链式调用</li>
+<li>终结方法：返回值类型不再是<code>Stream</code>自身类型的方法，不咋支持类似于<code>StringBuilder</code>那样的链式调用。比如有<code>count</code>和<code>foreach</code>方法</li>
+</ul>
+<h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><ul>
+<li>该方法接收一个Consumer接口函数，将每一个硫元素交个该函数进行处理</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">forEach</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> T&gt; action)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;获取stream流</span><br><span class="line">        Stream&lt;String&gt; stringStream &#x3D; Stream.of(&quot;hxx&quot;, &quot;qzy&quot;);</span><br><span class="line">        &#x2F;&#x2F;调用forEach</span><br><span class="line">        stringStream.forEach(</span><br><span class="line">                (String name)-&gt;&#123;</span><br><span class="line">                    System.out.println(name);</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="过滤方法filter"><a href="#过滤方法filter" class="headerlink" title="过滤方法filter"></a>过滤方法filter</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stream&lt;T&gt; <span class="title">filter</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; predicate)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数接收一个Predicate函数式接口参数（可以是一个Lambda或方法引用）作为筛选条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        Stream&lt;String&gt; stream &#x3D; Stream.of(&quot;hxx&quot;, &quot;qzy&quot;);</span><br><span class="line">        Stream&lt;String&gt; h &#x3D; stream.filter(</span><br><span class="line">                (String name) -&gt; &#123;</span><br><span class="line">                    return name.startsWith(&quot;h&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line">        System.out.println(h);</span><br><span class="line">        stream.forEach(name-&gt; System.out.println(name));&#x2F;&#x2F;报错，使用完stream之后转换到了h流，stream已经关闭</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="映射：map"><a href="#映射：map" class="headerlink" title="映射：map"></a>映射：map</h2><ul>
+<li>如果需要将流中的元素映射到另一个流中，可以使用map方法，方法签名：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//&lt;R&gt; Stream &lt;R&gt; map(Function&lt;? siper T,? extends R&gt; maper);</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>);</span><br><span class="line">        Stream&lt;Integer&gt; integerStream = stream.map((String s) -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> Integer.parseInt(s);</span><br><span class="line">        &#125;);</span><br><span class="line">        integerStream.forEach(i-&gt; System.out.println(i));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="count、limit、skip、contact"><a href="#count、limit、skip、contact" class="headerlink" title="count、limit、skip、contact"></a>count、limit、skip、contact</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//long count(); 终结方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;4&quot;</span>,<span class="string">&quot;5&quot;</span>);</span><br><span class="line">        <span class="comment">/*Stream&lt;String&gt; limit = stream.limit(3);</span></span><br><span class="line"><span class="comment">        System.out.println(limit.count());</span></span><br><span class="line"><span class="comment">        Stream&lt;String&gt; skip = stream.skip(3);*/</span></span><br><span class="line">        Stream&lt;String&gt; stream1 = Stream.of(<span class="string">&quot;hxx&quot;</span>);</span><br><span class="line">        Stream&lt;String&gt; concat = Stream.concat(stream, stream1);<span class="comment">//保证流没有关闭</span></span><br><span class="line">        concat.forEach(i-&gt; System.out.println(i));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/11/21/Stream%E6%B5%81/" data-id="cknhdl55c0036y0s6f1i35vu2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/11/26/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/02/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3-Java/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">函数式接口-Java</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">Java设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Java设计模式</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/SSM/" style="font-size: 15px;">SSM</a> <a href="/tags/c/" style="font-size: 16.67px;">c++</a> <a href="/tags/javaweb/" style="font-size: 18.33px;">javaweb</a> <a href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" style="font-size: 13.33px;">《数据库系统概论》</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hxx-98<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>HTTP-request | Hxx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.HTTP协议 概念：Hyber Text Transfer Protocal 超文本传输协议  定义了客户端和服务器端通信时，发送数据的格式  特点：  基于TCP&#x2F;IP的高级协议 默认端口号80 基于请求&#x2F;响应模型：一次请求对应一次响应 无状态：每次请求之间相互独立，不能交互数据   历史版本  1.0版本：每次请求都会重新建立连接 1.1版本：复用连接    2.HTTP请求消息数据格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP-request">
+<meta property="og:url" content="http://hxx-98.github.io/2021/01/30/HTTP-request/index.html">
+<meta property="og:site_name" content="Hxx">
+<meta property="og:description" content="1.HTTP协议 概念：Hyber Text Transfer Protocal 超文本传输协议  定义了客户端和服务器端通信时，发送数据的格式  特点：  基于TCP&#x2F;IP的高级协议 默认端口号80 基于请求&#x2F;响应模型：一次请求对应一次响应 无状态：每次请求之间相互独立，不能交互数据   历史版本  1.0版本：每次请求都会重新建立连接 1.1版本：复用连接    2.HTTP请求消息数据格式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-30T09:27:53.000Z">
+<meta property="article:modified_time" content="2021-02-02T13:09:11.104Z">
+<meta property="article:author" content="hxx-98">
+<meta property="article:tag" content="javaweb">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hxx" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hxx</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hxx-98.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-HTTP-request" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/30/HTTP-request/" class="article-date">
+  <time datetime="2021-01-30T09:27:53.000Z" itemprop="datePublished">2021-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP-request
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-HTTP协议"><a href="#1-HTTP协议" class="headerlink" title="1.HTTP协议"></a>1.HTTP协议</h1><ul>
+<li><p>概念：Hyber Text Transfer Protocal 超文本传输协议</p>
+</li>
+<li><p>定义了客户端和服务器端通信时，发送数据的格式</p>
+</li>
+<li><p>特点：</p>
+<ol>
+<li>基于TCP/IP的高级协议</li>
+<li>默认端口号80</li>
+<li>基于请求/响应模型：一次请求对应一次响应</li>
+<li>无状态：每次请求之间相互独立，不能交互数据</li>
+</ol>
+</li>
+<li><p>历史版本</p>
+<ul>
+<li>1.0版本：每次请求都会重新建立连接</li>
+<li>1.1版本：复用连接</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-HTTP请求消息数据格式"><a href="#2-HTTP请求消息数据格式" class="headerlink" title="2.HTTP请求消息数据格式"></a>2.HTTP请求消息数据格式</h1><ol>
+<li><p><strong>请求行</strong></p>
+<p>请求方式  请求url   请求协议/版本</p>
+<ul>
+<li>GET<ol>
+<li>请求参数在请求行中，在url后</li>
+<li>请求的url长度有限制</li>
+</ol>
+</li>
+<li>POST<ol>
+<li>请求参数在请求体中</li>
+<li>请求的url长度没有限制</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>请求头</strong>：请求头名称：请求头值，键值对格式</p>
+<ul>
+<li>Host：请求的主机</li>
+<li>User-Agent：浏览器告诉服务器浏览器版本信息。可以在服务器端获取该头的信息，解决浏览器的兼容性问题</li>
+<li>Accept：本浏览器可以接受的资源格式</li>
+<li>Accept-Lanuage：支持语言环境</li>
+<li>Accept-Encoding：压缩格式</li>
+<li>Referer：告诉服务器，当前请求从哪里来。<ol>
+<li>防盗链</li>
+<li>统计工作</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>请求空行</strong></p>
+<p>空行，分割POST请求消息的请求头和请求体</p>
+</li>
+<li><p><strong>请求体</strong>（正文）</p>
+<ul>
+<li>封装POST请求消息的请求参数</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-请求响应原理"><a href="#3-请求响应原理" class="headerlink" title="3.请求响应原理"></a>3.请求响应原理</h1><ol>
+<li>tomcat服务器会根据请求url中的资源路径，创建对应的servlet对象。</li>
+<li><strong>tomcat服务器会创建request和response对象</strong>，request对象中封装请求消息数据。</li>
+<li>tomcat将request和response两个对象传递给service方法，并且调用service</li>
+<li>在service方法中可以<strong>通过request对象获取请求消息数据</strong>，<strong>通过response对象设置响应消息数据。</strong></li>
+<li>服务器在给浏览器做出响应之前，会从response对象中取设置的响应消息数据。</li>
+</ol>
+<h1 id="4-request对象"><a href="#4-request对象" class="headerlink" title="4.request对象"></a>4.request对象</h1><h2 id="4-1request对象继承体系结构"><a href="#4-1request对象继承体系结构" class="headerlink" title="4.1request对象继承体系结构"></a>4.1request对象继承体系结构</h2><ul>
+<li>ServletRequest：接口</li>
+<li>HttpServletRequest：接口，继承ServletRequest</li>
+<li>org.apache.catalina.connector.RequestFacade：实现HttpServletRequest接口</li>
+</ul>
+<h2 id="4-2request功能"><a href="#4-2request功能" class="headerlink" title="4.2request功能"></a>4.2request功能</h2><ul>
+<li><p><strong>获取请求消息数据</strong></p>
+<ol>
+<li><p><strong>获取请求行数据</strong></p>
+<p>eg. GET /test/demo?name=zhangsan HTTP/1.1</p>
+<ul>
+<li><p>获取请求方式：String getMethod();   GET</p>
+</li>
+<li><p><strong>获取虚拟目录：String getContextPath();    /test</strong></p>
+</li>
+<li><p>获取Servlet路径：String getServletPath();    /demo</p>
+</li>
+<li><p>获取GET方式请求参数：String getQueryString();      name=zhangsan</p>
+</li>
+<li><p><strong>获取请求URI(统一资源标识符)：String getRequestURI();         /test/demo</strong></p>
+<p>获取请求URL(统一资源定位符)：String getRequestURL();     <a target="_blank" rel="noopener" href="http://localhost:8080/test/demo">http://localhost:8080/test/demo</a></p>
+</li>
+<li><p>获取请求协议：String getProtocol：  HTTP/1.1</p>
+</li>
+<li><p>获取客户机的IP地址：String getRemoteAddr();</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/requestdemo1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">requestdemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(request.getMethod());</span><br><span class="line">        System.out.println(request.getContextPath());</span><br><span class="line">        System.out.println(request.getServletPath());</span><br><span class="line">        System.out.println(request.getQueryString());</span><br><span class="line">        System.out.println(request.getRequestURI());</span><br><span class="line">        System.out.println(request.getRequestURL());</span><br><span class="line">        System.out.println(request.getProtocol());</span><br><span class="line">        System.out.println(request.getRemoteAddr());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*输入的链接：http://localhost:8080/test/requestdemo1?name=zhangsan</span></span><br><span class="line"><span class="comment">GET</span></span><br><span class="line"><span class="comment">/test</span></span><br><span class="line"><span class="comment">/requestdemo1</span></span><br><span class="line"><span class="comment">name=zhangsan</span></span><br><span class="line"><span class="comment">/test/requestdemo1</span></span><br><span class="line"><span class="comment">http://localhost:8080/test/requestdemo1</span></span><br><span class="line"><span class="comment">HTTP/1.1</span></span><br><span class="line"><span class="comment">0:0:0:0:0:0:0:1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>获取请求头数据</strong><ul>
+<li>String getHeader(String name)：通过请求头的名称获取请求头的值</li>
+<li>Enumeration &lt; String &gt;getHeaderNames()：获取所有的请求头名称</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/requestdemo2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">requestdemo2</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取请求头数据</span></span><br><span class="line">        <span class="comment">//获取所有请求头名称</span></span><br><span class="line">        Enumeration&lt;String&gt; headerNames = request.getHeaderNames();</span><br><span class="line">        <span class="keyword">while</span> (headerNames.hasMoreElements())&#123;</span><br><span class="line">            String name = headerNames.nextElement();</span><br><span class="line">            <span class="comment">//根据名称获取请求头的值</span></span><br><span class="line">            String value = request.getHeader(name);</span><br><span class="line">            System.out.println(name+<span class="string">&quot;----&gt;&quot;</span>+value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//简单防盗链</span></span><br><span class="line">        String referer = request.getHeader(<span class="string">&quot;referer&quot;</span>);</span><br><span class="line">        System.out.println(referer);</span><br><span class="line">        <span class="comment">// http://localhost/test/requestdemo2</span></span><br><span class="line">        <span class="keyword">if</span> (referer!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (referer.contains(<span class="string">&quot;/test&quot;</span>))&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;播放&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;不播放&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ol start="3">
+<li><p><strong>获取请求体数据</strong></p>
+<ul>
+<li><p>请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数</p>
+</li>
+<li><p>步骤</p>
+<p>(1) 获取流对象，字节流或字符流</p>
+<ul>
+<li>BufferedReader getReader()：获取字符输入流，只能操作字符数据</li>
+<li>ServletInputStream()：获取字节输入流，可以操作所有数据类型</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取请求消息体</span></span><br><span class="line">        BufferedReader br = request.getReader();</span><br><span class="line">        <span class="comment">//读取数据</span></span><br><span class="line">        String line = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> ((line= br.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>(2) 从流对象中拿数据</p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p><strong>获取请求参数通用方式</strong></p>
+<ol>
+<li><p>String getParameter(String name)：根据参数名称获取参数值  username=hxx</p>
+</li>
+<li><p>String[] getParameterValues(String name)：根据参数名称获取参数值的数组 hobby=xx&amp;hobby=yy</p>
+</li>
+<li><p>Enumeration&lt; String &gt;getParameterNames()：获取所有请求的参数名称</p>
+</li>
+<li><p>Map&lt; String,String[] &gt;  getParameterMap()：获取所有参数的map集合</p>
+</li>
+<li><p><strong>中文乱码问题：</strong></p>
+<p>get方式：tomcat8已经将get方式乱码问题解决</p>
+<p>post方式：会乱码，需要在获取参数前设置编码 <strong>request.setCharacterEncoding(“utf-8”);</strong></p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    <span class="comment">//设置流的编码,要和所对应的页面格式相同</span></span><br><span class="line">    request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">    <span class="comment">//POST 请求参数</span></span><br><span class="line">    <span class="comment">//根据参数名称获取参数值</span></span><br><span class="line">    String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">    System.out.println(username);</span><br><span class="line"></span><br><span class="line">    String[] hobbies = request.getParameterValues(<span class="string">&quot;hobby&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (String hobby : hobbies) &#123;</span><br><span class="line">        System.out.println(hobby);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取所有请求参数的名称</span></span><br><span class="line">    Enumeration&lt;String&gt; parameterNames = request.getParameterNames();</span><br><span class="line">    <span class="keyword">while</span>(parameterNames.hasMoreElements())&#123;</span><br><span class="line">        <span class="comment">//参数名字</span></span><br><span class="line">        String name = parameterNames.nextElement();</span><br><span class="line">        <span class="comment">//根据参数名字获取参数值</span></span><br><span class="line">        String parameter = request.getParameter(name);</span><br><span class="line">        System.out.println(name+<span class="string">&quot;----&gt;&quot;</span>+parameter);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取所有参数的map集合</span></span><br><span class="line">    Map&lt;String, String[]&gt; parameterMap = request.getParameterMap();</span><br><span class="line">    <span class="comment">//获取键值</span></span><br><span class="line">    Set&lt;String&gt; keySet = parameterMap.keySet();</span><br><span class="line">    <span class="comment">//根据键值获取值</span></span><br><span class="line">    <span class="keyword">for</span> (String name : keySet) &#123;</span><br><span class="line">        String[] values = parameterMap.get(name);</span><br><span class="line">        <span class="keyword">for</span> (String value : values) &#123;</span><br><span class="line">            System.out.println(value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>请求转发:一种在服务器内部的资源跳转方式</strong></p>
+<ol>
+<li><p>通过request对象获取请求转发器对象</p>
+<p>RequestDispatcher getRequestDispacher(String path)：参数为转发资源的路径</p>
+</li>
+<li><p>使用RequestDispatcher对象进行转发</p>
+<p>forward(ServletRequest request, ServletResponse response)</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getRequestDispatcher(<span class="string">&quot;/requestdemo5&quot;</span>).forward(request,response);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>特点<ul>
+<li>浏览器地址栏路径不发生变化</li>
+<li>只能转发到当前服务器内部资源中</li>
+<li>转发是一次请求</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>共享数据</strong></p>
+<ul>
+<li>域对象：一个有作用范围的对象，可以在范围内共享数据</li>
+<li>request域：代表一次请求，一般用于请求转发的多个资源中共享数据</li>
+<li>方法<ol>
+<li>setAttribute(String name,Object obj)：存储数据</li>
+<li>Object  setAttribute(String name)：通过键获取值</li>
+<li>removeAttribute(String name)：通过键移除键值对</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/requestdemo4&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">requestdemo4</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//设置request域</span></span><br><span class="line">        request.setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;hxx&quot;</span>);</span><br><span class="line">        <span class="comment">//转发到demo5</span></span><br><span class="line">        request.getRequestDispatcher(<span class="string">&quot;/requestdemo5&quot;</span>).forward(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet(&quot;/requestdemo5&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">requestdemo5</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;demo5--------&quot;</span>);</span><br><span class="line">        <span class="comment">//获取request域值</span></span><br><span class="line">        Object msg = request.getAttribute(<span class="string">&quot;msg&quot;</span>);</span><br><span class="line">        System.out.println(msg);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>获取ServletContext对象</p>
+<ul>
+<li>servletContext getServletContext()</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/01/30/HTTP-request/" data-id="cknhdl545000oy0s6aim4cl5s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/31/IDEA-%E5%8F%B3%E9%94%AEnew-servlet/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          IDEA 右键new servlet
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/30/Servlet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Servlet基本原理和配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">Java设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Java设计模式</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/SSM/" style="font-size: 15px;">SSM</a> <a href="/tags/c/" style="font-size: 16.67px;">c++</a> <a href="/tags/javaweb/" style="font-size: 18.33px;">javaweb</a> <a href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" style="font-size: 13.33px;">《数据库系统概论》</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hxx-98<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

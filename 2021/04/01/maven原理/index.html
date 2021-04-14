@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>maven原理 | Hxx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="maven依赖管理依赖管理：maven工程对jar包的管理过程 在运行传统web项目工程时，必须将该项目所依赖的一些jar包添加到工程中。当具有相同架构的项目不止一个，那么就需要赋值这份jar包到每一个工程中，那么其占用的空间就会很大。可重用性也很差。 maven开发的web项目jar包不在项目中，而是有一个专门的jar包仓库，而当每一个maven工程编译运行时，会通过jar包坐标找到对应jar包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="maven原理">
+<meta property="og:url" content="http://hxx-98.github.io/2021/04/01/maven%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Hxx">
+<meta property="og:description" content="maven依赖管理依赖管理：maven工程对jar包的管理过程 在运行传统web项目工程时，必须将该项目所依赖的一些jar包添加到工程中。当具有相同架构的项目不止一个，那么就需要赋值这份jar包到每一个工程中，那么其占用的空间就会很大。可重用性也很差。 maven开发的web项目jar包不在项目中，而是有一个专门的jar包仓库，而当每一个maven工程编译运行时，会通过jar包坐标找到对应jar包">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/maven%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E5%9B%BE.png">
+<meta property="article:published_time" content="2021-04-01T03:04:54.000Z">
+<meta property="article:modified_time" content="2021-04-01T11:56:51.898Z">
+<meta property="article:author" content="hxx-98">
+<meta property="article:tag" content="javaweb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/maven%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E5%9B%BE.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hxx" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hxx</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hxx-98.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-maven原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/01/maven%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2021-04-01T03:04:54.000Z" itemprop="datePublished">2021-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      maven原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="maven依赖管理"><a href="#maven依赖管理" class="headerlink" title="maven依赖管理"></a>maven依赖管理</h1><p>依赖管理：maven工程对jar包的管理过程</p>
+<p>在运行传统web项目工程时，必须将该项目所依赖的一些jar包添加到工程中。当具有相同架构的项目不止一个，那么就需要赋值这份jar包到每一个工程中，那么其占用的空间就会很大。可重用性也很差。</p>
+<p>maven开发的web项目jar包不在项目中，而是有一个专门的jar包仓库，而当每一个maven工程编译运行时，会通过jar包坐标找到对应jar包，提高代码可重用性。</p>
+<h1 id="maven一键构造"><a href="#maven一键构造" class="headerlink" title="maven一键构造"></a>maven一键构造</h1><p>一个项目往往需要经历编译、测试、运行、打包、安装、部署等一系列过程。</p>
+<p>构建：指的是项目从编译、测试、运行、打包、安装、部署整个过程都交给maven进行管理</p>
+<p>一键构建：maven一个命令来完成整个工作，规范化构建流程：清理、编译、测试、报告、打包、部署</p>
+<h1 id="maven安装"><a href="#maven安装" class="headerlink" title="maven安装"></a>maven安装</h1><ol>
+<li><p>下载</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
+<p>下载   apache-maven-3.6.3-bin.zip</p>
+</li>
+<li><p>解压（不要由中文）</p>
+<p>bin目录下的mvn文件：用来构建项目</p>
+<p>boot目录下存放maven自身运行的类加载器</p>
+<p>conf目录下settings.xml对maven进行配置</p>
+<p>lib目录下maven自身运行依赖的jar包，继承了tomcat插件</p>
+</li>
+<li><p>maven环境变量配置</p>
+<p>右击我的电脑—-》属性—–》高级系统设置—–》环境变量—–》</p>
+<ul>
+<li>系统变量中新建：变量名MAVEN_HOME，变量值maven解压后的目录，点击确定</li>
+<li>编辑系统变量的PATH：新建   %MAVEN_HOME%\bin</li>
+<li>注意在系统变量中有JAVA_HOME</li>
+</ul>
+<p>打开cmd命令窗口，运行mvn -v，可以看是否安装好maven</p>
+</li>
+</ol>
+<h1 id="maven仓库种类和关系"><a href="#maven仓库种类和关系" class="headerlink" title="maven仓库种类和关系"></a>maven仓库种类和关系</h1><p>在settings.xml中设置了默认的本地仓库路径：${user.home}/.m2/repository（C:\Users\用户\ .m2）</p>
+<p>也可以自己设置本地仓库路径：<code>&lt;localRepository&gt;设置路径&lt;/localRepository&gt;</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- localRepository</span></span><br><span class="line"><span class="comment"> | The path to the local repository maven will use to store artifacts.</span></span><br><span class="line"><span class="comment"> |</span></span><br><span class="line"><span class="comment"> | Default: $&#123;user.home&#125;/.m2/repository</span></span><br><span class="line"><span class="comment">&lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>仓库分三类：本地仓库、远程仓库、中央仓库</strong></p>
+<p>​        默认情况下：当启动maven工程时默认在上面的<strong>本地仓库</strong>路径中找jar包。如果电脑联网，本地找不到jar包，会自动从<strong>中央仓库</strong>下载jar包。</p>
+<p>​        在公司中：首先可以采用<strong>本地</strong>上传jar包的方式。中央仓库放置了几乎所有开源的jar包。实际开发中maven不会使用全部jar包，为了保证不联网的状况下可以开发项目，以及统一放置所需要的jar包，会再创建一个<strong>远程仓库</strong>（私服）。当远程仓库和自己的电脑在一个局域网下，就可以直接访问远程仓库下载jar包，若远程仓库没有所需要的jar包，会去<strong>中央仓库</strong>下载jar包。</p>
+<h1 id="maven项目标准目录"><a href="#maven项目标准目录" class="headerlink" title="maven项目标准目录"></a>maven项目标准目录</h1><p>src/main/java：核心代码</p>
+<p>src/main/resources：配置文件</p>
+<p>src/test/java：测试代码</p>
+<p>src/test/resources：测试配置</p>
+<p>src/main/webapp：页面资源、js,css,图片等</p>
+<h1 id="maven生命周期"><a href="#maven生命周期" class="headerlink" title="maven生命周期"></a>maven生命周期</h1><p>maven有三个生命周期：清除生命周期、默认生命周期、站点生命周期</p>
+<p>清除生命周期：清楚项目编译信息   mvn clean  </p>
+<p>默认生命周期：编译(mvn compile)、测试(mvn test)、打包(mvn package)、安装(mvn install)、部署(mvn deploy)</p>
+<h1 id="maven概念模型"><a href="#maven概念模型" class="headerlink" title="maven概念模型"></a>maven概念模型</h1><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/maven%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E5%9B%BE.png"></p>
+<p><strong>项目对象模型</strong> (Project Object Model)</p>
+<p>一个 maven 工程都有一个 pom.xml 文件，通过 pom.xml 文件定义项目的坐标、项目依赖、项目信息、</p>
+<p>插件目标等。</p>
+<p><strong>依赖管理系统</strong>(Dependency Management System)</p>
+<p>通过 maven 的依赖管理对项目所依赖的 jar 包进行统一管理。</p>
+<p>比如：项目依赖 junit4.9，通过在 pom.xml 中定义 junit4.9 的依赖即使用 junit4.9</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/04/01/maven%E5%8E%9F%E7%90%86/" data-id="cknhdl55o003wy0s6dnfk3hn4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/01/IDEA%E5%BC%80%E5%8F%91maven%E9%A1%B9%E7%9B%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          IDEA开发maven项目
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/31/Jedis%E6%93%8D%E4%BD%9Credis/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Jedis操作redis</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">Java设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Java设计模式</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/SSM/" style="font-size: 15px;">SSM</a> <a href="/tags/c/" style="font-size: 16.67px;">c++</a> <a href="/tags/javaweb/" style="font-size: 18.33px;">javaweb</a> <a href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" style="font-size: 13.33px;">《数据库系统概论》</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hxx-98<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
