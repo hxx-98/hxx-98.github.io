@@ -64,6 +64,495 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-AJAX-JQuery实现方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/29/AJAX-JQuery%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2021-03-29T07:11:54.000Z" itemprop="datePublished">2021-03-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/29/AJAX-JQuery%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/">AJAX-JQuery实现方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-AJAX基本概念"><a href="#1-AJAX基本概念" class="headerlink" title="1.AJAX基本概念"></a>1.AJAX基本概念</h1><ul>
+<li>ASynchronous Javascript And XML  异步的JavaScript和XML </li>
+<li>异步和同步：客户端和服务器端相互通信的基础上<ul>
+<li>异步：客户端必须等待服务器端的响应。在等待期间客户端不能做其他操作</li>
+<li>同步：客户端不需要等待服务器端的响应。在服务器处理请求的过程中，客户端可以进行其他的操作</li>
+</ul>
+</li>
+<li>Ajax是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术</li>
+<li>通过在后台与服务器进行少量数据交换，Ajax可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网站的某部分进行更新。传统的网页（不使用Ajax）如果需要更新内容，必须重载整个网页页面。</li>
+</ul>
+<h1 id="2-实现方式"><a href="#2-实现方式" class="headerlink" title="2.实现方式"></a>2.实现方式</h1><h2 id="2-1原生的JS实现方式"><a href="#2-1原生的JS实现方式" class="headerlink" title="2.1原生的JS实现方式"></a>2.1原生的JS实现方式</h2><ul>
+<li><p>html中script实现步骤</p>
+<p>创建XMLHttpRequest对象，用于在后台和服务器交换数据</p>
+<p>建立连接</p>
+<p>发送请求</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;发送异步请求&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;fun()&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span><span class="comment">&lt;!--当发送异步请求时客户端输入框可以正常输入，同步请求时要等到服务器处理完才可以操作输入框--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;myDiv&quot;</span>&gt;</span>hxxxx<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//定义方法</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> xmlhttp;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</span></span><br><span class="line">        &#123;</span><br><span class="line"><span class="javascript">            <span class="comment">//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码</span></span></span><br><span class="line"><span class="javascript">            xmlhttp=<span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="keyword">else</span></span></span><br><span class="line">        &#123;</span><br><span class="line"><span class="javascript">            <span class="comment">// IE6, IE5 浏览器执行代码</span></span></span><br><span class="line"><span class="javascript">            xmlhttp=<span class="keyword">new</span> ActiveXObject(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>);</span></span><br><span class="line">        &#125;</span><br><span class="line">        /*建立连接</span><br><span class="line">        *  参数：</span><br><span class="line">        *       1.请求方式：GET、POST</span><br><span class="line">        *           get请求参数在URL后面拼接，send方法为空参</span><br><span class="line">        *           post方式请求参数在send方法中定义</span><br><span class="line"><span class="javascript">        *                   xmlhttp.send(<span class="string">&quot;username=hxx&amp;id=1&quot;</span>);</span></span><br><span class="line">        *       2.请求的URL</span><br><span class="line"><span class="javascript">        *       <span class="number">3.</span>同步或异步请求：<span class="literal">true</span>（异步） <span class="literal">false</span>（同步）</span></span><br><span class="line">        * */</span><br><span class="line"><span class="javascript">        xmlhttp.open(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;ajaxServlet?username=hxx&quot;</span>,<span class="literal">true</span>);</span></span><br><span class="line"><span class="javascript">        <span class="comment">//发送请求</span></span></span><br><span class="line">        xmlhttp.send();</span><br><span class="line"><span class="javascript">        <span class="comment">//响应</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span></span><br><span class="line">        &#123;</span><br><span class="line"><span class="javascript">            <span class="comment">//当 readyState 等于 4 且状态为 200 时，表示响应已就绪：</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span> &amp;&amp; xmlhttp.status==<span class="number">200</span>)</span></span><br><span class="line">            &#123;</span><br><span class="line"><span class="javascript">                <span class="built_in">document</span>.getElementById(<span class="string">&quot;myDiv&quot;</span>).innerText=xmlhttp.responseText;</span></span><br><span class="line">                alert(xmlhttp.responseText)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>服务器资源ajaxServlet接收参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/ajaxServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ajaxServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//接收参数</span></span><br><span class="line">        String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        <span class="comment">//假设处理时间5秒，观察客户端的输入框是否可以输入数据:异步可以、同步不可以</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//打印参数</span></span><br><span class="line">        System.out.println(username);</span><br><span class="line">        <span class="comment">//响应</span></span><br><span class="line">        response.getWriter().write(<span class="string">&quot;hello:&quot;</span>+username);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doPost(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2Jquery实现方式"><a href="#2-2Jquery实现方式" class="headerlink" title="2.2Jquery实现方式"></a>2.2Jquery实现方式</h2><ol>
+<li><strong>$.ajax()</strong><ul>
+<li>语法：$.ajax(url,[settings])  ，一般情况下写成 $.ajax({键值对}) </li>
+</ul>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>JqueryAjax<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;js/jquery-3.5.1.min.js&quot;</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">//使用$.ajax()发送异步请求</span></span></span><br><span class="line"><span class="javascript">            $.ajax(</span></span><br><span class="line">                &#123;</span><br><span class="line"><span class="javascript">                    url: <span class="string">&quot;ajaxServlet&quot;</span>, <span class="comment">//请求路径</span></span></span><br><span class="line"><span class="javascript">                    type: <span class="string">&quot;POST&quot;</span>, <span class="comment">//请求方式</span></span></span><br><span class="line"><span class="javascript">                    data:&#123; <span class="string">&quot;username&quot;</span>:<span class="string">&quot;hxx&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="string">&quot;20&quot;</span>&#125;,<span class="comment">//传递的数据</span></span></span><br><span class="line"><span class="javascript">                    success:<span class="function"><span class="keyword">function</span> (<span class="params">Data</span>) </span>&#123;<span class="comment">//响应成功后的回调函数，Data是服务器的响应数据</span></span></span><br><span class="line">                        alert(Data);</span><br><span class="line">                    &#125;,</span><br><span class="line"><span class="javascript">                    error:<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                        alert(<span class="string">&quot;出错啦&quot;</span>);<span class="comment">//表示如果请求响应出现错误，会执行此回调函数</span></span></span><br><span class="line">                    &#125;,</span><br><span class="line"><span class="javascript">                    data_type:<span class="string">&quot;text&quot;</span><span class="comment">//表示接收到的响应数据的格式</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;发送异步请求&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;fun()&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span><span class="comment">&lt;!--当发送异步请求时客户端输入框可以正常输入，同步请求时要等到服务器处理完才可以操作输入框--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p><strong>$.get()</strong></p>
+<p>语法：$.get(url,[data],[callback],[type])  请求路径、请求参数、回调函数、响应结果的类型</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//定义方法</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">       $.get(<span class="string">&quot;ajaxServlet&quot;</span>,&#123;<span class="string">&quot;username&quot;</span>:<span class="string">&quot;hxx&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="string">&quot;20&quot;</span>&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line">           alert(data);</span><br><span class="line"><span class="javascript">       &#125;,<span class="string">&quot;text&quot;</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>$.post()</strong></li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//定义方法</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">       $.get(<span class="string">&quot;ajaxServlet&quot;</span>,&#123;<span class="string">&quot;username&quot;</span>:<span class="string">&quot;hxx&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="string">&quot;20&quot;</span>&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line">           alert(data);</span><br><span class="line"><span class="javascript">       &#125;,<span class="string">&quot;text&quot;</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/03/29/AJAX-JQuery%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" data-id="cknhe7btp0000ows691yveboa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JQuery基础使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/25/JQuery%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2021-03-25T02:16:30.000Z" itemprop="datePublished">2021-03-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/25/JQuery%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/">JQuery基础使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><ol>
+<li><p>概念： 一个<strong>JavaScript框架</strong>。简化JS开发</p>
+<ul>
+<li><p>jQuery是一个快速、简洁的JavaScript框架，是继Prototype之后又一个优秀的JavaScript代码库（或JavaScript框架）。jQuery设计的宗旨    是“write Less，Do More”，即倡导写更少的代码，做更多的事情。它封装JavaScript常用的功能代码，提供一种简便的JavaScript设计模式，优化HTML文档操作、事件处理、动画设计和Ajax交互。</p>
+</li>
+<li><p>JavaScript框架：本质上就是一些js文件，封装了js的原生代码而已</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="2-快速入门"><a href="#2-快速入门" class="headerlink" title="2.快速入门"></a>2.快速入门</h1><ol>
+<li><p><strong>下载JQuery</strong></p>
+<p>  目前jQuery有三个大版本：<br>  1.x：兼容ie678,使用最为广泛的，官方只做BUG维护，</p>
+<pre><code>           功能不再新增。因此一般项目来说，使用1.x版本就可以了，</code></pre>
+<p>  2.x：不兼容ie678，很少有人使用，官方只做BUG维护，</p>
+<pre><code>           功能不再新增。如果不考虑兼容低版本的浏览器可以使用2.x，</code></pre>
+<p>  3.x：不兼容ie678，只支持最新的浏览器。除非特殊要求，</p>
+<pre><code>           一般不会使用3.x版本的，很多老的jQuery插件不支持这个版本。</code></pre>
+</li>
+<li><p><strong>jquery-xxx.js 与 jquery-xxx.min.js区别：</strong></p>
+<ul>
+<li><p>jquery-xxx.js：开发版本。给程序员看的，有良好的缩进和注释。体积大一些</p>
+</li>
+<li><p>jquery-xxx.min.js：生产版本。程序中使用，没有缩进。体积小一些。程序加载更快</p>
+</li>
+</ul>
+</li>
+<li><p><strong>js1.html，注意js文件src路径要书写正确</strong></p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../js/jquery-3.5.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;div1&quot;</span>&gt;</span> div1...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//根据id 使用Jquery获取元素对象</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> div1 = $(<span class="string">&quot;#div1&quot;</span>);</span></span><br><span class="line">    alert(div1.html());</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-JQuery对象和JS对象区别与转换"><a href="#3-JQuery对象和JS对象区别与转换" class="headerlink" title="3.JQuery对象和JS对象区别与转换"></a>3.JQuery对象和JS对象区别与转换</h1><ol>
+<li>JQuery对象在操作时，更加方便。</li>
+<li>JQuery对象和js对象方法不通用的.</li>
+<li>两者相互转换<ul>
+<li><strong>jq – &gt; js : jq对象[索引] 或者 jq对象.get(索引)</strong></li>
+<li><strong>js – &gt; jq : $(js对象)</strong></li>
+</ul>
+</li>
+</ol>
+<h1 id="4-选择器"><a href="#4-选择器" class="headerlink" title="4.选择器"></a>4.选择器</h1><ul>
+<li><p>筛选具有相似特征的元素（标签）</p>
+</li>
+<li><p>基本操作</p>
+<ol>
+<li>事件绑定<pre><code>     //1.获取b1按钮
+     $(&quot;#b1&quot;).click(function()&#123;
+         alert(&quot;abc&quot;);
+     &#125;);</code></pre>
+</li>
+<li>入口函数</li>
+</ol>
+<p>​             $(function () {<br>​               </p>
+<pre><code>            &#125;);</code></pre>
+<p>​             window.onload  和 $(function) 区别</p>
+<p>​             window.onload 只能定义一次,如果定义多次，后边的会将前边的覆盖掉。而后者是可以定义多次的。</p>
+<ol start="3">
+<li>样式控制：css方法<br>// $(“#div1”).css(“background-color”,”red”);<br>$(“#div1”).css(“backgroundColor”,”pink”);</li>
+</ol>
+</li>
+<li><p>分类</p>
+<ol>
+<li><p><strong>基本选择器</strong></p>
+<ol>
+<li><p>标签选择器（元素选择器）</p>
+<ul>
+<li>语法： $(“html标签名”) 获得所有匹配标签名称的元素</li>
+</ul>
+</li>
+<li><p>id选择器 </p>
+<ul>
+<li>语法： $(“#id的属性值”) 获得与指定8id属性值匹配的元素</li>
+</ul>
+</li>
+<li><p>类选择器</p>
+<ul>
+<li>语法： $(“.class的属性值”) 获得与指定的class属性值匹配的元素</li>
+</ul>
+</li>
+<li><p>并集选择器：</p>
+<ul>
+<li>语法： $(“选择器1,选择器2….”) 获取多个选择器选中的所有元素</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>层级选择器</strong></p>
+<ol>
+<li>后代选择器<ul>
+<li>语法： $(“A B “) 选择A元素内部的所有B元素        </li>
+</ul>
+</li>
+<li>子选择器<ul>
+<li>语法： $(“A &gt; B”) 选择A元素内部的所有B子元素</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>属性选择器</strong></p>
+<ol>
+<li>属性名称选择器 <ul>
+<li>语法： $(“A[属性名]”) 包含指定属性的选择器</li>
+</ul>
+</li>
+<li>属性选择器<ul>
+<li>语法： $(“A[属性名=’值’]”) 包含指定属性等于指定值的选择器</li>
+</ul>
+</li>
+<li>复合属性选择器<ul>
+<li>语法： $(“A[属性名=’值’] []…”) 包含多个属性条件的选择器</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>过滤选择器</strong></p>
+<ol>
+<li><p>首元素选择器 </p>
+<ul>
+<li>语法：  $(:first ) 获得选择的元素中的第一个元素</li>
+</ul>
+</li>
+<li><p>尾元素选择器 </p>
+<ul>
+<li>语法： $(:last)  获得选择的元素中的最后一个元素</li>
+</ul>
+</li>
+<li><p>非元素选择器</p>
+<ul>
+<li><p>语法： $(:not(selector) ) 不包括指定内容的元素</p>
+<pre><code>  例如选择class不为one的div：$(div:not(.one))</code></pre>
+</li>
+</ul>
+</li>
+<li><p>偶数选择器</p>
+<ul>
+<li>语法： $(:even) 偶数，从 0 开始计数</li>
+</ul>
+</li>
+<li><p>奇数选择器</p>
+<ul>
+<li>语法：$( :odd)  奇数，从 0 开始计数</li>
+</ul>
+</li>
+<li><p>等于索引选择器</p>
+<ul>
+<li>语法：$( :eq(index) ) 指定索引元素</li>
+</ul>
+</li>
+<li><p>大于索引选择器 </p>
+<ul>
+<li>语法：$( :gt(index) ) 大于指定索引元素</li>
+</ul>
+</li>
+<li><p>小于索引选择器 </p>
+<ul>
+<li>语法：$( :lt(index) ) 小于指定索引元素</li>
+</ul>
+</li>
+<li><p>标题选择器</p>
+<ul>
+<li>语法：$( :header)  获得标题（h1~h6）元素，固定写法</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>表单过滤选择器</strong></p>
+<ol>
+<li>可用元素选择器 <ul>
+<li>语法： :enabled 获得可用元素</li>
+</ul>
+</li>
+<li>不可用元素选择器 <ul>
+<li>语法： :disabled 获得不可用元素</li>
+</ul>
+</li>
+<li>选中选择器 <ul>
+<li>语法： :checked 获得单选/复选框选中的元素</li>
+</ul>
+</li>
+<li>选中选择器 <ul>
+<li>语法： :selected 获得下拉框选中的元素</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="5-DOM操作"><a href="#5-DOM操作" class="headerlink" title="5.DOM操作"></a>5.DOM操作</h1><ol>
+<li><p><strong>内容操作</strong></p>
+<ol>
+<li>html(): 获取/设置元素的标签体内容   <code>&lt;a&gt;&lt;font&gt;内容&lt;/font&gt;&lt;/a&gt;</code>  –&gt; <code>&lt;font&gt;内容&lt;/font&gt;</code></li>
+<li>text(): 获取/设置元素的标签体纯文本内容   <code>&lt;a&gt;&lt;font&gt;内容&lt;/font&gt;&lt;/a&gt;</code> –&gt; 内容</li>
+<li>val()： 获取/设置元素的value属性值</li>
+</ol>
+</li>
+<li><p><strong>属性操作</strong></p>
+<ol>
+<li><p>通用属性操作</p>
+<pre><code>     1. attr(): 获取/设置元素的属性</code></pre>
+<ol start="2">
+<li>removeAttr():删除属性</li>
+<li>prop():获取/设置元素的属性</li>
+<li>removeProp():删除属性</li>
+</ol>
+<ul>
+<li>attr和prop区别？<pre><code>  1. 如果操作的是元素的固有属性，则建议使用prop
+      2. 如果操作的是元素自定义的属性，则建议使用attr</code></pre>
+</li>
+</ul>
+</li>
+<li><p>对class属性操作</p>
+<ol>
+<li><p>addClass():添加class属性值</p>
+</li>
+<li><p>removeClass():删除class属性值</p>
+</li>
+<li><p>toggleClass():切换class属性</p>
+<ul>
+<li><p>toggleClass(“one”): </p>
+</li>
+<li><p>判断如果元素对象上存在class=”one”，则将属性值one删除掉。  如果元素对象上不存在class=”one”，则添加</p>
+</li>
+</ul>
+</li>
+<li><p>css():</p>
+</li>
+</ol>
+</li>
+<li><p>CRUD操作:</p>
+<ol>
+<li>append():父元素将子元素追加到末尾<pre><code> * 对象1.append(对象2): 将对象2添加到对象1元素内部，并且在末尾</code></pre>
+</li>
+<li>prepend():父元素将子元素追加到开头<ul>
+<li>对象1.prepend(对象2):将对象2添加到对象1元素内部，并且在开头</li>
+</ul>
+</li>
+<li>appendTo():<ul>
+<li>对象1.appendTo(对象2):将对象1添加到对象2内部，并且在末尾</li>
+</ul>
+</li>
+<li>prependTo()：<ul>
+<li>对象1.prependTo(对象2):将对象1添加到对象2内部，并且在开头</li>
+</ul>
+</li>
+<li>after():添加元素到元素后边<ul>
+<li>对象1.after(对象2)： 将对象2添加到对象1后边。对象1和对象2是兄弟关系</li>
+</ul>
+</li>
+<li>before():添加元素到元素前边<ul>
+<li>对象1.before(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系</li>
+</ul>
+</li>
+<li>insertAfter()<ul>
+<li>对象1.insertAfter(对象2)：将对象1添加到对象2后边。对象1和对象2是兄弟关系</li>
+</ul>
+</li>
+<li>insertBefore()<ul>
+<li>对象1.insertBefore(对象2)： 将对象1添加到对象2前边。对象1和对象2是兄弟关系</li>
+</ul>
+</li>
+<li>remove():移除元素<ul>
+<li>对象.remove():将对象删除掉</li>
+</ul>
+</li>
+<li>empty():清空元素的所有后代元素。<ul>
+<li>对象.empty():将对象的后代元素全部清空，但是保留当前对象以及其属性节点</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="6-动画：三种方式显示和隐藏元素"><a href="#6-动画：三种方式显示和隐藏元素" class="headerlink" title="6.动画：三种方式显示和隐藏元素"></a>6.动画：三种方式显示和隐藏元素</h1><ol>
+<li><p><strong>默认显示和隐藏方式</strong></p>
+<ol>
+<li>show([speed,[easing],[fn]])<ol>
+<li>speed：动画的速度。三个预定义的值(“slow”,”normal”, “fast”)或表示动画时长的毫秒数值(如：1000)</li>
+<li>easing：用来指定切换效果，默认是”swing”，可用参数”linear”<ul>
+<li>swing：动画执行时效果是 先慢，中间快，最后又慢<ul>
+<li>linear：动画执行时速度是匀速的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>fn：在动画完成时执行的函数，每个元素执行一次。</li>
+</ol>
+</li>
+<li>hide([speed,[easing],[fn]])</li>
+<li>toggle([speed],[easing],[fn])</li>
+</ol>
+</li>
+<li><p><strong>滑动显示和隐藏方式</strong></p>
+<pre><code>     1. slideDown([speed],[easing],[fn])</code></pre>
+<ol start="2">
+<li>slideUp([speed,[easing],[fn]])</li>
+<li>slideToggle([speed],[easing],[fn])</li>
+</ol>
+</li>
+<li><p><strong>淡入淡出显示和隐藏方式</strong></p>
+<pre><code>1. fadeIn([speed],[easing],[fn])
+2. fadeOut([speed],[easing],[fn])
+3. fadeToggle([speed,[easing],[fn]])</code></pre>
+</li>
+</ol>
+<h1 id="7-遍历"><a href="#7-遍历" class="headerlink" title="7.遍历"></a>7.遍历</h1><ol>
+<li>js的遍历方式    <ul>
+<li>for(初始化值;循环结束条件;步长)</li>
+</ul>
+</li>
+<li>jq的遍历方式<ol>
+<li>jq对象.each(callback)<pre><code> 1. 语法：jquery对象.each(function(index,element)&#123;&#125;);
+       * index:就是元素在集合中的索引
+ * element：就是集合中的每一个元素对象
+  * this：集合中的每一个元素对象</code></pre>
+</li>
+</ol>
+</li>
+<li>回调函数返回值： <ul>
+<li>true:如果当前function返回为false，则结束循环(break)。</li>
+<li>false:如果当前function返回为true，则结束本次循环，继续下次循环(continue)</li>
+</ul>
+</li>
+<li>$.each(object, [callback])</li>
+<li>for..of: jquery 3.0 版本之后提供的方式<br> for(元素对象 of 容器对象)</li>
+</ol>
+<h1 id="8-事件绑定"><a href="#8-事件绑定" class="headerlink" title="8.事件绑定"></a>8.事件绑定</h1><ol>
+<li><p>jquery标准的绑定方式</p>
+<ul>
+<li>jq对象.事件方法(回调函数)；</li>
+<li>注：如果调用事件方法，不传递回调函数，则会触发浏览器默认行为。<ul>
+<li>表单对象.submit();//让表单提交</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>on绑定事件/off解除绑定</p>
+<pre><code> * jq对象.on(&quot;事件名称&quot;,回调函数)</code></pre>
+<ul>
+<li>jq对象.off(“事件名称”)<ul>
+<li>如果off方法不传递任何参数，则将组件上的所有事件全部解绑</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>事件切换：toggle</p>
+<pre><code> * jq对象.toggle(fn1,fn2...)
+     * 当单击jq对象对应的组件后，会执行fn1.第二次点击会执行fn2.....
+
+ * 注意：1.9版本 .toggle() 方法删除,jQuery Migrate（迁移）插件可以恢复此功能。
+
+      &lt;script src=&quot;../js/jquery-migrate-1.0.0.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</code></pre>
+</li>
+</ol>
+<h1 id="9-插件：增强Jquery的功能"><a href="#9-插件：增强Jquery的功能" class="headerlink" title="9.插件：增强Jquery的功能"></a>9.插件：增强Jquery的功能</h1><ol>
+<li>实现方式：<ol>
+<li>$.fn.extend(object) <pre><code> * 增强通过Jquery获取的对象的功能  $(&quot;#id&quot;)</code></pre>
+</li>
+<li>$.extend(object)<ul>
+<li>增强JQeury对象自身的功能  $/jQuery</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/03/25/JQuery%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" data-id="cknhe7bus001kows62si1bhg6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-利用过滤器和动态代理过滤敏感词" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/03/24/%E5%88%A9%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E8%BF%87%E6%BB%A4%E6%95%8F%E6%84%9F%E8%AF%8D/" class="article-date">
@@ -803,241 +1292,6 @@
 
 
   
-    <article id="post-JSP简单学习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/16/JSP%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2021-02-16T01:59:50.000Z" itemprop="datePublished">2021-02-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/16/JSP%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/">JSP简单学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-JSP原理"><a href="#1-JSP原理" class="headerlink" title="1.JSP原理"></a>1.JSP原理</h1><ul>
-<li><p>Java server Pages：Java服务器端页面。一个特殊的页面，既可以定义html标签，又可以定义Java代码</p>
-</li>
-<li><p>原理：JSP本质上是一个Servlet，例如index.jsp，服务器启动后，浏览器访问index.jsp，在CATALINA_BASE目录下生成work目录，其中可以找到对应的<strong>index_jsp.class和index_jsp.java</strong>文件。</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JSP%E9%97%AE%E9%A2%982.png"></p>
-<p><strong>其中，对应的类为index_jsp，继承了org.apache.jasper.runtime.HttpJspBase，在tomcat源码中HttpJspBase继承了HttpServlet。</strong></p>
-<p>index_jsp.java文件中该类的_jspService方法中将index.jsp文件中的html标签输出到浏览器。</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JSP%E9%97%AE%E9%A2%981.png"></p>
-</li>
-</ul>
-<h1 id="2-JSP脚本"><a href="#2-JSP脚本" class="headerlink" title="2.JSP脚本"></a>2.JSP脚本</h1><ul>
-<li><p>jsp定义Java代码的地方</p>
-</li>
-<li><p>定义方式</p>
-<ol>
-<li>&lt;%  代码 %&gt;：定义的Java代码，在_jspService方法中。 _jspService可以定义什么，该脚本就可以定义什么</li>
-<li>&lt;%! 代码 %&gt;：定义的Java代码，在jsp转换后的Java类中的成员位置，比如变量，静态代码块</li>
-<li>&lt;%=  代码 %&gt;：定义的Java代码，会输出到页面上</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  hello</span><br><span class="line">  &lt;%</span><br><span class="line">    System.out.println(<span class="string">&quot;hello jsp&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">9</span>;</span><br><span class="line">  %&gt;</span><br><span class="line">  &lt;%! <span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">int</span> j;</span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    j=<span class="number">10</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  %&gt;</span><br><span class="line">  &lt;%= i %&gt;</span><br><span class="line">  &lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-JSP指令"><a href="#3-JSP指令" class="headerlink" title="3.JSP指令"></a>3.JSP指令</h1><ul>
-<li><p>指令作用：用于配置JSP页面，导入资源文件</p>
-</li>
-<li><p>格式：</p>
-<p>&lt;%@ 指令名 属性名1=属性值1 属性名2=属性值2 %&gt;</p>
-</li>
-<li><p>指令分类</p>
-<ol>
-<li><p><strong>page</strong>：配饰JSP页面</p>
-<ul>
-<li><p><strong>content-type</strong>：等于response.setContentType()。</p>
-<p>设置响应体的mime类型以及字符集</p>
-<p>设置当前jsp页面文件的编码(高级IDE可使用，如果是低级工具，则需要设置pageEncoding属性)</p>
-</li>
-<li><p><strong>import</strong>：导包</p>
-</li>
-<li><p><strong>errorPage</strong>：当前页面发生异常后，会自动跳转到指定的错误页面。比如在index.jsp中发生异常，那么指定errorPage=”500.jsp”，在500.jsp文件中输出服务器正忙信息。</p>
-</li>
-<li><p><strong>isErrorPage</strong>：标识当前是否为错误页面。</p>
-<p>true：是错误页面，可以使用内置对象exception，获取异常信息并输出到日志文件中</p>
-<p>false：不是错误页面，默认值。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>include</strong>：导入页面的资源文件</p>
-<p>&lt;%@include file=”top.jsp”%&gt;</p>
-</li>
-<li><p><strong>taglib</strong>：导入资源</p>
-<ul>
-<li><p>先导入jstl的jar包</p>
-</li>
-<li><p>&lt;%@ taglib prefix=”c” uri=”<a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/core&quot;">http://java.sun.com/jsp/jstl/core&quot;</a> %&gt;</p>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<h1 id="4-JSP内置对象"><a href="#4-JSP内置对象" class="headerlink" title="4.JSP内置对象"></a>4.JSP内置对象</h1><ul>
-<li>在JSP页面中不需要获取和创建，可以直接使用的对象。</li>
-</ul>
-<p>例如：在_jspService方法的参数中有request和response，那么在jsp中就可以直接使用，在 _jspService方法中定义了out对象，那么在jsp中也可以使用。</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">  String contextPath = request.getContextPath();</span><br><span class="line">  out.print(contextPath);</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>jsp有九个内置对象：<strong>request、response、out、pageContext、session、application、page、config、exception</strong></p>
-<ol>
-<li><p><strong>out</strong>：字符输出流对象，将数据输出到页面上。</p>
-<ul>
-<li><p><strong>out.write()和response.getWriter()的区别</strong></p>
-<p><strong>在tomcat服务器真正给客户端做出相应之前，会先找response缓冲区数据，在找out缓冲区数据。response.getWriter()数据输出永远在out.write()之前</strong></p>
-</li>
-</ul>
-</li>
-<li><p>作用</p>
-</li>
-</ol>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/jsp%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1.PNG"></p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/02/16/JSP%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" data-id="cknhe7but001oows69hx73n00" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-会话技术Cookie" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/07/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AFCookie/" class="article-date">
-  <time datetime="2021-02-07T08:24:28.000Z" itemprop="datePublished">2021-02-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/07/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AFCookie/">会话技术Cookie</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><ul>
-<li><p>会话：一次会话中包含多次请求和响应</p>
-<ul>
-<li>一次会话：浏览器第一次给服务器资源发送请求，会话建立，知道有一方断开为止。</li>
-</ul>
-</li>
-<li><p>功能：在一次会话的范围内的多次请求间，共享数据</p>
-</li>
-<li><p>方式</p>
-<p>客户端会话技术：Cookie，将数据保存到客户端</p>
-<p>服务器端会话技术：Session</p>
-</li>
-<li><p>快速入门：</p>
-<ol>
-<li><p>创建Cookie对象，绑定数据</p>
-<p>new Cookie(String name,String value)</p>
-</li>
-<li><p>发送Cookie对象</p>
-<p>response.addCookie(Cookie cookie)</p>
-</li>
-<li><p>获取Cookie和数据</p>
-<p>Cookies[] request.getCookies()</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/CookieDemo1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookieDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//响应头 set-cookie</span></span><br><span class="line">        Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        response.addCookie(cookie);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doPost(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet(&quot;/CookieDemo2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookieDemo2</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取请求头cookie</span></span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line">        <span class="comment">//遍历取值</span></span><br><span class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cookie!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                String name = cookie.getName();</span><br><span class="line">                String value = cookie.getValue();</span><br><span class="line">                System.out.println(name+<span class="string">&quot;---&gt;&quot;</span>+value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doPost(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/cookie.PNG"  />
-
-</li>
-</ul>
-<h1 id="2-Cookie相关问题"><a href="#2-Cookie相关问题" class="headerlink" title="2.Cookie相关问题"></a>2.Cookie相关问题</h1><ol>
-<li><p><strong>一次可以发送多个cookie</strong>：可以创建多个cookie对象，使用response多次调用addCookie方法发送cookie即可</p>
-</li>
-<li><p><strong>cookie在浏览器中的保存时间</strong></p>
-<ul>
-<li><p>默认情况下，当浏览器关闭后，Cookie数据被销毁</p>
-</li>
-<li><p>持久化存储：setMaxAge(int seconds)</p>
-<p>参数值为正数：将cookie数据写到硬盘文件中。持久化存储，也代表cookie的存活时间</p>
-<p>参数值为负数：默认值</p>
-<p>参数值为0：删除cookie信息</p>
-</li>
-</ul>
-</li>
-<li><p><strong>cookie存放中文</strong></p>
-<ul>
-<li><p>在tomcat 8 之前，cookie不能直接存储中文</p>
-<p>需要将中文数据转码，一般采用URL编码</p>
-</li>
-<li><p><strong>tomcat 8 之后，cookie支持中文。对特殊字符还是不支持，建议使用URL编码存储，URL解码</strong></p>
-</li>
-</ul>
-</li>
-<li><p><strong>cookie获取范围</strong></p>
-<p>假设在一个tomcat服务器中，部署了多个web项目，那么这些web项目中的cookie能不能共享</p>
-<ul>
-<li>默认情况下cookie不能共享</li>
-<li>setPath(String path)：设置cookie的获取范围。默认情况下，设置当前的虚拟目录。如果要共享给部署在本服务器的其他项目，则可以将path设置为”/“；</li>
-</ul>
-<p>不同的tomcat服务器间cookie共享问题</p>
-<ul>
-<li><p>setDomain(String path)：如果设置一级域名相同，那么多个服务器之间cookie可以共享。</p>
-<p>比如setDomain(“.baidu.com”)，那么tieba.baidu.com和news.baidu.com中cookie可以共享</p>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-cookie的特点和作用"><a href="#3-cookie的特点和作用" class="headerlink" title="3.cookie的特点和作用"></a>3.cookie的特点和作用</h1><ul>
-<li>cookie存储数据在客户端浏览器</li>
-<li>浏览器对于单个cookie的大小有限制以及对同一个域名下的总cookie数量也有限制</li>
-<li>作用<ol>
-<li>cookie一般用于存储少量的不太敏感的数据</li>
-<li>在不登陆的情况下，完成服务器对客户端的身份识别</li>
-</ol>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/02/07/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AFCookie/" data-id="cknhe7bwk0055ows6cq122fbo" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1088,6 +1342,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
@@ -1097,14 +1359,6 @@
         
           <li>
             <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
           </li>
         
       </ul>

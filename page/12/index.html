@@ -64,6 +64,214 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-类模板" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/11/%E7%B1%BB%E6%A8%A1%E6%9D%BF/" class="article-date">
+  <time datetime="2020-04-11T09:19:35.000Z" itemprop="datePublished">2020-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/11/%E7%B1%BB%E6%A8%A1%E6%9D%BF/">类模板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h1><h2 id="1-类模板语法"><a href="#1-类模板语法" class="headerlink" title="1 类模板语法"></a>1 类模板语法</h2><p><strong>类模板作用：</strong></p>
+<ul>
+<li>建立一个通用类，类中的成员 数据类型可以不具体制定，用一个<strong>虚拟的类型</strong>来代表。</li>
+</ul>
+<p><strong>语法：</strong> </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">类</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<p>template  —  声明创建模板</p>
+<p>typename  — 表面其后面的符号是一种数据类型，可以用class代替</p>
+<p>T    —   通用的数据类型，名称可以替换，通常为大写字母</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Nametype</span>,<span class="keyword">class</span> <span class="title">agetype</span>&gt;</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Person(Nametype name, agetype age)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Name = name;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPerson</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;name: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_Name &lt;&lt; <span class="string">&quot; age: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Nametype m_Name;</span><br><span class="line">	agetype m_Age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// 指定NameType 为string类型，AgeType 为 int类型</span></span><br><span class="line">	Person&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;p1(<span class="string">&quot;Tom&quot;</span>, <span class="number">10</span>);</span><br><span class="line">	p1.showPerson();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-类模板和函数模板的区别"><a href="#2-类模板和函数模板的区别" class="headerlink" title="2 类模板和函数模板的区别"></a>2 类模板和函数模板的区别</h2><p>类模板与函数模板区别主要有两点：</p>
+<ol>
+<li>类模板没有自动类型推导的使用方式</li>
+<li>类模板在模板参数列表中可以有默认参数</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//类模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Nametype</span>,<span class="keyword">class</span> <span class="title">agetype</span> =</span> <span class="keyword">int</span>&gt; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Person(Nametype name, agetype age)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Name = name;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPerson</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;name: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_Name &lt;&lt; <span class="string">&quot; age: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Nametype m_Name;</span><br><span class="line">	agetype m_Age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// Person p(&quot;孙悟空&quot;, 1000); // 错误 类模板使用时候，不可以用自动类型推导</span></span><br><span class="line">	Person&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;p1(<span class="string">&quot;Tom&quot;</span>, <span class="number">10</span>);</span><br><span class="line">	Person &lt;<span class="built_in">string</span>&gt; p(<span class="string">&quot;猪八戒&quot;</span>, <span class="number">999</span>); <span class="comment">//类模板中的模板参数列表 可以指定默认参数</span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h2 id="3-类模板中成员函数创建时机"><a href="#3-类模板中成员函数创建时机" class="headerlink" title="3 类模板中成员函数创建时机"></a>3 类模板中成员函数创建时机</h2><p><strong>类模板中成员函数和普通类中成员函数创建时机是有区别的：</strong></p>
+<ul>
+<li>普通类中的成员函数一开始就可以创建</li>
+<li>类模板中的成员函数在调用时才创建</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPerson1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Person1 show&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPerson2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Person2 show&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myclass</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		T obj;</span><br><span class="line">		<span class="comment">//类模板中的成员函数，并不是一开始就创建的，而是在模板调用时再生成</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">()</span></span>&#123;</span><br><span class="line">			obj.showPerson1();</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">()</span></span>&#123;</span><br><span class="line">			obj.showPerson2();</span><br><span class="line">		&#125;</span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	myclass&lt;Person1&gt;m;</span><br><span class="line">	m.func1();</span><br><span class="line">	<span class="comment">//m.func2();//编译会出错，说明函数调用才会去创建成员函数</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-类模板对象做函数参数"><a href="#4-类模板对象做函数参数" class="headerlink" title="4 类模板对象做函数参数"></a>4 类模板对象做函数参数</h2><ul>
+<li>类模板实例化出的对象，向函数传参的方式一共有三种：</li>
+</ul>
+<ol>
+<li>指定传入的类型：直接显示对象的数据类型</li>
+<li>参数模板化： 将对象中的参数变为模板进行传递</li>
+<li>整个类模板化：将这个对象类型模板化进行传递</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		Person(T1 name,T2 age)&#123;</span><br><span class="line">			m_name = name;</span><br><span class="line">			m_age = age;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">showPerson</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;name: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_name &lt;&lt; <span class="string">&quot; age: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		T1 m_name;</span><br><span class="line">		T2 m_age;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//指定传入类型</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printPerson1</span><span class="params">(Person&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;&amp;p)</span></span>&#123;</span><br><span class="line">	p.showPerson();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Person&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;P(<span class="string">&quot;hxx&quot;</span>,<span class="number">20</span>);</span><br><span class="line">	printPerson1(P);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//参数模板化</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printPerson2</span><span class="params">(Person&lt;T1,T2&gt;&amp;p)</span></span>&#123;</span><br><span class="line">	p.showPerson();</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;T1的类型是：&quot;</span>&lt;&lt;<span class="keyword">typeid</span>(T1).name()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;T2的类型是：&quot;</span>&lt;&lt;<span class="keyword">typeid</span>(T2).name()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Person&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;P(<span class="string">&quot;qzy&quot;</span>,<span class="number">20</span>);</span><br><span class="line">	printPerson2(P);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//整个类模板化</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printPerson3</span><span class="params">(T &amp;p)</span></span>&#123;</span><br><span class="line">	p.showPerson();</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;T的类型是：&quot;</span>&lt;&lt;<span class="keyword">typeid</span>(T).name()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test03</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Person&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;P(<span class="string">&quot;hq&quot;</span>,<span class="number">20</span>);</span><br><span class="line">	printPerson3(P);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	test01();</span><br><span class="line">	test02();</span><br><span class="line">	test03();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-类模板成员函数类外实现"><a href="#5-类模板成员函数类外实现" class="headerlink" title="5 类模板成员函数类外实现"></a>5 类模板成员函数类外实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		Person(T1 name,T2 age); </span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">showPerson</span><span class="params">()</span></span>;</span><br><span class="line">		T1 m_name;</span><br><span class="line">		T2 m_age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//类外实现成员函数</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line">Person&lt;T1,T2&gt;::Person(T1 name,T2 age)&#123;</span><br><span class="line">	<span class="keyword">this</span>-&gt;m_age = age;</span><br><span class="line">	<span class="keyword">this</span>-&gt;m_name = name;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>,<span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="keyword">void</span> Person&lt;T1,T2&gt;::showPerson()&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;name: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_name &lt;&lt; <span class="string">&quot; age: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Person&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;P(<span class="string">&quot;hxx&quot;</span>,<span class="number">20</span>);</span><br><span class="line">	P.showPerson(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-类模板分文件编写"><a href="#6-类模板分文件编写" class="headerlink" title="6 类模板分文件编写"></a>6 类模板分文件编写</h2><p><strong>问题：</strong></p>
+<ul>
+<li>类模板中成员函数创建时机是在调用阶段，导致分文件编写时链接不到</li>
+</ul>
+<p>解决：</p>
+<ul>
+<li>解决方式1：直接包含.cpp源文件</li>
+<li>解决方式2：将声明和实现写到同一个文件中，并更改后缀名为.hpp，hpp是约定的名称，并不是强制</li>
+</ul>
+<p><strong>示例：</strong></p>
+<p>person.hpp</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Person(T1 name, T2 age);</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPerson</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T1 m_Name;</span><br><span class="line">	T2 m_Age;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//构造函数 类外实现</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line">Person&lt;T1, T2&gt;::Person(T1 name, T2 age) &#123;</span><br><span class="line">	<span class="keyword">this</span>-&gt;m_Name = name;</span><br><span class="line">	<span class="keyword">this</span>-&gt;m_Age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//成员函数 类外实现</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="keyword">void</span> Person&lt;T1, T2&gt;::showPerson() &#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;姓名: &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_Name &lt;&lt; <span class="string">&quot; 年龄:&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>.cpp文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;person.hpp&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Person&lt;string, int&gt; p(&quot;Tom&quot;, 10);</span><br><span class="line">	p.showPerson();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	test01();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-类模板与友元"><a href="#7-类模板与友元" class="headerlink" title="7 类模板与友元"></a>7 类模板与友元</h2><ul>
+<li><p>全局函数类内实现：直接在类内声明友元即可</p>
+</li>
+<li><p>全局函数类外实现 ：需要提前让编译器知道全局函数的存在</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*类模板和友元*/</span> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">//全局函数配合友元  类外实现 - 先做函数模板声明，下方在做函数模板定义，在做友元</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span>;</span></span><br><span class="line"><span class="comment">//如果声明了函数模板，可以将实现写到后面，否则需要将实现体写到类的前面让编译器提前看到</span></span><br><span class="line"><span class="comment">//template&lt;class T1, class T2&gt; void printPerson2(Person&lt;T1, T2&gt; &amp; p); </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printPerson2</span><span class="params">(Person&lt;T1,T2&gt;&amp;p)</span></span>&#123;</span><br><span class="line"> 	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;姓名: &quot;</span> &lt;&lt; p.m_Name &lt;&lt; <span class="string">&quot; 年龄:&quot;</span> &lt;&lt; p.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="keyword">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//全局函数类内实现</span></span><br><span class="line">	<span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">printPerson</span><span class="params">(Person&lt;T1,T2&gt;p)</span></span>&#123;</span><br><span class="line">	 	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;姓名: &quot;</span> &lt;&lt; p.m_Name &lt;&lt; <span class="string">&quot; 年龄:&quot;</span> &lt;&lt; p.m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	 &#125;</span><br><span class="line">	 <span class="comment">//全局函数类外实现,加空模板参数列表 </span></span><br><span class="line">	<span class="keyword">friend</span> <span class="keyword">void</span> printPerson2&lt;&gt;(Person&lt;T1,T2&gt;&amp;p); </span><br><span class="line">	Person(T1 name, T2 age)&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Name = name;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Age = age;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	T1 m_Name;</span><br><span class="line">	T2 m_Age;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过全局函数类内实现 打印Person信息</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line"> 	Person&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;p(<span class="string">&quot;hxx&quot;</span>,<span class="number">20</span>);</span><br><span class="line"> 	printPerson(p);</span><br><span class="line"> 	printPerson2(p);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	test01();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/04/11/%E7%B1%BB%E6%A8%A1%E6%9D%BF/" data-id="cknhe7bxt007xows67sxw765x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-函数模板" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/11/%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/" class="article-date">
+  <time datetime="2020-04-11T02:13:37.000Z" itemprop="datePublished">2020-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/11/%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/">函数模板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h1><h2 id="1-模板函数语法"><a href="#1-模板函数语法" class="headerlink" title="1 模板函数语法"></a>1 模板函数语法</h2><ul>
+<li><p>函数模板作用：建立一个通用函数，其函数返回值类型和形参类型可以不具体制定，用一个<strong>虚拟的类型</strong>来代表。</p>
+<ul>
+<li>函数模板利用关键字 template</li>
+<li>使用函数模板有两种方式：自动类型推导、显示指定类型</li>
+<li>模板的目的是为了提高复用性，将类型参数化</li>
+</ul>
+</li>
+<li><p><strong>语法：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">函数声明或定义</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释</strong></p>
+<p>template ：声明创建模板</p>
+<p>typename ：表面其后面的符号是一种数据类型，可以用<strong>class</strong>代替</p>
+<p>T ：通用的数据类型，名称可以替换，通常为大写字母</p>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span><span class="comment">//声明一个模板，告诉编译器后面代码中紧跟的T是一个通用数据类型 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(T&amp; a, T&amp; b)</span> </span>&#123;</span><br><span class="line">	T temp = a;</span><br><span class="line">	a = b;</span><br><span class="line">	b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">	<span class="comment">//利用模板实现交换</span></span><br><span class="line">	<span class="comment">//1.自动类型推导 </span></span><br><span class="line">	Swap(a,b);</span><br><span class="line">	<span class="comment">//2.显示指定类型</span></span><br><span class="line">	Swap&lt;<span class="keyword">int</span>&gt;(a,b); </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;a = &quot;</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;b = &quot;</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="2-函数模版注意事项"><a href="#2-函数模版注意事项" class="headerlink" title="2 函数模版注意事项"></a>2 函数模版注意事项</h2><p><strong>注意事项：</strong></p>
+<ul>
+<li>自动类型推导，必须推导出一致的数据类型T,才可以使用</li>
+</ul>
+<ul>
+<li>模板必须要确定出T的数据类型，才可以使用</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span><span class="comment">//声明一个模板，告诉编译器后面代码中紧跟的T是一个通用数据类型 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(T&amp; a, T&amp; b)</span> </span>&#123;</span><br><span class="line">	T temp = a;</span><br><span class="line">	a = b;</span><br><span class="line">	b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">char</span> c =<span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">	Swap(a,b);<span class="comment">//正确，可以推导出一致的T</span></span><br><span class="line">	<span class="comment">//Swap(a,c);//错误，推导不出一致的T，T到底是int还是char 	</span></span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;func&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//func(); //错误，模板不能独立使用，必须确定出T的类型</span></span><br><span class="line">	func&lt;<span class="keyword">int</span>&gt;(); <span class="comment">//利用显示指定类型的方式，给T一个类型，才可以使用该模板</span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h2 id="3-普通函数与模板函数的区别"><a href="#3-普通函数与模板函数的区别" class="headerlink" title="3 普通函数与模板函数的区别"></a>3 普通函数与模板函数的区别</h2><p><strong>普通函数与函数模板区别：</strong></p>
+<ul>
+<li>普通函数调用时可以发生自动类型转换（隐式类型转换）</li>
+<li>函数模板调用时，如果利用自动类型推导，不会发生隐式类型转换</li>
+<li>如果利用显示指定类型的方式，可以发生隐式类型转换</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">myadd01</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function">T <span class="title">myadd02</span><span class="params">(T a,T b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">char</span> c = <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">	<span class="comment">//正确，将char类型的&#x27;c&#x27;隐式转换为int类型&#x27;c&#x27;对应的ASCII码99 </span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;myadd01(a,c)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//myadd02(a,c);//报错，使用自动类型推导时，不会发生隐式类型转换</span></span><br><span class="line">	myadd02&lt;<span class="keyword">int</span>&gt;(a,c);<span class="comment">//正确，如果显示指定类型，可以发生隐式类型转换 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-普通函数与函数模板的调用规则"><a href="#4-普通函数与函数模板的调用规则" class="headerlink" title="4 普通函数与函数模板的调用规则"></a>4 普通函数与函数模板的调用规则</h2><p>普通函数和函数模板的函数名是</p>
+<p>可以一样的。</p>
+<p><strong>调用规则：</strong></p>
+<ol>
+<li>如果函数模板和普通函数都可以实现，优先调用普通函数</li>
+<li>可以通过<strong>空模板参数列表</strong>来强制调用函数模板</li>
+<li>函数模板也可以发生重载</li>
+<li>如果函数模板可以产生更好的匹配,优先调用函数模板</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通函数与函数模板调用规则</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myPrint</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;调用的普通函数&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myPrint</span><span class="params">(T a, T b)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;调用的模板&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myPrint</span><span class="params">(T a, T b, T c)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;调用重载的模板&quot;</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line"><span class="comment">//	 注意 如果告诉编译器  普通函数是有的，但只是声明没有实现，</span></span><br><span class="line"><span class="comment">//或者不在当前文件内实现，就会报错找不到</span></span><br><span class="line">	myPrint(a,b);<span class="comment">//调用普通函数 </span></span><br><span class="line">	myPrint&lt;&gt;(a,b); <span class="comment">//调用模板函数 </span></span><br><span class="line">	<span class="keyword">int</span> c = <span class="number">30</span>; </span><br><span class="line">	myPrint(a,b,c); <span class="comment">//调用重载模板函数 </span></span><br><span class="line">	<span class="comment">//如果函数模板可以产生更好的匹配,优先调用函数模板</span></span><br><span class="line">	<span class="keyword">char</span> c1 = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">	<span class="keyword">char</span> c2 = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line">	myPrint(c1, c2); <span class="comment">//调用函数模板</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-模板的局限性"><a href="#5-模板的局限性" class="headerlink" title="5 模板的局限性"></a>5 模板的局限性</h2><p><strong>局限性：模板的通用性不是万能的</strong></p>
+<ul>
+<li>在下面的代码中，如果传入的是一个数组，就无法实现了</li>
+<li>在下面的代码中如果传入的参数是子自定义数据类型也无法运行</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(T a, T b)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">   	a = b;</span><br><span class="line">&#125;	</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(T a, T b)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">   <span class="keyword">if</span>(a &gt; b) &#123; ... &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>c++为了解决这种问题，提供模板的重载，可以为这些特定的类型提供具体化的模板</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Person(<span class="built_in">string</span> name, <span class="keyword">int</span> age)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Name = name;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">string</span> m_Name;</span><br><span class="line">	<span class="keyword">int</span> m_Age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//普通函数模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">myCompare</span><span class="params">(T&amp; a, T&amp; b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a == b)	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span>	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//具体化，显示具体化的原型和定意思以template&lt;&gt;开头，并通过名称来指出类型</span></span><br><span class="line"><span class="comment">//具体化优先于常规模板</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;&gt; <span class="keyword">bool</span> <span class="title">myCompare</span><span class="params">(Person &amp;p1, Person &amp;p2)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( p1.m_Name  == p2.m_Name &amp;&amp; p1.m_Age == p2.m_Age)	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span>	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">	<span class="comment">//内置数据类型可以直接使用通用的函数模板</span></span><br><span class="line">	<span class="keyword">bool</span> ret = myCompare(a, b);</span><br><span class="line">	<span class="keyword">if</span> (ret)	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;a == b &quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">else</span>	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;a != b &quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="function">Person <span class="title">p1</span><span class="params">(<span class="string">&quot;Tom&quot;</span>, <span class="number">10</span>)</span></span>;</span><br><span class="line">	<span class="function">Person <span class="title">p2</span><span class="params">(<span class="string">&quot;Tom&quot;</span>, <span class="number">10</span>)</span></span>;		</span><br><span class="line">	<span class="comment">//自定义数据类型，不会调用普通的函数模板</span></span><br><span class="line">	<span class="comment">//可以创建具体化的Person数据类型的模板，用于特殊处理这个类型</span></span><br><span class="line">	<span class="keyword">bool</span> ret = myCompare(p1, p2);</span><br><span class="line">	<span class="keyword">if</span> (ret)	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;p1 == p2 &quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">else</span>	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;p1 != p2 &quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/04/11/%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/" data-id="cknhe7bwp005hows6aio572q6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据库复习笔记七" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/03/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%83/" class="article-date">
@@ -2080,208 +2288,6 @@
 
 
   
-    <article id="post-优先级队列" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/03/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/" class="article-date">
-  <time datetime="2020-03-03T07:50:56.000Z" itemprop="datePublished">2020-03-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/03/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/">优先级队列</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="STL优先级队列"><a href="#STL优先级队列" class="headerlink" title="STL优先级队列"></a>STL优先级队列</h2><ul>
-<li><p>priority_queue:自适应容器（容器适配器），不能使用list</p>
-</li>
-<li><p>最大值优先级队列：最大的在队列的最前面</p>
-</li>
-<li><p>最小值优先级队列：最小的在队列最前面</p>
-</li>
-<li><p>包含的头文件 queue</p>
-</li>
-<li><p>函数接口</p>
-<p>priority_queue&lt;int,deque&lt; int &gt; &gt; pq; //默认最大值优先级队列</p>
-<p>priority_queue&lt;int,vector&lt; int &gt; &gt; pq;</p>
-<p>priority_queue&lt; int, deque&lt; int &gt;,<strong>greater</strong>&lt; int &gt;&gt; pq;//最小值优先级队列</p>
-<p>pq.empty();</p>
-<p>pq.size();</p>
-<p>pq.top();</p>
-<p>pq.pop();</p>
-<p>pq.push(item);</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/03/03/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/" data-id="cknhe7bwj0052ows60ikrdbs1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-vector容器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/29/vector%E5%AE%B9%E5%99%A8/" class="article-date">
-  <time datetime="2020-02-29T04:29:13.000Z" itemprop="datePublished">2020-02-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/29/vector%E5%AE%B9%E5%99%A8/">vector容器</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Vector-容器"><a href="#Vector-容器" class="headerlink" title="Vector 容器"></a>Vector 容器</h2><h3 id="1-vector基本概念"><a href="#1-vector基本概念" class="headerlink" title="1 vector基本概念"></a>1 vector基本概念</h3><ul>
-<li><p>功能</p>
-<p>vector数据结构和数组十分相似，也称为单端数组</p>
-</li>
-<li><p>vector和普通数组的区别</p>
-<p>不同之处在于数组是静态空间，而vector可以动态扩展</p>
-</li>
-<li><p>动态扩展</p>
-<p><strong>并不是在原空间之后续接新空间，而是找更大的内存空间，然后将原数据拷贝新空间，释放原空间</strong></p>
-</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/vector.PNG"></p>
-<ul>
-<li>vector容器的迭代器是支持随机访问的迭代器</li>
-</ul>
-<h3 id="2-vector构造函数"><a href="#2-vector构造函数" class="headerlink" title="2 vector构造函数"></a>2 vector构造函数</h3><ul>
-<li><p>功能描述</p>
-<p>创造vector容器</p>
-</li>
-<li><p>函数原型</p>
-<ol>
-<li><code>vector &lt;T&gt; v</code>  //采用模板实现类实现，默认构造函数</li>
-<li><code>vector(v.begin(),v.end());</code>   将v[ begin(), end() ) 区间中的元素拷贝给本身</li>
-<li><code>vector(n,elem);</code>    //构造函数将n个elem拷贝给本</li>
-<li><code>vector(const vector &amp;vec);</code>   //拷贝构造函数</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printVector</span><span class="params">(<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt;&amp; v)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = v.begin(); it != v.end(); it++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		v1.push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">	printVector(v1);</span><br><span class="line">	<span class="comment">//通过区间方式构造</span></span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br><span class="line">	printVector(v2);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v3(<span class="number">5</span>, <span class="number">100</span>);</span><br><span class="line">	printVector(v3);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v4(v3);</span><br><span class="line">	printVector(v4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-vector赋值操作"><a href="#3-vector赋值操作" class="headerlink" title="3 vector赋值操作"></a>3 vector赋值操作</h3><ul>
-<li>函数原型<ol>
-<li><code>vector&amp; operator=(const vector &amp;vec)</code>  </li>
-<li><code>assign(beg,end);</code>  //给[beg, end）区间中的数据拷贝复制给本身</li>
-<li><code>assign(n,elem)</code>  //将n个elem拷贝赋值给本身</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;  v1.push_back(i);  &#125;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v2;</span><br><span class="line">	v2 = v1;</span><br><span class="line">	printVector(v2);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v3;</span><br><span class="line">	v3.assign(v1.begin(), v1.end());</span><br><span class="line">	printVector(v3);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v4;</span><br><span class="line">	v4.assign(<span class="number">5</span>, <span class="number">10</span>);</span><br><span class="line">	printVector(v4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-vector容量和大小"><a href="#4-vector容量和大小" class="headerlink" title="4 vector容量和大小"></a>4 vector容量和大小</h3><ul>
-<li>函数原型<ol>
-<li><code>empty();</code>  //判断容器是否为空</li>
-<li><code>capacity();</code>  //容器的容量,<strong>容量大于等于长度</strong></li>
-<li><code>size();</code>  //返回容器中元素的个数</li>
-<li><code>resize(int num);</code> //重新指定容器的长度为num,若容器边长，则以默认值填充新位置。如果容器变短，则末尾超出容器长度的元素被删除</li>
-<li><code>resize(int num,elem)</code>  //重新指定容器的长度为num,若容器变长，则以elem值填充新位置。若容器变短，则末尾超出容器长度的元素被删除。</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void test03() &#123;</span><br><span class="line">	vector&lt;int&gt;v1;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; 5; i++) &#123; v1.push_back(i); &#125;</span><br><span class="line">	if (v1.empty())  cout &lt;&lt; &quot;v1为空&quot; &lt;&lt; endl;</span><br><span class="line">	else &#123;</span><br><span class="line">		cout &lt;&lt; &quot;v1不为空&quot; &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; &quot;v1的容量为&quot; &lt;&lt; v1.capacity() &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; &quot;v1的大小为&quot; &lt;&lt; v1.size() &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;重回新指定大小</span><br><span class="line">	v1.resize(7);</span><br><span class="line">	printVector(v1);&#x2F;&#x2F;0 1 2 3 4 0 0</span><br><span class="line">	v1.resize(10,8);</span><br><span class="line">	printVector(v1);&#x2F;&#x2F;0 1 2 3 4 0 0 8 8 8</span><br><span class="line">	v1.resize(5);</span><br><span class="line">	printVector(v1);&#x2F;&#x2F;0 1 2 3 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-vector插入和删除"><a href="#5-vector插入和删除" class="headerlink" title="5 vector插入和删除"></a>5 vector插入和删除</h3><ul>
-<li>函数原型<ol>
-<li><code>push_back(elem);</code> //尾部插入元素</li>
-<li><code>pop_back();</code>  //删除最后一个元素</li>
-<li><code>insert(const_iterator pos,ele);</code>  //迭代器指向位置pos插入元素ele</li>
-<li><code>insert(const_iterator pos,int count,ele)；</code>//迭代器指向位置pos插入count个元素ele</li>
-<li><code>erase(const_iterator pos);</code>//删除迭代器指向的元素</li>
-<li><code>erase(const_iterator start,const_iterator end);</code>//删除迭代器从start到end之间的元素</li>
-<li><code>clear()</code>；//删除容器中所有的元素</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123; v1.push_back(i); &#125;</span><br><span class="line">	v1.pop_back();</span><br><span class="line">	printVector(v1);</span><br><span class="line">	<span class="comment">//插入</span></span><br><span class="line">	v1.insert(v1.begin(), <span class="number">100</span>);</span><br><span class="line">	printVector(v1);</span><br><span class="line">	v1.insert(v1.begin(),<span class="number">2</span>, <span class="number">50</span>);</span><br><span class="line">	printVector(v1);</span><br><span class="line">	<span class="comment">//删除</span></span><br><span class="line">	v1.erase(v1.end()<span class="number">-1</span>);</span><br><span class="line">	printVector(v1);</span><br><span class="line"></span><br><span class="line">	v1.erase(v1.begin(),v1.end()<span class="number">-2</span>);</span><br><span class="line">	printVector(v1);</span><br><span class="line">	v1.clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-vector数据存取"><a href="#6-vector数据存取" class="headerlink" title="6 vector数据存取"></a>6 vector数据存取</h3><ul>
-<li>函数原型<ol>
-<li><code>at(int idx);</code>  //返回索引 idx 所值的数据</li>
-<li><code>operator[];</code>  //返回索引 idx 所指的数据</li>
-<li><code>front();</code>  //返回容器中第一个数据</li>
-<li><code>back();</code>  // 返回容器中最后一个数据元素</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test05</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123; v1.push_back(i); &#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v1.size(); i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; v1[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v1.size(); i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; v1.at(i) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;第一个元素&quot;</span> &lt;&lt; v1.front() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;最后一个元素&quot;</span> &lt;&lt; v1.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="7-vector互换容器"><a href="#7-vector互换容器" class="headerlink" title="7 vector互换容器"></a>7 vector互换容器</h3><ul>
-<li><p>函数原型</p>
-<p><code>swap(vec);</code>  </p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//巧用swap可以收缩内存空间</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test07</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v1;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v2;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		v1.push_back(i);</span><br><span class="line">		v2.push_back(i + <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的容量为&quot;</span> &lt;&lt; v1.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的大小为&quot;</span> &lt;&lt; v1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	v1.resize(<span class="number">3</span>);<span class="comment">//容量没有变</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的容量为&quot;</span> &lt;&lt; v1.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的大小为&quot;</span> &lt;&lt; v1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//收缩内存</span></span><br><span class="line">	<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt;(v1).swap(v1);</span><br><span class="line">	<span class="comment">//vector &lt;int&gt;(v1)</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的容量为&quot;</span> &lt;&lt; v1.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的大小为&quot;</span> &lt;&lt; v1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">v1的容量为<span class="number">138255</span></span><br><span class="line">v1的大小为<span class="number">100000</span></span><br><span class="line">v1的容量为<span class="number">138255</span></span><br><span class="line">v1的大小为<span class="number">3</span></span><br><span class="line">v1的容量为<span class="number">3</span></span><br><span class="line">v1的大小为<span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="8-vector预留空间"><a href="#8-vector预留空间" class="headerlink" title="8 vector预留空间"></a>8 vector预留空间</h3><ul>
-<li><p>功能描述</p>
-<p>减少vector在动态扩展容量时的扩展次数</p>
-</li>
-<li><p>函数原型</p>
-<p><code>reserve(int len);</code> //容器预留len个元素长度，预留位置不初始化，元素不可访问</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test08</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v;</span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;<span class="comment">//记录动态扩展次数</span></span><br><span class="line">	<span class="keyword">int</span>* p = <span class="literal">NULL</span>;<span class="comment">//指向当前容器中的首元素</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">300</span>; i++) &#123;</span><br><span class="line">		v.push_back(i);</span><br><span class="line">		<span class="comment">//判断指针p所指的首元素地址是否发生变化，如果变化，则重新分配了内存，num加一并更新p</span></span><br><span class="line">		<span class="keyword">if</span> (p != &amp;v[<span class="number">0</span>]) &#123;</span><br><span class="line">			num++;</span><br><span class="line">			p = &amp;v[<span class="number">0</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;动态扩展次数：&quot;</span> &lt;&lt; num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">动态扩展次数：<span class="number">15</span></span><br></pre></td></tr></table></figure>
-
-<p>使用reserve后</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v.reserve(<span class="number">300</span>);<span class="comment">//预留空间</span></span><br></pre></td></tr></table></figure>
-
-<p>运算结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">动态扩展次数：1</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/02/29/vector%E5%AE%B9%E5%99%A8/" data-id="cknhe7bwe004qows6b5qj4qwq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -2332,6 +2338,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
@@ -2341,14 +2355,6 @@
         
           <li>
             <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
           </li>
         
       </ul>

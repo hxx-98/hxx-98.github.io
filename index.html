@@ -64,6 +64,172 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MyBatis缓存" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/" class="article-date">
+  <time datetime="2021-04-15T02:37:32.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><p>什么是缓存：存在于内存中的临时数据</p>
+<p>为什么是缓存：减少和数据库的交互次数，提高执行效率</p>
+<p>适用于缓存：经常查询并且不经常改变的；数据的正确与否对最终结果影响不大的</p>
+<p>不适用缓存：经常改变的数据；数据的正确与否对最终结果影响大：商品的库存、银行的汇率、股市的牌价</p>
+<h1 id="2-MyBatis一级缓存"><a href="#2-MyBatis一级缓存" class="headerlink" title="2.MyBatis一级缓存"></a>2.MyBatis一级缓存</h1><p>​        指的是Mybatis中SqlSession对象的缓存。当我们执行查询之后，查询的结果会同时存入到SqlSession为我们提供的一块区域中。该区域的结构是一个Map。当我们再次查询同样的数据，Mybatis会先去SqlSession查询中有，如果有则直接拿来用。当SqlSession对象消失时，一级缓存也消失</p>
+<p>​        <strong>一级缓存是 SqlSession 范围的缓存，当调用 SqlSession 的修改，添加，删除，commit()，close()等方法时，就会清空一级缓存。这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test15</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;queryUserRole&gt; Userrole = mapper.findUserRole();</span><br><span class="line">    System.out.println(Userrole);<span class="comment">/*要打印地址，不要重写toString*/</span></span><br><span class="line">    List&lt;queryUserRole&gt; Userrole1 = mapper.findUserRole();<span class="comment">//不发起查询，直接在缓存中取出数据</span></span><br><span class="line">    System.out.println(Userrole1);</span><br><span class="line">    <span class="comment">/*清除sqlSeeion*/</span></span><br><span class="line">    session.close();</span><br><span class="line">    session = factory.openSession();</span><br><span class="line">    mapper = session.getMapper(UserDao.class);</span><br><span class="line">    List&lt;queryUserRole&gt; Userrole2 = mapper.findUserRole();<span class="comment">//发起新的查询</span></span><br><span class="line">    System.out.println(Userrole2);</span><br><span class="line">    <span class="comment">//清除缓存</span></span><br><span class="line">    session.clearCache();</span><br><span class="line">    List&lt;queryUserRole&gt; Userrole3 = mapper.findUserRole();<span class="comment">//发起新的查询</span></span><br><span class="line">    System.out.println(Userrole3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png"></p>
+<h1 id="3-MyBatis二级缓存"><a href="#3-MyBatis二级缓存" class="headerlink" title="3.MyBatis二级缓存"></a>3.MyBatis二级缓存</h1><p>​            指的是MyBatis种SqlSessionFactory对象的缓存。</p>
+<p>​            <strong>由同一个SqlSessionFactory对象创建的SqlSession共享其缓存</strong></p>
+<h3 id="二级缓存的使用步骤"><a href="#二级缓存的使用步骤" class="headerlink" title="二级缓存的使用步骤"></a><strong>二级缓存的使用步骤</strong></h3><p>​        第一步：让MyBatis框架支持二级缓存（在SqlMapConfig.xml中配置）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--全局性地开启或关闭所有映射器配置文件中已配置的任何缓存，默认为true--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;cacheEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">setting</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​        第二步：让当前的映射文件支持二级缓存（在UserDao.xml中配置）， 要启用全局的二级缓存，添加一行：</p>
+<p>​        &lt; cache&gt;标签表示当前这个 mapper 映射将使用二级缓存，区分的标准就看 mapper 的 namespace 值。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;cn.hxx.Dao.AccountDao&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span>    </span><br></pre></td></tr></table></figure>
+
+<p>​        第三步：让当前的操作支持二级缓存（在select标签中配置）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--将 AccountDao.xml 映射文件中的&lt;select&gt;标签中设置 useCache=”true”代表当前这个 statement 要使用二级缓存，如果不使用二级缓存可以设置为 false。--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findById&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;account&quot;</span> <span class="attr">useCache</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">	select * from account where uid=#&#123;id&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试：首先开启 mybatis 的二级缓存。</p>
+<p>​            session 去查询用户信息，查询到用户信息会将查询数据存储到二级缓存中。</p>
+<p>​            session1 去查询用户信息，首先会去二级缓存中找是否存在数据，如果存在直接从缓存中取出数据</p>
+<p>​            session1 删除一个用户，执行 commit 提交，将会清空该 mapper 映射下的二级缓存区域的数据</p>
+<p>​            session1 再去查询用户信息，则需要执行sql查询数据库，并存储到二级缓存 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;Account&gt; list = accountDao.findAll();<span class="comment">//第一次查询，执行sql,存入二级缓存</span></span><br><span class="line">    System.out.println(list);</span><br><span class="line">    session.close();<span class="comment">//关闭session，二级缓存中数据仍然在</span></span><br><span class="line">    SqlSession session1 = factory.openSession();</span><br><span class="line">    AccountDao session1Mapper = session1.getMapper(AccountDao.class);</span><br><span class="line">    List&lt;Account&gt; list1 = session1Mapper.findAll();<span class="comment">//不需要执行sql,在二级缓存中可以取出</span></span><br><span class="line">    System.out.println(list1);<span class="comment">//地址发生变化，因为在二级缓存中存储的是数据，不是地址</span></span><br><span class="line">    <span class="comment">//删除一个用户</span></span><br><span class="line">    session1Mapper.delete(<span class="number">1</span>);<span class="comment">//执行删除，所以清空二级缓存</span></span><br><span class="line">    session1Mapper.findAll();<span class="comment">//执行sql，并放入二级缓存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%982.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/" data-id="ckniyalur0000mos6a9la66dd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-MyBatis延迟加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" class="article-date">
+  <time datetime="2021-04-14T11:52:04.000Z" itemprop="datePublished">2021-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h1><p>问题：在一对多中，当我们有一个用户，它有100个账户。</p>
+<p>​            在查询用户时，用户下的账户信息应该是什么时候使用和查询的</p>
+<p>​            在查询账户时，账户的所属信息应该是随着账户查询时一起查询出来</p>
+<p>什么是延迟加载</p>
+<p>​        <strong>在真正使用数据时才发起查询，不用的时候不查询。按需加载（懒加载）</strong></p>
+<p>什么是立即加载</p>
+<p>​        <strong>不管用不用，只要一调用方法，马上发起查询</strong></p>
+<p>在对应的四种表关系中：一对多，多对一，一对一，多对多</p>
+<p>​        一对多，多对多：通常情况下都采用延迟加载</p>
+<p>​        多对一，一对一：通常情况下采用立即加载</p>
+<h1 id="2-使用-assocation-实现延迟加载"><a href="#2-使用-assocation-实现延迟加载" class="headerlink" title="2.使用 assocation 实现延迟加载"></a>2.<strong>使用</strong> <strong>assocation</strong> <strong>实现延迟加载</strong></h1><p>需求：查询账户信息同时查询用户信息。</p>
+<ol>
+<li>在 Mybatis 的配置文件 SqlMapConfig.xml 文件中<strong>添加延迟加载的配置。</strong></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;lazyLoadingEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;aggressiveLazyLoading&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>账号的持久层AccountDao接口和持久层映射文件</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">List<span class="tag">&lt;<span class="name">Account</span>&gt;</span> findAll();</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;cn.hxx.Dao.AccountDao&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--定义封装account和user的resultMap--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;accountUserMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;account&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;uid&quot;</span> <span class="attr">column</span>=<span class="string">&quot;uid&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;money&quot;</span> <span class="attr">column</span>=<span class="string">&quot;money&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;user&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;User&quot;</span> <span class="attr">select</span>=<span class="string">&quot;cn.hxx.Dao.UserDao.findById&quot;</span> <span class="attr">column</span>=<span class="string">&quot;uid&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">            select： 填写我们要调用的 select 映射的 id ,根据用户id查询用户信息，调用的是UserDao中的findById方法</span></span><br><span class="line"><span class="comment">            column ： 填写我们要传递给 select 映射的参数，传递给findById的方法是 sql查询出来的uid</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findAll&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;account&quot;</span>&gt;</span></span><br><span class="line">        select * from account;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><strong>用户UserDao</strong>的持久层接口和配置文件</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">User findById(Integer id);</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findById&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;cn.hxx.domain.User&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;Integer&quot;</span>&gt;</span></span><br><span class="line">    select * from user where id=#&#123;uid&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>测试</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;Account&gt; list = accountDao.findAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li><p>测试结果：因为本次只是将 Account对象查询出来放入 List 集合中，并没有涉及到 User对象，所以就没有</p>
+<p>​                    发出 SQL 语句查询账户所关联的 User 对象的查询</p>
+</li>
+</ol>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/Mybatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD1.png"></p>
+<h1 id="3-使用-Collection-实现延迟加载"><a href="#3-使用-Collection-实现延迟加载" class="headerlink" title="3.使用 Collection 实现延迟加载"></a>3.<strong>使用</strong> <strong>Collection</strong> <strong>实现延迟加载</strong></h1><p>在一对多关系配置的&lt; collection &gt;结点中配置延迟加载策略。&lt; collection &gt;结点中也有 select 属性，column 属性。</p>
+<p>需求：完成加载用户对象时，查询该用户所拥有的账户信息。</p>
+<ol>
+<li>用户类中添加账户列表</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line">    <span class="keyword">private</span> String sex;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line">    <span class="comment">//一对多关系映射，主表实体应该包含从表实体的集合引用</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Account1&gt; accounts;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>编写用户和账户持久层接口的方法</strong></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public interface UserDao &#123;</span><br><span class="line">	//查询所有用户</span><br><span class="line">    List<span class="tag">&lt;<span class="name">User1</span>&gt;</span> findAll1();</span><br><span class="line">&#125;    </span><br><span class="line"><span class="comment">&lt;!--配置collection实现延迟加载--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;AllUser1Map&quot;</span> <span class="attr">type</span>=<span class="string">&quot;user1&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;username&quot;</span> <span class="attr">property</span>=<span class="string">&quot;username&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">property</span>=<span class="string">&quot;sex&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;address&quot;</span> <span class="attr">property</span>=<span class="string">&quot;address&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;birthday&quot;</span> <span class="attr">property</span>=<span class="string">&quot;birthday&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">&quot;accounts&quot;</span> <span class="attr">ofType</span>=<span class="string">&quot;account1&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">select</span>=<span class="string">&quot;cn.hxx.Dao.AccountDao.findByUid&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">column</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置查询所有User1,id是UserDao的方法名--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findAll1&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;AllUser1Map&quot;</span>&gt;</span></span><br><span class="line">    select * from user;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>账号的持久层AccountDao接口和持久层映射文件</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface AccountDao &#123;</span><br><span class="line">    List<span class="tag">&lt;<span class="name">Account</span>&gt;</span> findByUid(Integer uid);</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findByUid&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;account&quot;</span>&gt;</span></span><br><span class="line">	select * from account where uid=#&#123;id&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>测试</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test14</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">/*测试collection延迟加载*/</span></span><br><span class="line">    List&lt;User1&gt; user1s = mapper.findAll1();</span><br><span class="line">   <span class="comment">/*for (User1 user1 : user1s) &#123;</span></span><br><span class="line"><span class="comment">        System.out.println(user1);</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" data-id="ckniyalx10001mos63xy5f5lx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-MyBatis多表查询" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" class="article-date">
@@ -725,103 +891,6 @@
 
 
   
-    <article id="post-maven集成tomcat插件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/04/02/maven%E9%9B%86%E6%88%90tomcat%E6%8F%92%E4%BB%B6/" class="article-date">
-  <time datetime="2021-04-02T06:31:42.000Z" itemprop="datePublished">2021-04-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/02/maven%E9%9B%86%E6%88%90tomcat%E6%8F%92%E4%BB%B6/">maven集成tomcat7插件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-集成tomcat7插件"><a href="#1-集成tomcat7插件" class="headerlink" title="1.集成tomcat7插件"></a>1.集成tomcat7插件</h1><p>在<a target="_blank" rel="noopener" href="https://tomcat.apache.org/maven-plugin.html">https://tomcat.apache.org/maven-plugin.html</a> 中有tomcat-maven-plugin，选择2.2版本进入<a target="_blank" rel="noopener" href="https://tomcat.apache.org/maven-plugin-2.2/">https://tomcat.apache.org/maven-plugin-2.2/</a> 复制下面这段代码到pom.xml中，并添加一段配置代码，注意如果没有下载插件，<strong>不要放到pluginManagement标签下！！！</strong>。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat6-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!--访问端口--&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">port</span>&gt;</span>8000<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">             <span class="comment">&lt;!--访问项目前缀路径--&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">path</span>&gt;</span>/SpringIOC<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">uriEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">uriEncoding</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">server</span>&gt;</span>tomcat7<span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>点击load，进行加载，就会自动下载</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/maven%E9%9B%86%E6%88%90tomcat%E6%8F%92%E4%BB%B6.png"></p>
-<p>加载成功后会显示tomcat，点击下面的命令就可以运行。</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/maven%E9%9B%86%E6%88%90tomcat%E6%8F%92%E4%BB%B61.png"></p>
-<p>在浏览器中要自己输入URL，不支持从IDEA中自动进入页面</p>
-<h1 id="2-edit-configuration"><a href="#2-edit-configuration" class="headerlink" title="2.edit configuration"></a>2.edit configuration</h1><p>按照下面的操作执行，但是run可以方便使用，点击红色停止按钮应该不能完全中止程序，尽量使用tomcat:shutdown命令</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/maven%E9%9B%86%E6%88%90tomcat%E6%8F%92%E4%BB%B63.png"></p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/maven%E9%9B%86%E6%88%90tomcat%E6%8F%92%E4%BB%B64.png"></p>
-<h1 id="3-快速书写tomcat-配置代码"><a href="#3-快速书写tomcat-配置代码" class="headerlink" title="3.快速书写tomcat 配置代码"></a>3.快速书写tomcat 配置代码</h1><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%BF%AB%E6%8D%B7%E7%94%9F%E6%88%90tomcat%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%A0%81.png"></p>
-<p><strong>完成上述操作后，在pom.xml中直接写tomcat7就可以快速生成代码</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/04/02/maven%E9%9B%86%E6%88%90tomcat%E6%8F%92%E4%BB%B6/" data-id="cknhe7bvy0040ows606nv0fo8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-IDEA中maven创建servlet导入依赖" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/04/01/IDEA%E4%B8%ADmaven%E5%88%9B%E5%BB%BAservlet%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96/" class="article-date">
-  <time datetime="2021-04-01T13:10:27.000Z" itemprop="datePublished">2021-04-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/01/IDEA%E4%B8%ADmaven%E5%88%9B%E5%BB%BAservlet%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96/">IDEA中maven创建servlet导入依赖</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>创建maven项目中，当需要添加servlet和jsp依赖，要在pom.xml文件中添加依赖声明。可以直接在中央仓库网址中复制：<a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api/4.0.1%EF%BC%88%E6%88%91%E9%80%89%E6%8B%A9%E4%BA%864.0.1%E7%89%88%E6%9C%AC%EF%BC%8C%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E9%9C%80%E8%A6%81%E9%80%89%E6%8B%A9%E5%A5%BD%E8%BF%9B%E5%85%A5%E4%B8%8B%E9%9D%A2%E8%BF%99%E4%B8%AA%E9%A1%B5%E9%9D%A2%EF%BC%89">https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api/4.0.1（我选择了4.0.1版本，根据自己需要选择好进入下面这个页面）</a></p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%B7%BB%E5%8A%A0maven%E4%BE%9D%E8%B5%961.png"></p>
-<p>将这段复制到pom.xml文件中，并进行load，此时会先在本地仓库寻找，（联网状态下）如果没有找到则自动会从这个中央仓库下载</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%B7%BB%E5%8A%A0maven%E4%BE%9D%E8%B5%96.png"></p>
-<p>在External Libraries中查看引入成功</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%B7%BB%E5%8A%A0maven%E4%BE%9D%E8%B5%963.png"></p>
-<p>在本地仓库文件中新增了jar包</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%B7%BB%E5%8A%A0maven%E4%BE%9D%E8%B5%962.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/04/01/IDEA%E4%B8%ADmaven%E5%88%9B%E5%BB%BAservlet%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96/" data-id="cknhe7buh0010ows6400ndid8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -872,6 +941,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
@@ -881,14 +958,6 @@
         
           <li>
             <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
           </li>
         
       </ul>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>MyBatis缓存 | Hxx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 概念什么是缓存：存在于内存中的临时数据 为什么是缓存：减少和数据库的交互次数，提高执行效率 适用于缓存：经常查询并且不经常改变的；数据的正确与否对最终结果影响不大的 不适用缓存：经常改变的数据；数据的正确与否对最终结果影响大：商品的库存、银行的汇率、股市的牌价 2.MyBatis一级缓存​        指的是Mybatis中SqlSession对象的缓存。当我们执行查询之后，查询的结果会同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis缓存">
+<meta property="og:url" content="http://hxx-98.github.io/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="Hxx">
+<meta property="og:description" content="1. 概念什么是缓存：存在于内存中的临时数据 为什么是缓存：减少和数据库的交互次数，提高执行效率 适用于缓存：经常查询并且不经常改变的；数据的正确与否对最终结果影响不大的 不适用缓存：经常改变的数据；数据的正确与否对最终结果影响大：商品的库存、银行的汇率、股市的牌价 2.MyBatis一级缓存​        指的是Mybatis中SqlSession对象的缓存。当我们执行查询之后，查询的结果会同">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
+<meta property="og:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%982.png">
+<meta property="article:published_time" content="2021-04-15T02:37:32.000Z">
+<meta property="article:modified_time" content="2021-04-15T14:00:09.116Z">
+<meta property="article:author" content="hxx-98">
+<meta property="article:tag" content="SSM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hxx" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hxx</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hxx-98.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-MyBatis缓存" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/" class="article-date">
+  <time datetime="2021-04-15T02:37:32.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MyBatis缓存
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><p>什么是缓存：存在于内存中的临时数据</p>
+<p>为什么是缓存：减少和数据库的交互次数，提高执行效率</p>
+<p>适用于缓存：经常查询并且不经常改变的；数据的正确与否对最终结果影响不大的</p>
+<p>不适用缓存：经常改变的数据；数据的正确与否对最终结果影响大：商品的库存、银行的汇率、股市的牌价</p>
+<h1 id="2-MyBatis一级缓存"><a href="#2-MyBatis一级缓存" class="headerlink" title="2.MyBatis一级缓存"></a>2.MyBatis一级缓存</h1><p>​        指的是Mybatis中SqlSession对象的缓存。当我们执行查询之后，查询的结果会同时存入到SqlSession为我们提供的一块区域中。该区域的结构是一个Map。当我们再次查询同样的数据，Mybatis会先去SqlSession查询中有，如果有则直接拿来用。当SqlSession对象消失时，一级缓存也消失</p>
+<p>​        <strong>一级缓存是 SqlSession 范围的缓存，当调用 SqlSession 的修改，添加，删除，commit()，close()等方法时，就会清空一级缓存。这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test15</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;queryUserRole&gt; Userrole = mapper.findUserRole();</span><br><span class="line">    System.out.println(Userrole);<span class="comment">/*要打印地址，不要重写toString*/</span></span><br><span class="line">    List&lt;queryUserRole&gt; Userrole1 = mapper.findUserRole();<span class="comment">//不发起查询，直接在缓存中取出数据</span></span><br><span class="line">    System.out.println(Userrole1);</span><br><span class="line">    <span class="comment">/*清除sqlSeeion*/</span></span><br><span class="line">    session.close();</span><br><span class="line">    session = factory.openSession();</span><br><span class="line">    mapper = session.getMapper(UserDao.class);</span><br><span class="line">    List&lt;queryUserRole&gt; Userrole2 = mapper.findUserRole();<span class="comment">//发起新的查询</span></span><br><span class="line">    System.out.println(Userrole2);</span><br><span class="line">    <span class="comment">//清除缓存</span></span><br><span class="line">    session.clearCache();</span><br><span class="line">    List&lt;queryUserRole&gt; Userrole3 = mapper.findUserRole();<span class="comment">//发起新的查询</span></span><br><span class="line">    System.out.println(Userrole3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png"></p>
+<h1 id="3-MyBatis二级缓存"><a href="#3-MyBatis二级缓存" class="headerlink" title="3.MyBatis二级缓存"></a>3.MyBatis二级缓存</h1><p>​            指的是MyBatis种SqlSessionFactory对象的缓存。</p>
+<p>​            <strong>由同一个SqlSessionFactory对象创建的SqlSession共享其缓存</strong></p>
+<h3 id="二级缓存的使用步骤"><a href="#二级缓存的使用步骤" class="headerlink" title="二级缓存的使用步骤"></a><strong>二级缓存的使用步骤</strong></h3><p>​        第一步：让MyBatis框架支持二级缓存（在SqlMapConfig.xml中配置）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--全局性地开启或关闭所有映射器配置文件中已配置的任何缓存，默认为true--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;cacheEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">setting</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​        第二步：让当前的映射文件支持二级缓存（在UserDao.xml中配置）， 要启用全局的二级缓存，添加一行：</p>
+<p>​        &lt; cache&gt;标签表示当前这个 mapper 映射将使用二级缓存，区分的标准就看 mapper 的 namespace 值。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;cn.hxx.Dao.AccountDao&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span>    </span><br></pre></td></tr></table></figure>
+
+<p>​        第三步：让当前的操作支持二级缓存（在select标签中配置）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--将 AccountDao.xml 映射文件中的&lt;select&gt;标签中设置 useCache=”true”代表当前这个 statement 要使用二级缓存，如果不使用二级缓存可以设置为 false。--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findById&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;account&quot;</span> <span class="attr">useCache</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">	select * from account where uid=#&#123;id&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试：首先开启 mybatis 的二级缓存。</p>
+<p>​            session 去查询用户信息，查询到用户信息会将查询数据存储到二级缓存中。</p>
+<p>​            session1 去查询用户信息，首先会去二级缓存中找是否存在数据，如果存在直接从缓存中取出数据</p>
+<p>​            session1 删除一个用户，执行 commit 提交，将会清空该 mapper 映射下的二级缓存区域的数据</p>
+<p>​            session1 再去查询用户信息，则需要执行sql查询数据库，并存储到二级缓存 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;Account&gt; list = accountDao.findAll();<span class="comment">//第一次查询，执行sql,存入二级缓存</span></span><br><span class="line">    System.out.println(list);</span><br><span class="line">    session.close();<span class="comment">//关闭session，二级缓存中数据仍然在</span></span><br><span class="line">    SqlSession session1 = factory.openSession();</span><br><span class="line">    AccountDao session1Mapper = session1.getMapper(AccountDao.class);</span><br><span class="line">    List&lt;Account&gt; list1 = session1Mapper.findAll();<span class="comment">//不需要执行sql,在二级缓存中可以取出</span></span><br><span class="line">    System.out.println(list1);<span class="comment">//地址发生变化，因为在二级缓存中存储的是数据，不是地址</span></span><br><span class="line">    <span class="comment">//删除一个用户</span></span><br><span class="line">    session1Mapper.delete(<span class="number">1</span>);<span class="comment">//执行删除，所以清空二级缓存</span></span><br><span class="line">    session1Mapper.findAll();<span class="comment">//执行sql，并放入二级缓存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%982.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/" data-id="ckniyalur0000mos6a9la66dd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MyBatis延迟加载</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">Java设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Java设计模式</a> <a href="/tags/MySQL/" style="font-size: 11.67px;">MySQL</a> <a href="/tags/SSM/" style="font-size: 15px;">SSM</a> <a href="/tags/c/" style="font-size: 16.67px;">c++</a> <a href="/tags/javaweb/" style="font-size: 18.33px;">javaweb</a> <a href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" style="font-size: 13.33px;">《数据库系统概论》</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hxx-98<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

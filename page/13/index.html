@@ -64,6 +64,208 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-优先级队列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/03/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/" class="article-date">
+  <time datetime="2020-03-03T07:50:56.000Z" itemprop="datePublished">2020-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/03/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/">优先级队列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="STL优先级队列"><a href="#STL优先级队列" class="headerlink" title="STL优先级队列"></a>STL优先级队列</h2><ul>
+<li><p>priority_queue:自适应容器（容器适配器），不能使用list</p>
+</li>
+<li><p>最大值优先级队列：最大的在队列的最前面</p>
+</li>
+<li><p>最小值优先级队列：最小的在队列最前面</p>
+</li>
+<li><p>包含的头文件 queue</p>
+</li>
+<li><p>函数接口</p>
+<p>priority_queue&lt;int,deque&lt; int &gt; &gt; pq; //默认最大值优先级队列</p>
+<p>priority_queue&lt;int,vector&lt; int &gt; &gt; pq;</p>
+<p>priority_queue&lt; int, deque&lt; int &gt;,<strong>greater</strong>&lt; int &gt;&gt; pq;//最小值优先级队列</p>
+<p>pq.empty();</p>
+<p>pq.size();</p>
+<p>pq.top();</p>
+<p>pq.pop();</p>
+<p>pq.push(item);</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/03/03/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/" data-id="cknhe7bwj0052ows60ikrdbs1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vector容器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/29/vector%E5%AE%B9%E5%99%A8/" class="article-date">
+  <time datetime="2020-02-29T04:29:13.000Z" itemprop="datePublished">2020-02-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/29/vector%E5%AE%B9%E5%99%A8/">vector容器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vector-容器"><a href="#Vector-容器" class="headerlink" title="Vector 容器"></a>Vector 容器</h2><h3 id="1-vector基本概念"><a href="#1-vector基本概念" class="headerlink" title="1 vector基本概念"></a>1 vector基本概念</h3><ul>
+<li><p>功能</p>
+<p>vector数据结构和数组十分相似，也称为单端数组</p>
+</li>
+<li><p>vector和普通数组的区别</p>
+<p>不同之处在于数组是静态空间，而vector可以动态扩展</p>
+</li>
+<li><p>动态扩展</p>
+<p><strong>并不是在原空间之后续接新空间，而是找更大的内存空间，然后将原数据拷贝新空间，释放原空间</strong></p>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/vector.PNG"></p>
+<ul>
+<li>vector容器的迭代器是支持随机访问的迭代器</li>
+</ul>
+<h3 id="2-vector构造函数"><a href="#2-vector构造函数" class="headerlink" title="2 vector构造函数"></a>2 vector构造函数</h3><ul>
+<li><p>功能描述</p>
+<p>创造vector容器</p>
+</li>
+<li><p>函数原型</p>
+<ol>
+<li><code>vector &lt;T&gt; v</code>  //采用模板实现类实现，默认构造函数</li>
+<li><code>vector(v.begin(),v.end());</code>   将v[ begin(), end() ) 区间中的元素拷贝给本身</li>
+<li><code>vector(n,elem);</code>    //构造函数将n个elem拷贝给本</li>
+<li><code>vector(const vector &amp;vec);</code>   //拷贝构造函数</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printVector</span><span class="params">(<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt;&amp; v)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = v.begin(); it != v.end(); it++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		v1.push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">	printVector(v1);</span><br><span class="line">	<span class="comment">//通过区间方式构造</span></span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br><span class="line">	printVector(v2);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v3(<span class="number">5</span>, <span class="number">100</span>);</span><br><span class="line">	printVector(v3);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v4(v3);</span><br><span class="line">	printVector(v4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-vector赋值操作"><a href="#3-vector赋值操作" class="headerlink" title="3 vector赋值操作"></a>3 vector赋值操作</h3><ul>
+<li>函数原型<ol>
+<li><code>vector&amp; operator=(const vector &amp;vec)</code>  </li>
+<li><code>assign(beg,end);</code>  //给[beg, end）区间中的数据拷贝复制给本身</li>
+<li><code>assign(n,elem)</code>  //将n个elem拷贝赋值给本身</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;  v1.push_back(i);  &#125;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v2;</span><br><span class="line">	v2 = v1;</span><br><span class="line">	printVector(v2);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v3;</span><br><span class="line">	v3.assign(v1.begin(), v1.end());</span><br><span class="line">	printVector(v3);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v4;</span><br><span class="line">	v4.assign(<span class="number">5</span>, <span class="number">10</span>);</span><br><span class="line">	printVector(v4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-vector容量和大小"><a href="#4-vector容量和大小" class="headerlink" title="4 vector容量和大小"></a>4 vector容量和大小</h3><ul>
+<li>函数原型<ol>
+<li><code>empty();</code>  //判断容器是否为空</li>
+<li><code>capacity();</code>  //容器的容量,<strong>容量大于等于长度</strong></li>
+<li><code>size();</code>  //返回容器中元素的个数</li>
+<li><code>resize(int num);</code> //重新指定容器的长度为num,若容器边长，则以默认值填充新位置。如果容器变短，则末尾超出容器长度的元素被删除</li>
+<li><code>resize(int num,elem)</code>  //重新指定容器的长度为num,若容器变长，则以elem值填充新位置。若容器变短，则末尾超出容器长度的元素被删除。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void test03() &#123;</span><br><span class="line">	vector&lt;int&gt;v1;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; 5; i++) &#123; v1.push_back(i); &#125;</span><br><span class="line">	if (v1.empty())  cout &lt;&lt; &quot;v1为空&quot; &lt;&lt; endl;</span><br><span class="line">	else &#123;</span><br><span class="line">		cout &lt;&lt; &quot;v1不为空&quot; &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; &quot;v1的容量为&quot; &lt;&lt; v1.capacity() &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; &quot;v1的大小为&quot; &lt;&lt; v1.size() &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;重回新指定大小</span><br><span class="line">	v1.resize(7);</span><br><span class="line">	printVector(v1);&#x2F;&#x2F;0 1 2 3 4 0 0</span><br><span class="line">	v1.resize(10,8);</span><br><span class="line">	printVector(v1);&#x2F;&#x2F;0 1 2 3 4 0 0 8 8 8</span><br><span class="line">	v1.resize(5);</span><br><span class="line">	printVector(v1);&#x2F;&#x2F;0 1 2 3 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-vector插入和删除"><a href="#5-vector插入和删除" class="headerlink" title="5 vector插入和删除"></a>5 vector插入和删除</h3><ul>
+<li>函数原型<ol>
+<li><code>push_back(elem);</code> //尾部插入元素</li>
+<li><code>pop_back();</code>  //删除最后一个元素</li>
+<li><code>insert(const_iterator pos,ele);</code>  //迭代器指向位置pos插入元素ele</li>
+<li><code>insert(const_iterator pos,int count,ele)；</code>//迭代器指向位置pos插入count个元素ele</li>
+<li><code>erase(const_iterator pos);</code>//删除迭代器指向的元素</li>
+<li><code>erase(const_iterator start,const_iterator end);</code>//删除迭代器从start到end之间的元素</li>
+<li><code>clear()</code>；//删除容器中所有的元素</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123; v1.push_back(i); &#125;</span><br><span class="line">	v1.pop_back();</span><br><span class="line">	printVector(v1);</span><br><span class="line">	<span class="comment">//插入</span></span><br><span class="line">	v1.insert(v1.begin(), <span class="number">100</span>);</span><br><span class="line">	printVector(v1);</span><br><span class="line">	v1.insert(v1.begin(),<span class="number">2</span>, <span class="number">50</span>);</span><br><span class="line">	printVector(v1);</span><br><span class="line">	<span class="comment">//删除</span></span><br><span class="line">	v1.erase(v1.end()<span class="number">-1</span>);</span><br><span class="line">	printVector(v1);</span><br><span class="line"></span><br><span class="line">	v1.erase(v1.begin(),v1.end()<span class="number">-2</span>);</span><br><span class="line">	printVector(v1);</span><br><span class="line">	v1.clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-vector数据存取"><a href="#6-vector数据存取" class="headerlink" title="6 vector数据存取"></a>6 vector数据存取</h3><ul>
+<li>函数原型<ol>
+<li><code>at(int idx);</code>  //返回索引 idx 所值的数据</li>
+<li><code>operator[];</code>  //返回索引 idx 所指的数据</li>
+<li><code>front();</code>  //返回容器中第一个数据</li>
+<li><code>back();</code>  // 返回容器中最后一个数据元素</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test05</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123; v1.push_back(i); &#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v1.size(); i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; v1[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v1.size(); i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; v1.at(i) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;第一个元素&quot;</span> &lt;&lt; v1.front() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;最后一个元素&quot;</span> &lt;&lt; v1.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-vector互换容器"><a href="#7-vector互换容器" class="headerlink" title="7 vector互换容器"></a>7 vector互换容器</h3><ul>
+<li><p>函数原型</p>
+<p><code>swap(vec);</code>  </p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//巧用swap可以收缩内存空间</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test07</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v1;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v2;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		v1.push_back(i);</span><br><span class="line">		v2.push_back(i + <span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的容量为&quot;</span> &lt;&lt; v1.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的大小为&quot;</span> &lt;&lt; v1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	v1.resize(<span class="number">3</span>);<span class="comment">//容量没有变</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的容量为&quot;</span> &lt;&lt; v1.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的大小为&quot;</span> &lt;&lt; v1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//收缩内存</span></span><br><span class="line">	<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt;(v1).swap(v1);</span><br><span class="line">	<span class="comment">//vector &lt;int&gt;(v1)</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的容量为&quot;</span> &lt;&lt; v1.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;v1的大小为&quot;</span> &lt;&lt; v1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">v1的容量为<span class="number">138255</span></span><br><span class="line">v1的大小为<span class="number">100000</span></span><br><span class="line">v1的容量为<span class="number">138255</span></span><br><span class="line">v1的大小为<span class="number">3</span></span><br><span class="line">v1的容量为<span class="number">3</span></span><br><span class="line">v1的大小为<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-vector预留空间"><a href="#8-vector预留空间" class="headerlink" title="8 vector预留空间"></a>8 vector预留空间</h3><ul>
+<li><p>功能描述</p>
+<p>减少vector在动态扩展容量时的扩展次数</p>
+</li>
+<li><p>函数原型</p>
+<p><code>reserve(int len);</code> //容器预留len个元素长度，预留位置不初始化，元素不可访问</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test08</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;v;</span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;<span class="comment">//记录动态扩展次数</span></span><br><span class="line">	<span class="keyword">int</span>* p = <span class="literal">NULL</span>;<span class="comment">//指向当前容器中的首元素</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">300</span>; i++) &#123;</span><br><span class="line">		v.push_back(i);</span><br><span class="line">		<span class="comment">//判断指针p所指的首元素地址是否发生变化，如果变化，则重新分配了内存，num加一并更新p</span></span><br><span class="line">		<span class="keyword">if</span> (p != &amp;v[<span class="number">0</span>]) &#123;</span><br><span class="line">			num++;</span><br><span class="line">			p = &amp;v[<span class="number">0</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;动态扩展次数：&quot;</span> &lt;&lt; num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">动态扩展次数：<span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+<p>使用reserve后</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v.reserve(<span class="number">300</span>);<span class="comment">//预留空间</span></span><br></pre></td></tr></table></figure>
+
+<p>运算结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">动态扩展次数：1</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/02/29/vector%E5%AE%B9%E5%99%A8/" data-id="cknhe7bwe004qows6b5qj4qwq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-string容器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/02/28/string%E5%AE%B9%E5%99%A8/" class="article-date">
@@ -694,104 +896,6 @@
 
 
   
-    <article id="post-const修饰成员函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/25/const%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" class="article-date">
-  <time datetime="2020-02-25T13:36:24.000Z" itemprop="datePublished">2020-02-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/25/const%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">const修饰成员函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="const修饰成员函数"><a href="#const修饰成员函数" class="headerlink" title="const修饰成员函数"></a>const修饰成员函数</h2><ul>
-<li><p><code>this</code>指针的本质是一个指针常量，即<code>this</code>指针的指向不可以修改，但是指向对象内容可以修改。</p>
-</li>
-<li><p>常函数</p>
-<p>（1）成员函数<strong>后</strong>加 const 后为常函数，此时<code>this</code>指针实质上理解为<code>const 类名 *const this</code>。所以在常函数内不可以修改成员属性。</p>
-<p>（2）成员属性声明时加关键字 <code>mutable</code> 后，在常函数中依然可以被修改。</p>
-</li>
-<li><p>常对象</p>
-<p>（1）声明对象前加 const 为常对象</p>
-<p>（2）常对象只能调用常函数</p>
-</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> m_Age;</span><br><span class="line">	<span class="keyword">mutable</span> <span class="keyword">int</span> m_B;<span class="comment">//在常函数中也可以被修改</span></span><br><span class="line">	<span class="comment">//Person *const this</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showClassName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Age = <span class="number">10</span>;</span><br><span class="line">		<span class="comment">//this = NULL;报错</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;this is Person class&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//const Person *const this</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPerson</span><span class="params">()</span><span class="keyword">const</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_B = <span class="number">10</span>;</span><br><span class="line">		<span class="comment">//this-&gt;m_Age = 10;//不可修改</span></span><br><span class="line">		<span class="comment">//this = NULL;</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;age = &quot;</span> &lt;&lt; m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//常对象只能调用常函数</span></span><br><span class="line">	<span class="keyword">const</span> Person p;</span><br><span class="line">	<span class="comment">//p.m_Age = 10;//报错</span></span><br><span class="line">	p.m_B = <span class="number">10</span>;</span><br><span class="line">    p.showPerson();</span><br><span class="line">	<span class="comment">//p.func();//报错，常对象不可以调用普通成员函数，</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Person p;</span><br><span class="line">	p.showPerson();<span class="comment">//this指针指向p</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    test01();</span><br><span class="line">	test02();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/02/25/const%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" data-id="cknhe7bvr003kows6da3dbxp7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-空指针访问成员函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/25/%E7%A9%BA%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" class="article-date">
-  <time datetime="2020-02-25T13:20:59.000Z" itemprop="datePublished">2020-02-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/25/%E7%A9%BA%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">空指针访问成员函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="空指针访问成员函数"><a href="#空指针访问成员函数" class="headerlink" title="空指针访问成员函数"></a>空指针访问成员函数</h2><ul>
-<li>c++中空指针可以调用成员函数，但是要注意有没有用到this指针</li>
-<li>如果要用到this指针，需要加以判断保证代码的健壮性</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> m_Age;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showClassName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;this is Person class&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPersonAge1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span> == <span class="literal">NULL</span>) &#123;<span class="comment">//空指针判断</span></span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;age = &quot;</span> &lt;&lt; m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPersonAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;age = &quot;</span> &lt;&lt; m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="comment">//等价于 cout &lt;&lt; &quot;age = &quot; &lt;&lt; this.m_Age &lt;&lt; endl;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Person* p;</span><br><span class="line">	p-&gt;showClassName();</span><br><span class="line">	<span class="comment">//报错原因是传入的指针是NULL</span></span><br><span class="line">	<span class="comment">//p-&gt;showPersonAge();</span></span><br><span class="line">	p-&gt;showPersonAge1();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	test02();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/02/25/%E7%A9%BA%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" data-id="cknhe7bxt007vows6dslk0672" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -842,6 +946,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
@@ -851,14 +963,6 @@
         
           <li>
             <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
           </li>
         
       </ul>

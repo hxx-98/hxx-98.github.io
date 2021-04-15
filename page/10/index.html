@@ -64,6 +64,122 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Array和math工具类-Java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/17/Array%E5%92%8Cmath%E5%B7%A5%E5%85%B7%E7%B1%BB-Java/" class="article-date">
+  <time datetime="2020-08-17T08:12:07.000Z" itemprop="datePublished">2020-08-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/17/Array%E5%92%8Cmath%E5%B7%A5%E5%85%B7%E7%B1%BB-Java/">Array和math工具类-Java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Arrays常用方法"><a href="#Arrays常用方法" class="headerlink" title="Arrays常用方法"></a>Arrays常用方法</h1><ul>
+<li>public static String toString(数组名)：将数组转化为字符串</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arrays = &#123;<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>&#125;;</span><br><span class="line">        String string  = Arrays.toString(arrays);</span><br><span class="line">        System.out.println(string);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>public static void sort（数组）：按照默认升序对数组元素排序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arrays = &#123;<span class="number">20</span>,<span class="number">10</span>,<span class="number">30</span>&#125;;</span><br><span class="line">        Arrays.sort(arrays);</span><br><span class="line">        System.out.println(Arrays.toString(arrays));</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="math工具类"><a href="#math工具类" class="headerlink" title="math工具类"></a>math工具类</h1><ul>
+<li>public static double abs(double num):获取绝对值</li>
+<li>public static double ceil(double num);向上取整</li>
+<li>public static double floor(double num);向下取整</li>
+<li>public static long round(double num);四舍五入</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Math.ceil(<span class="number">3.1</span>));<span class="comment">//输出4.0</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/17/Array%E5%92%8Cmath%E5%B7%A5%E5%85%B7%E7%B1%BB-Java/" data-id="cknhe7bty0003ows6b2ay0zen" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-静态static关键字-Java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/17/%E9%9D%99%E6%80%81static%E5%85%B3%E9%94%AE%E5%AD%97-Java/" class="article-date">
+  <time datetime="2020-08-17T07:19:48.000Z" itemprop="datePublished">2020-08-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/17/%E9%9D%99%E6%80%81static%E5%85%B3%E9%94%AE%E5%AD%97-Java/">静态static关键字-Java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="static修饰成员"><a href="#static修饰成员" class="headerlink" title="static修饰成员"></a>static修饰成员</h1><ul>
+<li>修饰成员变量，多个对象共享使用该变量，也可<strong>类名.静态变量</strong>来使用。</li>
+<li>修饰成员方法，称为静态方法。<ol>
+<li>可以通过对象名调用（不推荐），也可以通过类名调用（<strong>类名称.静态方法</strong>），如果在本类中调用可省略类名。</li>
+<li>如果没有static关键字，那么必须首先创建对象，通过对象使用。</li>
+<li>静态方法不能直接访问非静态成员，因为在内存中先有的静态内容。</li>
+<li>静态方法中不能使用this。</li>
+</ol>
+</li>
+</ul>
+<h1 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h1><ul>
+<li><p> 当第一次使用到本类时，静态代码块执行唯一一次。用来一次性的对静态成员变量进行赋值</p>
+</li>
+<li><p>在类中</p>
+<p>static   {   代码   }</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是静态代码块&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student student = <span class="keyword">new</span> Student();</span><br><span class="line">    Student student1 = <span class="keyword">new</span> Student();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是静态代码块</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/17/%E9%9D%99%E6%80%81static%E5%85%B3%E9%94%AE%E5%AD%97-Java/" data-id="cknhe7by4008hows65lgubntn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-String字符串-Java" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/14/String%E5%AD%97%E7%AC%A6%E4%B8%B2-Java/" class="article-date">
@@ -532,162 +648,6 @@
 
 
   
-    <article id="post-数组(java)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/08/12/%E6%95%B0%E7%BB%84(java)/" class="article-date">
-  <time datetime="2020-08-12T01:49:05.000Z" itemprop="datePublished">2020-08-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/12/%E6%95%B0%E7%BB%84(java)/">数组</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="数组的定义格式"><a href="#数组的定义格式" class="headerlink" title="数组的定义格式"></a>数组的定义格式</h1><ul>
-<li><p>动态初始化</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据类型 [] 数组名 = new 数据类型[数组长度];</span></span><br><span class="line"><span class="keyword">int</span> [] array = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">300</span>];</span><br><span class="line"><span class="comment">/*或者</span></span><br><span class="line"><span class="comment">int [] array;</span></span><br><span class="line"><span class="comment">array = new int[300];*/</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<ul>
-<li><p>静态初始化</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据类型 [] 数组名 = new 数据类型[]&#123;元素1,元素2,...&#125;;</span></span><br><span class="line"><span class="keyword">int</span> [] arrayA = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="comment">/*或者</span></span><br><span class="line"><span class="comment">int [] arrayA;</span></span><br><span class="line"><span class="comment">arrayA = new int[]&#123;1，2，3&#125;;*/</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>省略格式的初始化</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据类型 [] 数组名 = &#123;元素1,元素2,...&#125;;</span></span><br><span class="line"><span class="keyword">int</span> [] arrayB = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="comment">//下面这种写法是错误的</span></span><br><span class="line"><span class="comment">/*int []arrayB;</span></span><br><span class="line"><span class="comment">arrayB = &#123;1,2,3&#125;;*/</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<h1 id="数组默认值"><a href="#数组默认值" class="headerlink" title="数组默认值"></a>数组默认值</h1><ul>
-<li><p>动态初始化数组，其中每个元素的默认值如下</p>
-<table>
-<thead>
-<tr>
-<th align="center">数据类型</th>
-<th align="center">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">整数类型</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td align="center">浮点类型</td>
-<td align="center">0.0</td>
-</tr>
-<tr>
-<td align="center">字符类型</td>
-<td align="center">‘\u000’(不可见字符)</td>
-</tr>
-<tr>
-<td align="center">布尔类型</td>
-<td align="center">false</td>
-</tr>
-<tr>
-<td align="center">引用类型</td>
-<td align="center">null</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h1 id="数组内存分布"><a href="#数组内存分布" class="headerlink" title="数组内存分布"></a>数组内存分布</h1><ul>
-<li>在方法内定义的数组，在栈区存放该数组的首地址，在堆区存放该数组元素的内容。</li>
-<li>例如查找array[1]的内容，先在栈区查找到该数组的首地址，然后再堆区按照序号获取元素值</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.PNG"></p>
-<ul>
-<li>若将数组重新进行new,那么再栈区存放的首地址将发生变化</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%95%B0%E7%BB%84%E9%87%8D%E6%96%B0new.PNG"></p>
-<h1 id="数组初始化空指针异常"><a href="#数组初始化空指针异常" class="headerlink" title="数组初始化空指针异常"></a>数组初始化空指针异常</h1><ul>
-<li>所有的引用类型量，都可以赋值为一个null值，数组是引用类型</li>
-<li>数组必须进行new初始化，才能使用其中的元素</li>
-<li>如果只是给数组赋初值为null,那么访问时会发生空指针异常（NullPointerException）</li>
-</ul>
-<h1 id="数组作为方法参数"><a href="#数组作为方法参数" class="headerlink" title="数组作为方法参数"></a>数组作为方法参数</h1><ul>
-<li>数组作为方法参数，<strong>传递的是数组的地址值</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arrayA = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">        System.out.println(arrayA);</span><br><span class="line">        print(arrayA);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span>[] arrayA)</span> </span>&#123;</span><br><span class="line">        System.out.println(arrayA);<span class="comment">//数组地址</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="数组输出"><a href="#数组输出" class="headerlink" title="数组输出"></a>数组输出</h1><ul>
-<li>Java封装了Arrays</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arrayA = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">System.out.println(Arrays.toString(arrayA));</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/08/12/%E6%95%B0%E7%BB%84(java)/" data-id="cknhe7bxh0079ows68p58h6h7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-IDEA之快捷键" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/08/11/IDEA%E4%B9%8B%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="article-date">
-  <time datetime="2020-08-11T08:22:42.000Z" itemprop="datePublished">2020-08-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/11/IDEA%E4%B9%8B%E5%BF%AB%E6%8D%B7%E9%94%AE/">IDEA之快捷键</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="IDEA常用快捷键"><a href="#IDEA常用快捷键" class="headerlink" title="IDEA常用快捷键"></a>IDEA常用快捷键</h1><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE.PNG"></p>
-<h1 id="IDEA修改快捷键"><a href="#IDEA修改快捷键" class="headerlink" title="IDEA修改快捷键"></a>IDEA修改快捷键</h1><ul>
-<li>点击file—&gt;settings—&gt;Keymap—&gt;Code</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE1.PNG"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/08/11/IDEA%E4%B9%8B%E5%BF%AB%E6%8D%B7%E9%94%AE/" data-id="cknhe7bui0012ows64tbkfh4y" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -738,6 +698,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
@@ -747,14 +715,6 @@
         
           <li>
             <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
           </li>
         
       </ul>

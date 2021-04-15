@@ -64,6 +64,104 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-const修饰成员函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/25/const%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" class="article-date">
+  <time datetime="2020-02-25T13:36:24.000Z" itemprop="datePublished">2020-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/25/const%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">const修饰成员函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="const修饰成员函数"><a href="#const修饰成员函数" class="headerlink" title="const修饰成员函数"></a>const修饰成员函数</h2><ul>
+<li><p><code>this</code>指针的本质是一个指针常量，即<code>this</code>指针的指向不可以修改，但是指向对象内容可以修改。</p>
+</li>
+<li><p>常函数</p>
+<p>（1）成员函数<strong>后</strong>加 const 后为常函数，此时<code>this</code>指针实质上理解为<code>const 类名 *const this</code>。所以在常函数内不可以修改成员属性。</p>
+<p>（2）成员属性声明时加关键字 <code>mutable</code> 后，在常函数中依然可以被修改。</p>
+</li>
+<li><p>常对象</p>
+<p>（1）声明对象前加 const 为常对象</p>
+<p>（2）常对象只能调用常函数</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> m_Age;</span><br><span class="line">	<span class="keyword">mutable</span> <span class="keyword">int</span> m_B;<span class="comment">//在常函数中也可以被修改</span></span><br><span class="line">	<span class="comment">//Person *const this</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showClassName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_Age = <span class="number">10</span>;</span><br><span class="line">		<span class="comment">//this = NULL;报错</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;this is Person class&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//const Person *const this</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPerson</span><span class="params">()</span><span class="keyword">const</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_B = <span class="number">10</span>;</span><br><span class="line">		<span class="comment">//this-&gt;m_Age = 10;//不可修改</span></span><br><span class="line">		<span class="comment">//this = NULL;</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;age = &quot;</span> &lt;&lt; m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//常对象只能调用常函数</span></span><br><span class="line">	<span class="keyword">const</span> Person p;</span><br><span class="line">	<span class="comment">//p.m_Age = 10;//报错</span></span><br><span class="line">	p.m_B = <span class="number">10</span>;</span><br><span class="line">    p.showPerson();</span><br><span class="line">	<span class="comment">//p.func();//报错，常对象不可以调用普通成员函数，</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Person p;</span><br><span class="line">	p.showPerson();<span class="comment">//this指针指向p</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    test01();</span><br><span class="line">	test02();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/02/25/const%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" data-id="cknhe7bvr003kows6da3dbxp7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-空指针访问成员函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/25/%E7%A9%BA%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" class="article-date">
+  <time datetime="2020-02-25T13:20:59.000Z" itemprop="datePublished">2020-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/25/%E7%A9%BA%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/">空指针访问成员函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="空指针访问成员函数"><a href="#空指针访问成员函数" class="headerlink" title="空指针访问成员函数"></a>空指针访问成员函数</h2><ul>
+<li>c++中空指针可以调用成员函数，但是要注意有没有用到this指针</li>
+<li>如果要用到this指针，需要加以判断保证代码的健壮性</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> m_Age;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showClassName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;this is Person class&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPersonAge1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span> == <span class="literal">NULL</span>) &#123;<span class="comment">//空指针判断</span></span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;age = &quot;</span> &lt;&lt; m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">showPersonAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;age = &quot;</span> &lt;&lt; m_Age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="comment">//等价于 cout &lt;&lt; &quot;age = &quot; &lt;&lt; this.m_Age &lt;&lt; endl;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Person* p;</span><br><span class="line">	p-&gt;showClassName();</span><br><span class="line">	<span class="comment">//报错原因是传入的指针是NULL</span></span><br><span class="line">	<span class="comment">//p-&gt;showPersonAge();</span></span><br><span class="line">	p-&gt;showPersonAge1();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	test02();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/02/25/%E7%A9%BA%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/" data-id="cknhe7bxt007vows6dslk0672" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-this指针" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/02/25/this%E6%8C%87%E9%92%88/" class="article-date">
@@ -501,185 +599,6 @@
 
 
   
-    <article id="post-拷贝函数调用时机" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/24/%E6%8B%B7%E8%B4%9D%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA/" class="article-date">
-  <time datetime="2020-02-24T02:34:36.000Z" itemprop="datePublished">2020-02-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/24/%E6%8B%B7%E8%B4%9D%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA/">拷贝函数调用时机</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>c++中拷贝构造函数调用时机通常有三种情况</p>
-<p>（1）使用一个已经创建完毕的对象来初始化一个新对象</p>
-<p>（2）值传递的方式函数参数传值</p>
-<p>（3）以值方式返回局部对象</p>
-</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//3、以值方式返回局部对象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Person() &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Person 的默认构造函数调用。&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Person(<span class="keyword">int</span> a) &#123;</span><br><span class="line">		age = a;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Person 的有参构造函数调用。&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Person(<span class="keyword">const</span> Person &amp;p) &#123;</span><br><span class="line">		age = p.age;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Person 的拷贝构造函数调用。&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	~Person() &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Person 的析构函数调用。&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//使用一个已经创建完毕的对象来初始化一个新对象</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="function">Person <span class="title">p1</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">	<span class="function">Person <span class="title">p2</span><span class="params">(p1)</span></span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;p2 的年龄为：&quot;</span> &lt;&lt; p2.age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//值传递的方式函数参数传值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dowork</span><span class="params">(Person p)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Person p;</span><br><span class="line">	dowork(p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//值方式返回局部对象</span></span><br><span class="line"><span class="function">Person <span class="title">dowork2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Person p1;<span class="comment">//默认构造函数</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; (<span class="keyword">int</span>)&amp;p1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> p1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Person p = dowork2(); <span class="comment">//拷贝构造函数，相当于Person p = p1;，拷贝之后在析构 dowork2 函数返回的局部对象</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; (<span class="keyword">int</span>)&amp;p &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;test01&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	test01();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;\ntest02&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	test02();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;\ntest03&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	test03();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">test01</span><br><span class="line">Person 的有参构造函数调用。</span><br><span class="line">Person 的拷贝构造函数调用。</span><br><span class="line">p2 的年龄为：<span class="number">10</span></span><br><span class="line">Person 的析构函数调用。</span><br><span class="line">Person 的析构函数调用。</span><br><span class="line"></span><br><span class="line">test02</span><br><span class="line">Person 的默认构造函数调用。</span><br><span class="line">Person 的拷贝构造函数调用。</span><br><span class="line">Person 的析构函数调用。</span><br><span class="line">Person 的析构函数调用。</span><br><span class="line"></span><br><span class="line">test03</span><br><span class="line">Person 的默认构造函数调用。</span><br><span class="line"><span class="number">17823492</span></span><br><span class="line">Person 的拷贝构造函数调用。</span><br><span class="line">Person 的析构函数调用。</span><br><span class="line"><span class="number">17823740</span></span><br><span class="line">Person 的析构函数调用。</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/02/24/%E6%8B%B7%E8%B4%9D%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA/" data-id="cknhe7bx9006nows6162xekvx" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sort详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/23/sort%E8%AF%A6%E8%A7%A3/" class="article-date">
-  <time datetime="2020-02-23T10:02:55.000Z" itemprop="datePublished">2020-02-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/23/sort%E8%AF%A6%E8%A7%A3/">sort详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="sort类函数"><a href="#sort类函数" class="headerlink" title="sort类函数"></a>sort类函数</h2><ul>
-<li>sort()函数是c++中的一种排序方法，实现的方法类似于快速排序的方法，时间复杂度为 n*log2(n)。</li>
-<li>sort 类函数总结</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">函数名</th>
-<th align="center">功能描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">sort</td>
-<td align="center">对给定区间进行排序</td>
-</tr>
-<tr>
-<td align="center">stable_sort</td>
-<td align="center">对给定所有元素进行稳定排序</td>
-</tr>
-<tr>
-<td align="center">partial_sort</td>
-<td align="center">对给定区间所有元素部分排序</td>
-</tr>
-<tr>
-<td align="center">partial_sort_copy</td>
-<td align="center">对给定区间复制并排序</td>
-</tr>
-<tr>
-<td align="center">nth_element</td>
-<td align="center">找出给定区间的某个位置对应的元素</td>
-</tr>
-<tr>
-<td align="center">is_sorted</td>
-<td align="center">判断区间是否有序</td>
-</tr>
-<tr>
-<td align="center">partition</td>
-<td align="center">将符合某个条件的元素放在前面</td>
-</tr>
-<tr>
-<td align="center">stable_partition</td>
-<td align="center">相对稳定的将符合某个条件的元素放在前面</td>
-</tr>
-</tbody></table>
-<h2 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h2><ul>
-<li><p>头文件：#include<algorithm></p>
-</li>
-<li><p>语法：sort(begin,end,cmp)</p>
-<p>begin: 待排序数组内存的起始地址</p>
-<p>end:  待排序数组结束地址的下一位</p>
-<p>cmp:  此参数可以不写，此时默认非降序排序（简单一点升序）</p>
-</li>
-</ul>
-<h3 id="int-型排序"><a href="#int-型排序" class="headerlink" title="int 型排序"></a>int 型排序</h3><p>示例一：没有cmp参数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">	sort(arr, arr + <span class="number">5</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">5</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-<p>示例二：利用cmp 参数实现降序排序，当cmp函数返回值为true时，表示cmp 函数的参数将会按照自定义的规则排序。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x &gt; y;<span class="comment">//第一个参数比第二个参数大，则排在前面</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">	sort(arr, arr + <span class="number">5</span>, cmp);<span class="comment">//使用重载函数形式，表明将要使用自定义的排序规则</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> <span class="number">5</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>示例三：利用 functional 提供的一堆基于模板的比较函数对象:equal_to&lt;类型&gt;、not_equal_to&lt;类型&gt;、</p>
-<p>greater&lt;类型&gt;、greater_equal&lt;类型&gt;、less&lt;类型&gt;、less_equal&lt;类型&gt;。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">	sort(arr, arr + <span class="number">5</span>, greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	sort(arr, arr + <span class="number">5</span>, less&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6 5 3 2 1</span><br><span class="line">1 2 3 5 6</span><br></pre></td></tr></table></figure>
-
-<h3 id="string-类排序"><a href="#string-类排序" class="headerlink" title="string 类排序"></a>string 类排序</h3><ul>
-<li>一个字符串间字符的排序</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">string</span> str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	sort(str.begin(), str.end());<span class="comment">//顺序排序</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	sort(str.rbegin(), str.rend());<span class="comment">//逆序排序 </span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ehllo</span><br><span class="line">ollhe</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>字符串间的排序</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">string</span> str[<span class="number">4</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">4</span>;i++) &#123;</span><br><span class="line">		getline(<span class="built_in">cin</span>,str[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	sort(str, str+<span class="number">4</span>,less&lt;<span class="built_in">string</span>&gt;());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">4</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; str[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>结构体类型的排序：先按照a降序，如果a相同在按照b降序</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> a, b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(test&amp; t1, test&amp; t2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (t1.a != t2.a)</span><br><span class="line">		<span class="keyword">return</span> t1.a &gt; t2.a;</span><br><span class="line">	<span class="keyword">return</span> t1.b &gt; t2.b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	test t[<span class="number">4</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">4</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; t[i].a &gt;&gt; t[i].b;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(t, t + <span class="number">4</span>, cmp);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">4</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; t[i].a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; t[i].b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/02/23/sort%E8%AF%A6%E8%A7%A3/" data-id="cknhe7bw6004cows6ei6fgg1l" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -730,6 +649,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
@@ -739,14 +666,6 @@
         
           <li>
             <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
           </li>
         
       </ul>

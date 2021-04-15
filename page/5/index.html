@@ -64,6 +64,279 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Servlet基本原理和配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/30/Servlet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2021-01-30T02:29:31.000Z" itemprop="datePublished">2021-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/30/Servlet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E9%85%8D%E7%BD%AE/">Servlet基本原理和配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Servlet概述"><a href="#1-Servlet概述" class="headerlink" title="1.Servlet概述"></a>1.Servlet概述</h1><ol>
+<li><p>概念：server applet，运行在服务器端的小程序</p>
+<ul>
+<li>servlet是一个接口，定义了Java类被浏览器访问到（Tomcat识别）的规则</li>
+<li>自定义类，实现servlet接口，复写方法</li>
+</ul>
+</li>
+<li><p>简单项目</p>
+<ul>
+<li><p>创建按JavaEE项目</p>
+</li>
+<li><p>定义一个类，实现servlet接口</p>
+<ul>
+<li>注：将tomcat安装目录下的bin/<strong>servlet-api.jar</strong>包导入项目中</li>
+<li><code>public class servletdemo1 implements Servlet</code></li>
+</ul>
+</li>
+<li><p>实现接口中的抽象方法</p>
+</li>
+<li><p>在web.xml文件中配置servlet ，写在根标签里</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--给servlet取名，任意 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- 指明servlet路径，包名.类名 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.hxx.servletdemo1<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--servlet映射，必须与servlet-name同名 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--这是浏览器中输入的访问该servlet的url--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hxx<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>servlet注解配置方法</strong></p>
+<p>在实现类前面加注解 @WebServlet(资源路径)</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="2-执行原理"><a href="#2-执行原理" class="headerlink" title="2.执行原理"></a>2.执行原理</h1><ol>
+<li><p>当服务器接收到客户端浏览器的请求后，会解析请求URL路径，获取访问的Servlet的资源路径</p>
+</li>
+<li><p>查找web.xml文件，是否有对应的 <code>&lt;url-pattern&gt;</code>标签体内容</p>
+</li>
+<li><p>如果有，则再找到对应的 <code>&lt;servlet-class&gt;</code>全类名</p>
+</li>
+<li><p>tomcat将字节码文件加载进内存，并且创建其对象</p>
+</li>
+<li><p>调用方法</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86.PNG"></p>
+</li>
+</ol>
+<h1 id="3-生命周期"><a href="#3-生命周期" class="headerlink" title="3.生命周期"></a>3.生命周期</h1><ol>
+<li>被创建：执行init方法，只执行一次<ul>
+<li>默认情况下，第一次被访问时，servlet被创建</li>
+<li>可以配置执行Servlet的创建时机：<strong>在web.xml中 <code>&lt;servlet&gt;</code> 标签体中配置</strong><br>   1.第一次被访问时，创建，<code>&lt;load-on-startup&gt;</code> 的值为负数<br>   2.在服务器启动时，创建 ，<code>&lt;load-on-startup&gt;</code> 为0或者正数</li>
+<li>servlet的init方法，只执行一次，说明一个servlet在内存中<strong>只存在一个对象</strong>，servlet是单例的。<strong>多个用户同时访问时可能存在线程安全问题</strong>，所以尽量不要在servlet定义成员变量。即使定义了成员变量，也不要修改值。</li>
+</ul>
+</li>
+<li>提供服务：执行service方法，执行多次</li>
+<li>被销毁：执行destroy方法，执行一次。服务器正常关闭时，servlet被销毁。在销毁之前被执行，用于释放资源。</li>
+<li>getServletInfo:获取servlet的一些信息：版本、作者等等</li>
+<li>getServletConfig:获取ServletConfig对象（servlet的配置对象）</li>
+</ol>
+<h1 id="4-IDEA、tomcat、servlet相关配置"><a href="#4-IDEA、tomcat、servlet相关配置" class="headerlink" title="4. IDEA、tomcat、servlet相关配置"></a>4. IDEA、tomcat、servlet相关配置</h1><ol>
+<li><p><strong>启动tomcat控制台或命令窗口中文乱码，将tomcat安装目录/conf/logging.properties中的所有UTF-8修改为gbk格式</strong></p>
+</li>
+<li><p>IDEA会为每一个tomcat部署的项目单独简历一份配置文件</p>
+<ul>
+<li>查看控制台的log：Using CATALINA_BASE:   “C:\Users\97130\AppData\Local\JetBrains\IntelliJIdea2020.2\tomcat\Unnamed_tomcat_2”</li>
+</ul>
+</li>
+<li><p>工作空间项目  和tomcat部署的web项目</p>
+<ul>
+<li><p>tomcat真正访问的是“<strong>tomcat部署的web项目</strong>”，其存放在<strong>整个项目的out\artifacts目录</strong>下</p>
+</li>
+<li><p>tomcat部署的web项目对应着“工作空间项目”的web目录下的所有资源</p>
+</li>
+<li><p>tomcat断点调试</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="5-servlet体系结构"><a href="#5-servlet体系结构" class="headerlink" title="5.servlet体系结构"></a>5.servlet体系结构</h1><ul>
+<li><strong>servlet</strong>  —-   接口</li>
+<li><strong>GenericServlet</strong> ：将servlet接口中其他的方法做了默认空实现，只将service()方法作为抽象方法。在定义servlet类时，可以直接集成GenericServlet类，实现service方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/demo2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">servletdemo2</span> <span class="keyword">extends</span> <span class="title">GenericServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello demo2.service....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>HttpServlet</strong>：对HTTP协议的一种封装，简化操作<ol>
+<li>定义类继承HttpServlet</li>
+<li>复写doGet或doPost</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/demo3&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">servletdemo3</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;demo3 doGet......&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;demo3 doPost......&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>urlpattern</strong>：servlet访问路径<ol>
+<li>一个servlet可以定义多个访问路径：@WebServlet({“/demo3”,”/dd3”})</li>
+<li>路径定义规则<ul>
+<li>/xxx</li>
+<li>/xxx/xxx：多层路径，目录结构</li>
+<li>*.后缀名</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/01/30/Servlet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E9%85%8D%E7%BD%AE/" data-id="cknhe7bvg0030ows6f9hf9f1u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tomcat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/27/tomcat/" class="article-date">
+  <time datetime="2021-01-27T10:18:02.000Z" itemprop="datePublished">2021-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/27/tomcat/">tomcat项目部署</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-web服务器软件"><a href="#1-web服务器软件" class="headerlink" title="1.web服务器软件"></a>1.web服务器软件</h1><ul>
+<li><p>服务器：安装了服务器软件的计算机</p>
+</li>
+<li><p>web服务器：接收用户请求，处理请求，做出响应</p>
+</li>
+<li><p>在web服务器中可以部署web项目，让用户通过浏览器来访问这些项目</p>
+</li>
+<li><p>web容器：动态资源的运行环境</p>
+</li>
+<li><p>常见的Java相关的web服务器软件</p>
+<p>weblogic：Oracle公司，大型的Javaee服务器，支持所有的javaee规范</p>
+<p>websphere：IBM公司</p>
+<p>JBOSS：</p>
+<p>tomcat：Apache组织、servlet/JSP</p>
+</li>
+</ul>
+<h1 id="2-tomcat"><a href="#2-tomcat" class="headerlink" title="2.tomcat"></a>2.tomcat</h1><ol>
+<li><p>启动：双击bin目录下的startup.bat</p>
+<ul>
+<li>若出现黑窗口一闪而过是因为没有正确配置JAVA_HOME环境变量</li>
+<li>启动报错，找到占用的端口号和对应的进程，杀死该进程。<ul>
+<li>在cmd中输入netstat -ano，找到 IP:端口号 如127.0.0.1:8080，以及对应的PID，在任务管理器中将对应的进程关闭</li>
+<li>修改自身的端口号：在tomcat安装目录中的conf目录下找到sever.xml文件，将其中port进行修改</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>访问：在浏览器中输入<a target="_blank" rel="noopener" href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a>  或者<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a>  </p>
+</li>
+<li><p>关闭</p>
+<ul>
+<li>双击bin目录下的shutdown.bat</li>
+<li>或者按ctrl+c</li>
+</ul>
+</li>
+<li><p>配置：部署项目的方式</p>
+<ul>
+<li><p>直接将项目放到tomcat安装目录下的webapps目录下。</p>
+<ul>
+<li><p>例如：创建hello文件夹，文件夹下编写一个helloworld.html文件，启动tomcat，在浏览器中输入localhost:8080/hello/helloworld.html，就可以访问这个静态资源文件。</p>
+<p>/hello:项目的访问路径—&gt;虚拟目录</p>
+</li>
+</ul>
+</li>
+<li><p>将项目工程直接打包成war包，放入webapps目录下，浏览器访问，tomcat会自动解压该包。如果没有的话，就重启一下tomcat</p>
+<ul>
+<li>例如将上面的helloworld.html压缩成hello.war文件，放到webapps目录下，解压后出现hello目录，下面存放helloword.html</li>
+</ul>
+</li>
+<li><p>配置conf/sever.xml文件</p>
+<p>在 <code>&lt;Host&gt;</code> 标签体中配置，其中docBase代表项目存放的路径，path为虚拟目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--部署项目--&gt;</span><br><span class="line">&lt;Context docBase&#x3D;&quot;E:\JAVA\JavaScript\HTML\hello&quot; path&#x3D;&quot;&#x2F;hxx&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例如：上面在hello文件夹中存放了helloworld.html文件，启动tomcat后，在浏览器中输入：localhost:8080/hxx/helloworld.html</li>
+</ul>
+</li>
+<li><p>热部署方式：在conf\Catalina\localhost目录下创建任意名称的xml文件，在文件中编写 <code>&lt;Context docBase=&quot;E:\JAVA\JavaScript\HTML\hello&quot; /&gt;</code> ，同样的docBase是项目的位置，虚拟目录是xml文件的名字。</p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>例如创建hxx.xml，然后再上面docBase目录下编写一个helloworld.html文件，启动tomcat，再浏览器中输入：localhost:8080/hxx/helloworld.html</li>
+</ul>
+<h1 id="3-与IDEA集成-创建部署web项目"><a href="#3-与IDEA集成-创建部署web项目" class="headerlink" title="3.与IDEA集成,创建部署web项目"></a>3.与IDEA集成,创建部署web项目</h1><ul>
+<li><p>静态项目和动态项目</p>
+<ul>
+<li><p>目录结构</p>
+<p>Java动态项目的目录结构：</p>
+<p>–项目根目录</p>
+<p>​    –WEB-INF目录</p>
+<p>​        –web.xml:web项目的核心配置文件，只有这个文件的是静态项目</p>
+<p>​        –classes：防止字节码文件目录</p>
+<p>​        –lib目录：放置以来的jar包</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1在IDEA2020-项目中中加入tomcat服务"><a href="#3-1在IDEA2020-项目中中加入tomcat服务" class="headerlink" title="3.1在IDEA2020 项目中中加入tomcat服务"></a>3.1<strong>在IDEA2020 项目中中加入tomcat服务</strong></h2><ul>
+<li>点击项目菜单栏中的Edit/Add Configurations，<strong>在Templates中选择Tomcat Sever下的 Local，并在deployment中添加Artifacts</strong></li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%906.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E9%9B%86%E6%88%90Tomcat.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%902.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%903.png"></p>
+<h2 id="3-2创建javaweb项目"><a href="#3-2创建javaweb项目" class="headerlink" title="3.2创建javaweb项目"></a><strong>3.2创建javaweb项目</strong></h2><ul>
+<li>创建一个空项目，新建一个java module：test，右键test，选择add framework support，添加web application</li>
+</ul>
+<p><img src="C:\Users\97130\AppData\Roaming\Typora\typora-user-images\image-20210129180629717.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E9%9B%86%E6%88%905.png"></p>
+<ul>
+<li><p>web项目目录结构和运行</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/run.png"></p>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/run2.png"></p>
+<h2 id="3-3-热部署"><a href="#3-3-热部署" class="headerlink" title="3.3 热部署"></a>3.3 热部署</h2><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE1.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/01/27/tomcat/" data-id="cknhe7bwd004oows6d29pdebd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Jsoup解析器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/01/27/Jsoup%E8%A7%A3%E6%9E%90%E5%99%A8/" class="article-date">
@@ -1311,340 +1584,6 @@
 
 
   
-    <article id="post-HTML" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/16/HTML/" class="article-date">
-  <time datetime="2021-01-16T03:32:23.000Z" itemprop="datePublished">2021-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/16/HTML/">HTML标签</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><ul>
-<li>Hyper Text Markup Language，超文本标记语言</li>
-<li>超文本：是用超链接的方法，将各种不同空间的文字信息组织在一起的网状文本</li>
-<li>标记语言：由标签构成的语言。&lt;标签名称&gt; </li>
-</ul>
-<h1 id="2-语法"><a href="#2-语法" class="headerlink" title="2. 语法"></a>2. 语法</h1><ul>
-<li><p>html文档后缀名：html或htm</p>
-</li>
-<li><p>标签分为</p>
-<p>围堵标签：由开始标签和结束标签。如&lt; html&gt; &lt; /html&gt;</p>
-<p>自闭和标签：开始标签和结束标签在一起。如&lt; br/&gt;</p>
-</li>
-<li><p>标签可以嵌套</p>
-</li>
-<li><p>在开始标签中可以定义属性。属性由键值对构成，值需要用引号引起来</p>
-</li>
-<li><p>不区分大小写</p>
-</li>
-</ul>
-<h1 id="3-标签"><a href="#3-标签" class="headerlink" title="3. 标签"></a>3. 标签</h1><h2 id="3-1文件标签"><a href="#3-1文件标签" class="headerlink" title="3.1文件标签"></a>3.1文件标签</h2><ul>
-<li><p>html：标识html文档的根标签</p>
-</li>
-<li><p>head：头标签。用于指定html文档的一些属性。引入外部的资源</p>
-</li>
-<li><p>title：标题标签</p>
-</li>
-<li><p>body：体标签</p>
-</li>
-<li><p>&lt; !DOCTYPE html&gt;</p>
-</li>
-</ul>
-<h2 id="3-2-文本标签"><a href="#3-2-文本标签" class="headerlink" title="3.2 文本标签"></a>3.2 文本标签</h2><ul>
-<li><p>注释：<code>&lt;!--注释内容--&gt;</code></p>
-</li>
-<li><p><code>&lt;h1&gt; &lt;/h1&gt; to &lt;h6&gt; &lt;/h6&gt;</code> ：标题标签，字号从h1到h6变小，且自动换行</p>
-</li>
-<li><p><code>&lt;p&gt; &lt;/p&gt; </code>：段落标签</p>
-</li>
-<li><p><code>&lt;br&gt;</code> ：换行标签</p>
-</li>
-<li><p><code>&lt;hr&gt;</code>：显示一条水平线。参数：color(颜色)，width(线条宽度) size(线条高度) align(对齐方式)</p>
-</li>
-<li><p><code>&lt;b&gt; &lt;/b&gt;</code> ：字体加粗</p>
-</li>
-<li><p><code>&lt;i&gt; &lt;/i&gt;</code>：字体斜体</p>
-</li>
-<li><p><code>&lt;center&gt; &lt;/center&gt;</code> :文本居中</p>
-</li>
-<li><p><code>&lt;font&gt; &lt;/font&gt;</code> ：字体标签</p>
-</li>
-<li><p>属性定义</p>
-<ul>
-<li>color<ol>
-<li>英文单词：red、green</li>
-<li>rgb(值1，值2，值3)：值的范围0~255，如rgb(0,0,255)</li>
-<li>#值1值2值3：值的范围：00~FF之间。如 #FF00FF</li>
-</ol>
-</li>
-<li>width<ol>
-<li>数值：width=”20”，单位默认是像素px</li>
-<li>数值%：占比，相对与父元素的比例</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-3-图片标签"><a href="#3-3-图片标签" class="headerlink" title="3.3 图片标签"></a>3.3 图片标签</h2><ul>
-<li><p>img：展示图片</p>
-<ul>
-<li><p>属性</p>
-<p>src：指定图片的位置</p>
-<p>alt：当图片加载不出来时所显示的文字</p>
-</li>
-</ul>
-</li>
-<li><p>src路径</p>
-<ul>
-<li><p>绝对路径</p>
-</li>
-<li><p>相对路径</p>
-<p>./ ：代表当前目录</p>
-<p>../ ：代表上一级目录</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-4-列表标签"><a href="#3-4-列表标签" class="headerlink" title="3.4 列表标签"></a>3.4 列表标签</h2><ul>
-<li>有序列表<ul>
-<li>ol ：定义一个有序列表</li>
-<li>li ：有序列表项</li>
-</ul>
-</li>
-<li>无序列表<ul>
-<li>ul ：定义一个无序列表</li>
-<li>li ：无序列表项</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-5-链接标签"><a href="#3-5-链接标签" class="headerlink" title="3.5 链接标签"></a>3.5 链接标签</h2><ul>
-<li><p>a ：定义一个超链接</p>
-<ul>
-<li><p>href：指定访问资源的URL</p>
-</li>
-<li><p>target：指定打开资源的方式</p>
-<p>_self：默认值，在当前页面打开</p>
-<p>_blank：在空白页面打开</p>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://hxx-98.github.io/&quot;</span>  <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span>hxx<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://hxx-98.github.io/&quot;</span>  <span class="attr">target</span>=<span class="string">&quot;_self&quot;</span>&gt;</span>hxx<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://hxx-98.github.io/&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;示意图.PNG&quot;</span>&gt;</span> <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-6-div和span"><a href="#3-6-div和span" class="headerlink" title="3.6 div和span"></a>3.6 div和span</h2><ul>
-<li>span：文本信息在一行展示，行内标签/内联标签</li>
-<li>div：每一个div占满一行，块级标签<ul>
-<li>id</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-7-语义化标签"><a href="#3-7-语义化标签" class="headerlink" title="3.7 语义化标签"></a>3.7 语义化标签</h2><p>提高程序可读性</p>
-<ul>
-<li>header</li>
-<li>footer</li>
-</ul>
-<h2 id="3-7-表格标签"><a href="#3-7-表格标签" class="headerlink" title="3.7 表格标签"></a>3.7 表格标签</h2><ul>
-<li><p>table：表</p>
-<p>width、border(边框)、bgcolor(背景色)、align</p>
-<p>cellpadding：定义内容和单元格之间的距离</p>
-<p>cellspacing：定义单元格之间的距离，若指定为0，则单元格的线会合为一条</p>
-</li>
-<li><p>tr：行</p>
-<ul>
-<li>bgcolor(背景色)</li>
-<li>align</li>
-</ul>
-</li>
-<li><p>td：单元格</p>
-<ul>
-<li>bgcolor(背景色)</li>
-<li>align</li>
-<li>colspan：合并列</li>
-<li>rowspan：合并行</li>
-</ul>
-</li>
-<li><p>th：表头单元格</p>
-</li>
-<li><p>caption：表格标题</p>
-</li>
-<li><p>thead：表示表格的头部分</p>
-</li>
-<li><p>tbody：表示表格的体部分</p>
-</li>
-<li><p>tfoot：表示表格的脚部分</p>
-</li>
-</ul>
-<h2 id="3-8-表单标签"><a href="#3-8-表单标签" class="headerlink" title="3.8 表单标签"></a>3.8 表单标签</h2><ul>
-<li><p>表单：用于采集用户输入数据。用于和服务器进行交互。</p>
-</li>
-<li><p>标签：form</p>
-<p>action：指定提交数据的URL</p>
-<p>method：指定提交方式</p>
-<ul>
-<li>get<ol>
-<li>请求参数会在地址栏中显示，会封装在请求体中</li>
-<li>请求参数长度有限制</li>
-<li>不太安全</li>
-</ol>
-</li>
-<li>post<ol>
-<li>请求参数不会在地址栏中显示，会封装在请求体中</li>
-<li>请求参数长度没有限制</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>表单项中的数据要想被提交，必须指定其name属性</p>
-</li>
-<li><p><strong>表单项标签</strong></p>
-<p><strong>input</strong>：可以通过type属性值，改变元素展示的样式</p>
-<ul>
-<li><p>label：指定输入项的文字描述信息。其for属性和input中的id属性对应，<strong>若对应，则点击label区域会在input输入框获取焦点</strong></p>
-</li>
-<li><p><strong>type</strong></p>
-<ul>
-<li><p>text：文本输入框</p>
-<p>placeholder：指定输入框的提示信息</p>
-</li>
-<li><p>password：密码输入框</p>
-</li>
-<li><p>radio：单选框</p>
-<p>注意</p>
-<ol>
-<li><p>要想让多个单选框实现单选的效果，则多个单选框的name属性值必须一样</p>
-</li>
-<li><p>一般会给每一个单选框提供value属性，指定其被选中后提交的值</p>
-</li>
-<li><p>checked=”checked”：代表默认被选中</p>
-</li>
-</ol>
-</li>
-<li><p>checkbox：复选框</p>
-</li>
-<li><p>file：文件选择框</p>
-</li>
-<li><p>hidden：隐藏域</p>
-</li>
-<li><p>按钮</p>
-<ol>
-<li>submit：提交</li>
-<li>button：按钮</li>
-<li>image：图片提交按钮，src属性指定图片的路径</li>
-</ol>
-</li>
-<li><p>color：取色器</p>
-</li>
-<li><p>date：日期，年月日</p>
-</li>
-<li><p>datetime-local：年月日时分</p>
-</li>
-</ul>
-</li>
-<li><p>select：下拉列表</p>
-<ul>
-<li>子元素option指定列表项，其中可加入selected表示默认选择</li>
-</ul>
-</li>
-<li><p>textarea：文本域</p>
-<ul>
-<li>cols：指定列数，每一行由多少个字符</li>
-<li>rows：默认行数</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;#&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;username&quot;</span>&gt;</span>用户名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;username&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span><span class="attr">placeholder</span>=<span class="string">&quot;请输入用户名&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--for和id对应起来--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;password&quot;</span>&gt;</span>密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;password&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span><span class="attr">name</span>=<span class="string">&quot;password&quot;</span><span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--name值要一样--&gt;</span></span><br><span class="line">    性别<span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;male&quot;</span><span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span><span class="attr">value</span>=<span class="string">&quot;male&quot;</span><span class="attr">checked</span>=<span class="string">&quot;checked&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;male&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;female&quot;</span><span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span><span class="attr">value</span>=<span class="string">&quot;female&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;female&quot;</span>&gt;</span>女<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    爱好</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;shopping&quot;</span><span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span><span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;shopping&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;shopping&quot;</span>&gt;</span>逛街<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;sing&quot;</span><span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span><span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span><span class="attr">value</span>=<span class="string">&quot;sing&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;sing&quot;</span>&gt;</span>唱歌<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    图片<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span><span class="attr">name</span>=<span class="string">&quot;file&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    隐藏域 <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span><span class="attr">name</span>=<span class="string">&quot;id&quot;</span><span class="attr">value</span>=<span class="string">&quot;aaaa&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    取色器<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;color&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生日<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;date&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生日<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;datetime-local&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    邮箱<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span><span class="attr">name</span>=<span class="string">&quot;email&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    年龄<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;number&quot;</span><span class="attr">name</span>=<span class="string">&quot;age&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    省份</span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;province&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;null&quot;</span><span class="attr">selected</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;陕西&quot;</span>&gt;</span>陕西<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;山西&quot;</span>&gt;</span>山西<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;北京&quot;</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    自我描述<span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;describe&quot;</span> <span class="attr">id</span>=<span class="string">&quot;des&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--input type=&quot;image&quot;src=&quot;移动运营商网间信令互通示意图.PNG&quot;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;登录&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/01/16/HTML/" data-id="cknhe7bud000qows6736hgjwx" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-静态资源和动态资源" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/16/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8C%E5%8A%A8%E6%80%81%E8%B5%84%E6%BA%90/" class="article-date">
-  <time datetime="2021-01-16T02:57:42.000Z" itemprop="datePublished">2021-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/16/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8C%E5%8A%A8%E6%80%81%E8%B5%84%E6%BA%90/">静态资源和动态资源</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h1><ul>
-<li>使用静态网页开发技术发布的资源</li>
-<li>特点：<ul>
-<li>所有用户访问，得到的结果是一样的</li>
-<li>如：文本、图片、视频、音频、<strong>HTML、CSS、JavaScript</strong></li>
-<li>如果用户请求的是静态资源，那么服务器会直接将静态资源发送给浏览器。浏览器中内置了静态资源的解析引擎，可以展示静态资源</li>
-</ul>
-</li>
-<li><strong>HTML：用于搭建基础网页，展示页面的内容</strong></li>
-<li><strong>CSS：用于美化页面，布局页面</strong></li>
-<li><strong>JavaScript：控制页面元素，让页面有动态效果</strong></li>
-</ul>
-<h1 id="动态资源"><a href="#动态资源" class="headerlink" title="动态资源"></a>动态资源</h1><ul>
-<li>使用动态网页技术发布的资源</li>
-<li>特点<ul>
-<li>所有用户访问，得到的结果可能不一样</li>
-<li>如：JSP/servlet、PHP、asp</li>
-<li>如果用户请求的是动态资源，那么服务器会执行动态资源，转换为静态资源，再发送给浏览器</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/01/16/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8C%E5%8A%A8%E6%80%81%E8%B5%84%E6%BA%90/" data-id="cknhe7byb008lows600zn67zs" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1695,6 +1634,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
@@ -1704,14 +1651,6 @@
         
           <li>
             <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">MyBatis数据库连接池</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/08/SqlMapConfig-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">SqlMapConfig.xml配置文件</a>
           </li>
         
       </ul>
