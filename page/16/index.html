@@ -64,6 +64,201 @@
       <div class="outer">
         <section id="main">
   
+    <article id="w-内存分区模型" class="article article-type-w" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/18/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA%E6%A8%A1%E5%9E%8B/" class="article-date">
+  <time datetime="2020-02-18T02:02:30.000Z" itemprop="datePublished">2020-02-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/18/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA%E6%A8%A1%E5%9E%8B/">内存分区模型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-内存分区模型"><a href="#1-内存分区模型" class="headerlink" title="1.  内存分区模型"></a>1.  内存分区模型</h2><ul>
+<li><p>c++程序在执行时，将内存分为<strong>四个区域</strong></p>
+<p><strong>代码区</strong>：存放函数体的二进制代码，由操作系统进行管理。</p>
+<p><strong>全局区</strong>：存放全局变量和静态变量以及常量。</p>
+<p><strong>栈区</strong>：由编译器自动分配释放，存放函数的参数值，局部变量等。</p>
+<p><strong>堆区</strong>：由程序员分配和释放，若程序员不释放，程序结束时由操作系统回收。</p>
+</li>
+<li><p>内存四区意义</p>
+<p>不同区域存放的数据，赋予不同的生命周期，给我们更大的灵活编程</p>
+</li>
+</ul>
+<h2 id="2-程序执行前"><a href="#2-程序执行前" class="headerlink" title="2. 程序执行前"></a>2. 程序执行前</h2><p>在程序编译后，生成了exe可执行程序，未执行该程序前分为两个区域</p>
+<ul>
+<li><p><strong>代码区</strong>：</p>
+<p>存放CPU执行的机器指令</p>
+<p>代码区是<strong>共享</strong>的，共享的目的是对于频繁被执行的程序，只需要在内存中有一份代码即可。</p>
+<p>代码区是<strong>只读</strong>的，使其只读的原因是防止程序意外地修改了它的指令</p>
+</li>
+<li><p><strong>全局区</strong>：</p>
+<p>全局区存放全局变量、静态变量、常量</p>
+<p>常量区存放const修饰的全局变量和字符串常量</p>
+<p><strong>该区域的数据在程序结束后由操作系统释放</strong></p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//全局变量</span></span><br><span class="line"><span class="keyword">int</span> g_a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> g_b = <span class="number">10</span>;</span><br><span class="line"><span class="comment">//全局常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> c_g_a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> c_g_b = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//局部变量</span></span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;局部变量a的地址&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;局部变量b的地址&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//全局变量</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;全局变量g_a的地址&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;g_a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;全局变量g_b的地址&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;g_b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//静态变量 在普通变量前加static</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> s_a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> s_b = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;静态变量s_a的地址&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;s_a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;静态变量s_b的地址&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;s_b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//常量</span></span><br><span class="line">	<span class="comment">//字符串常量</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;字符串常量的地址为：&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;<span class="string">&quot;hello world&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//const修饰的全局常量</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;const修饰的全局常量c_g_a的地址：&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;c_g_a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;const修饰的全局常量c_g_b的地址：&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;c_g_b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//const修饰的局部变量</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> c_l_a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> c_l_b = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;const修饰的局部常量c_l_a的地址：&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;c_l_a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;const修饰的局部常量c_l_b的地址：&quot;</span> &lt;&lt; (<span class="keyword">int</span>)&amp;c_l_b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">局部变量a的地址-552600588</span><br><span class="line">局部变量b的地址-552600556</span><br><span class="line">全局变量g_a的地址898355200</span><br><span class="line">全局变量g_b的地址898355204</span><br><span class="line">静态变量s_a的地址898355208</span><br><span class="line">静态变量s_b的地址898355212</span><br><span class="line">字符串常量的地址为：898346584</span><br><span class="line">const修饰的全局常量c_g_a的地址：898345904</span><br><span class="line">const修饰的全局常量c_g_b的地址：898345908</span><br><span class="line">const修饰的局部常量c_l_a的地址：-552600524</span><br><span class="line">const修饰的局部常量c_l_b的地址：-552600492</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-程序运行后"><a href="#3-程序运行后" class="headerlink" title="3.程序运行后"></a>3.程序运行后</h2><ul>
+<li><p>栈区</p>
+<p>由编译器自动分配释放，存放函数的参数值、局部变量等</p>
+<p>注意事项：<strong>不要返回局部变量的地址</strong>，栈区开辟的数据由编译器自动释放</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;<span class="comment">//局部变量，存放在栈区，此函数执行完后自动释放</span></span><br><span class="line">	<span class="keyword">return</span> &amp;a;<span class="comment">//返回局部变量的地址</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span>* p = func();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//第一次可以正确输出10，编译器做了一次保留</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//第二次这个数据就不再保留了</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">-858993460</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>堆区</p>
+<p>由程序员分配释放，若程序员不释放，程序结束时由操作系统回收</p>
+<p>在c++中主要利用new在堆区开辟内存</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//1、利用new关键字，可以将数据开辟到堆区</span></span><br><span class="line">	<span class="comment">//2、指针本质也是局部变量，放在栈上，函数执行完自动销毁</span></span><br><span class="line">	<span class="comment">//3、如果局部变量的指针指向的数据放在堆区或者全局区，程序执行结束前不会自动回收，所以可以正常输出</span></span><br><span class="line">	<span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>);</span><br><span class="line">	<span class="comment">//int* p = &amp;b;</span></span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span>* p = func();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-new操作符"><a href="#3-new操作符" class="headerlink" title="3. new操作符"></a>3. new操作符</h2><ul>
+<li><p>c++中利用new操作符在堆区中开辟数据</p>
+<p>堆区开辟的数据，由程序员手动开辟，手动释放，释放利用操作符delete</p>
+<p>利用new创建的数据，会返回该数据对应类型的指针</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//在堆区开辟数组</span></span><br><span class="line">	<span class="keyword">int</span>* arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++) &#123;</span><br><span class="line">		arr[i] = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">delete</span>[]arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span>* p = func();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//堆区数据释放</span></span><br><span class="line">	<span class="keyword">delete</span> p;</span><br><span class="line">	<span class="comment">//cout &lt;&lt; *p &lt;&lt; endl;引发异常：读取访问权限冲突</span></span><br><span class="line">	func2();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">0 1 2 3 4 5 6 7 8 9</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/02/18/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA%E6%A8%A1%E5%9E%8B/" data-id="cknhe7bwm0059ows6bmc9cqzl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-结构体" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/17/%E7%BB%93%E6%9E%84%E4%BD%93/" class="article-date">
+  <time datetime="2020-02-17T09:13:45.000Z" itemprop="datePublished">2020-02-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/17/%E7%BB%93%E6%9E%84%E4%BD%93/">结构体</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-结构体定义和使用"><a href="#1-结构体定义和使用" class="headerlink" title="1.结构体定义和使用"></a>1.结构体定义和使用</h2><ul>
+<li><p>语法：struct 结构体名 { 结构体成员列表 }；</p>
+</li>
+<li><p>通过结构体创建变量的方式</p>
+<p>(1) struct 结构体名 变量名</p>
+<p>(2) struct 结构体名 变量名 = { 成员1值，成员2值…. };</p>
+<p>(3) 定义结构体时顺便定义结构体变量</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;stu3;<span class="comment">//定义结构体时顺便定义结构体变量</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//(1) struct 结构体名 变量名</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">student</span> <span class="title">stu1</span>;</span></span><br><span class="line">	stu1.age = <span class="number">19</span>;</span><br><span class="line">	stu1.name = <span class="string">&quot;hanxiaoxuan&quot;</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;stu1的信息：&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;name:&quot;</span> &lt;&lt; stu1.name &lt;&lt; <span class="string">&quot;\tage:&quot;</span> &lt;&lt; stu1.age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//(2) struct 结构体名 变量名 = &#123; 成员1值，成员2值.... &#125;;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">student</span> <span class="title">stu2</span> =</span> &#123; <span class="string">&quot;hxx&quot;</span>,<span class="number">19</span> &#125;;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;stu2的信息：&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;name:&quot;</span> &lt;&lt; stu2.name &lt;&lt; <span class="string">&quot;\t\tage:&quot;</span> &lt;&lt; stu2.age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//(3) 定义结构体时顺便定义结构体变量</span></span><br><span class="line">	stu3.age = <span class="number">20</span>;</span><br><span class="line">	stu3.name = <span class="string">&quot;hhh&quot;</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;stu3的信息：&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;name:&quot;</span> &lt;&lt; stu3.name &lt;&lt; <span class="string">&quot;\t\tage:&quot;</span> &lt;&lt; stu3.age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stu1的信息：</span><br><span class="line">name:hanxiaoxuan        age:19</span><br><span class="line">stu2的信息：</span><br><span class="line">name:hxx                age:19</span><br><span class="line">stu3的信息：</span><br><span class="line">name:hhh                age:20</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-结构体数组"><a href="#2-结构体数组" class="headerlink" title="2. 结构体数组"></a>2. 结构体数组</h2><ul>
+<li>作用：将自定义的结构体放入到数组中方便维护</li>
+<li>语法：struct 结构体名 数组名[元素个数] = { {}，{}，{}…. };</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">student</span> <span class="title">arr</span>[2] =</span></span><br><span class="line">	&#123;</span><br><span class="line">		&#123;<span class="string">&quot;hxx&quot;</span>,<span class="number">19</span>&#125;,</span><br><span class="line">		&#123;<span class="string">&quot;hxs&quot;</span>,<span class="number">20</span>&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">2</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;学生&quot;</span> &lt;&lt; arr[i].name &lt;&lt; <span class="string">&quot;的年龄是&quot;</span> &lt;&lt; arr[i].age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">学生hxx的年龄是19</span><br><span class="line">学生hxs的年龄是20</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-结构体指针"><a href="#3-结构体指针" class="headerlink" title="3. 结构体指针"></a>3. 结构体指针</h2><ul>
+<li>作用：通过指针访问结构体中的成员</li>
+<li>利用 -&gt; 操作符，可以通过结构体指针访问结构体属性</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	student arr[<span class="number">2</span>] =</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;<span class="string">&quot;hxx&quot;</span>,<span class="number">19</span>&#125;,</span><br><span class="line">		&#123;<span class="string">&quot;hxs&quot;</span>,<span class="number">20</span>&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	student* p = arr;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">2</span>;i++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;学生&quot;</span> &lt;&lt; p-&gt;name &lt;&lt; <span class="string">&quot;的年龄是&quot;</span> &lt;&lt; p-&gt;age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		p++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">学生hxx的年龄是19</span><br><span class="line">学生hxs的年龄是20</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-结构体嵌套结构体"><a href="#4-结构体嵌套结构体" class="headerlink" title="4. 结构体嵌套结构体"></a>4. 结构体嵌套结构体</h2><ul>
+<li>作用：结构体中的成员可以是另一个结构体</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">teacher</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> id;</span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">student</span> <span class="title">stu</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	teacher t;</span><br><span class="line">	t.id = <span class="number">1000</span>;</span><br><span class="line">	t.name = <span class="string">&quot;老王&quot;</span>;</span><br><span class="line">	t.age = <span class="number">45</span>;</span><br><span class="line">	t.stu.age = <span class="number">19</span>;</span><br><span class="line">	t.stu.name = <span class="string">&quot;小王&quot;</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;老师姓名：&quot;</span> &lt;&lt; t.name &lt;&lt; <span class="string">&quot; 老师编号：&quot;</span> &lt;&lt; t.id&lt;&lt; <span class="string">&quot;老师年龄：&quot;</span> &lt;&lt; t.age</span><br><span class="line">		&lt;&lt; <span class="string">&quot;\n辅导的学生姓名：&quot;</span> &lt;&lt; t.stu.name &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; t.stu.age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">老师姓名：老王 老师编号：1000老师年龄：45</span><br><span class="line">辅导的学生姓名：小王年龄：19</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-结构体做函数参数"><a href="#5-结构体做函数参数" class="headerlink" title="5. 结构体做函数参数"></a>5. 结构体做函数参数</h2><ul>
+<li>作用：将结构体作为参数向函数中传递</li>
+<li>传递方式：值传递、地址传递</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(student s)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print1</span><span class="params">(<span class="keyword">const</span> student* p)</span></span>;<span class="comment">//将函数中的形参改为指针，可以减少内存，而且不会复制一个新的副本</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	student stu;</span><br><span class="line">	stu.age = <span class="number">19</span>;</span><br><span class="line">	stu.name = <span class="string">&quot;韩晓璇&quot;</span>;</span><br><span class="line">	<span class="comment">//值传递</span></span><br><span class="line">	print(stu);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;在main函数中打印 姓名：&quot;</span> &lt;&lt; stu.name &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; stu.age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//地址传递</span></span><br><span class="line">	print1(&amp;stu);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;在main函数中打印 姓名：&quot;</span> &lt;&lt; stu.name &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; stu.age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(student s)</span> </span>&#123;</span><br><span class="line">	s.age = <span class="number">22</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;在子函数中打印 姓名：&quot;</span> &lt;&lt; s.name &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; s.age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print1</span><span class="params">(<span class="keyword">const</span> student* p)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//p-&gt;age = 22;//加入const之后，一旦修改就会报错，防止误操作</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;在子函数2中打印 姓名：&quot;</span> &lt;&lt; p-&gt;name &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; p-&gt;age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在子函数中打印 姓名：韩晓璇年龄：22</span><br><span class="line">在main函数中打印 姓名：韩晓璇年龄：19</span><br><span class="line">在子函数2中打印 姓名：韩晓璇年龄：22</span><br><span class="line">在main函数中打印 姓名：韩晓璇年龄：22</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/02/17/%E7%BB%93%E6%9E%84%E4%BD%93/" data-id="cknhe7bxv0081ows632c0gzsb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="w-指针" class="article article-type-w" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/02/17/%E6%8C%87%E9%92%88/" class="article-date">
@@ -492,6 +687,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/16/MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">MyBatis注解开发</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
           </li>
         
@@ -501,14 +704,6 @@
         
           <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
           </li>
         
       </ul>

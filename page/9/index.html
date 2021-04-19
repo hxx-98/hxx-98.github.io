@@ -64,6 +64,116 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Collections工具类-Java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/22/Collections%E5%B7%A5%E5%85%B7%E7%B1%BB-Java/" class="article-date">
+  <time datetime="2020-08-22T09:13:24.000Z" itemprop="datePublished">2020-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/22/Collections%E5%B7%A5%E5%85%B7%E7%B1%BB-Java/">Collections工具类-Java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h1><ul>
+<li>public static &lt; T &gt; bollean addAll(Collection&lt; T &gt; c,T…elements)：往集合中添加元素</li>
+<li>public static void shutffle(List&lt;?&gt;list):打乱顺序</li>
+<li>public static &lt; T &gt; sort(List&lt;?&gt;list):按默认规则升序排序</li>
+<li>public static &lt; T &gt; sort(List&lt;?&gt;list，Comparator&lt;? Super T&gt;):按指定规则排序</li>
+</ul>
+<p><strong>对已有类型排序</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="number">2</span>);</span><br><span class="line">        list.add(<span class="number">1</span>);</span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        Collections.sort(list, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer o1, Integer o2)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> o1-o2;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>对自定义类型排序：对Comparable重写定义排序规则</strong>：this-参数（升序）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Comparable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"><span class="comment">//....</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getAge() - ((Person)o).getAge();<span class="comment">//按照年龄升序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Collections.sort(list, <span class="keyword">new</span> Comparator&lt;Person&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Person o1, Person o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> result = o1.getAge() - o2.getAge();</span><br><span class="line">                <span class="keyword">if</span>(result == <span class="number">0</span>)&#123;<span class="comment">//若年龄一样，则按照姓名排序</span></span><br><span class="line">                    result = o1.getName().charAt(<span class="number">0</span>) - o2.getName().charAt(<span class="number">0</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/22/Collections%E5%B7%A5%E5%85%B7%E7%B1%BB-Java/" data-id="cknhe7bu6000dows60rs80spk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-可变参数-Java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/22/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0-Java/" class="article-date">
+  <time datetime="2020-08-22T08:48:19.000Z" itemprop="datePublished">2020-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/22/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0-Java/">可变参数-Java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h1><ul>
+<li><p>使用前提</p>
+<p>当方法的参数列表数据类型已经确定，但是参数的个数不确定就可以使用可变参数</p>
+</li>
+<li><p>使用格式</p>
+<p>修饰符 返回值 方法名称（数据类型…变量名）{      }</p>
+</li>
+<li><p>原理</p>
+<p>可变参数的底层是一个数组，根据传递参数个数不同创建不同长度的数组，来存储这些参数。参数个数可以从0开始</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(add(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line">        <span class="keyword">int</span>[]a = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">        System.out.println(add(a));</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span>...arr)</span></span>&#123;</span><br><span class="line">        <span class="comment">//定义一个初始化变量累加</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : arr) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>注意事项</p>
+<p>一个方法的参数列表只能有一个可变参数，如果方法的参数有多个，那么可变参数必须写在参数列表的末尾</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/22/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0-Java/" data-id="cknhe7bwt005tows6cxy91qk6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-泛型-Java" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/21/%E6%B3%9B%E5%9E%8B-Java/" class="article-date">
@@ -674,136 +784,6 @@ System.out.println(date);
 
 
   
-    <article id="post-抽象类-Java" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/08/17/%E6%8A%BD%E8%B1%A1%E7%B1%BB-Java/" class="article-date">
-  <time datetime="2020-08-17T13:55:17.000Z" itemprop="datePublished">2020-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/17/%E6%8A%BD%E8%B1%A1%E7%B1%BB-Java/">抽象类-Java</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="抽象类的使用"><a href="#抽象类的使用" class="headerlink" title="抽象类的使用"></a>抽象类的使用</h1><ul>
-<li>类中成员方法在返回类型前面加上abstract关键字</li>
-<li>抽象类：抽象方法所在的类必须是抽象类。在class之前加abstract</li>
-<li>不能直接创建抽象类对象，必须使用子类继承抽象父类的所有抽象方法。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;子类实现父类抽象方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// Fu fu = new Fu();报错</span></span><br><span class="line">        Zi zi = <span class="keyword">new</span> Zi();</span><br><span class="line">        zi.eat();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="抽象类调用自己的抽象方法，实现来自实现类"><a href="#抽象类调用自己的抽象方法，实现来自实现类" class="headerlink" title="抽象类调用自己的抽象方法，实现来自实现类"></a>抽象类调用自己的抽象方法，实现来自实现类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dosomething</span><span class="params">()</span></span>&#123;</span><br><span class="line">         eat();</span><br><span class="line">        System.out.println(<span class="string">&quot;父类调用自己的抽象方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;子类实现父类抽象方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Zi zi = <span class="keyword">new</span> Zi();</span><br><span class="line">        zi.dosomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>当真正实例化去使用的时候，使用的是子类重写后的实例方法</li>
-</ul>
-<p>运行结果</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">子类实现父类抽象方法</span><br><span class="line">父类调用自己的抽象方法</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/08/17/%E6%8A%BD%E8%B1%A1%E7%B1%BB-Java/" data-id="cknhe7bx6006jows67ztd9bnq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-继承中的覆盖重写-Java" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/08/17/%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E8%A6%86%E7%9B%96%E9%87%8D%E5%86%99-Java/" class="article-date">
-  <time datetime="2020-08-17T10:41:38.000Z" itemprop="datePublished">2020-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/17/%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E8%A6%86%E7%9B%96%E9%87%8D%E5%86%99-Java/">继承中的覆盖重写-Java</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="继承关键字"><a href="#继承关键字" class="headerlink" title="继承关键字"></a>继承关键字</h1><ul>
-<li><p>public class 子类名称 extends 父类名称{   ……..   }</p>
-</li>
-<li><p>当子类和父类成员相同时，直接通过子类对象访问该成员，等号左边是谁，就有先用谁，没有就向上找</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> numFu = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">100</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodFu</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> numZi = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">200</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodZi</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Fu fu = <span class="keyword">new</span> Fu();</span><br><span class="line">        Zi zi = <span class="keyword">new</span> Zi();</span><br><span class="line">        System.out.println(zi.num); <span class="comment">//200</span></span><br><span class="line">        zi.methodFu();<span class="comment">//100</span></span><br><span class="line">        zi.methodZi();<span class="comment">//200</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>子类中局部变量、子类变量、父类变量重名时的访问</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">200</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">300</span>;</span><br><span class="line">        System.out.println(num);<span class="comment">//局部变量</span></span><br><span class="line">        System.out.println(<span class="keyword">this</span>.num);<span class="comment">//本类当中</span></span><br><span class="line">        System.out.println(<span class="keyword">super</span>.num);<span class="comment">//访问父类变量</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="覆盖重写"><a href="#覆盖重写" class="headerlink" title="覆盖重写"></a>覆盖重写</h1><ul>
-<li><p>父子之间方法名称和参数列表相同</p>
-</li>
-<li><p>@Override：写在方法前面，用来检测是不是有效的重写</p>
-</li>
-<li><p><strong>子类方法的返回值必须小于等于父类方法的返回值。</strong></p>
-<p>提示：java. lang.Object类是所有类的公共最高父类，java. lang.Strubg类是Object的子类</p>
-</li>
-<li><p>子类方法的权限必须<strong>大于等于</strong>父类方法的权限修饰符</p>
-<p>提示：public &gt; protected &gt; (default) &gt; private</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;显示号码&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.method();</span><br><span class="line">        System.out.println(<span class="string">&quot;显示姓名&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="继承中的构造"><a href="#继承中的构造" class="headerlink" title="继承中的构造"></a>继承中的构造</h1><ul>
-<li>当父类没有写有参的构造函数时，子类构造方法中会有一个默认隐含的super()调用。</li>
-<li>子类构造可以通过super关键字来调用父类重载构造</li>
-<li>super的父类构造调用必须是子类构造方法中的第一个语句，也不可出现多次</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Fu</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;有参的父类构造&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Fu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;无参的父类构造&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Zi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//super();</span></span><br><span class="line">        <span class="keyword">super</span>(<span class="number">20</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;子类构造&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="继承的特点"><a href="#继承的特点" class="headerlink" title="继承的特点"></a>继承的特点</h1><ul>
-<li>单继承：一个类的直接父类只能有一个。</li>
-<li>多级继承</li>
-<li>一个子类的父类是唯一的，但是一个父类可以有多个子类</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/08/17/%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E8%A6%86%E7%9B%96%E9%87%8D%E5%86%99-Java/" data-id="cknhe7bxw0085ows6g1154civ" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -854,6 +834,14 @@ System.out.println(date);
       <ul>
         
           <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/16/MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">MyBatis注解开发</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
           </li>
         
@@ -863,14 +851,6 @@ System.out.println(date);
         
           <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
           </li>
         
       </ul>

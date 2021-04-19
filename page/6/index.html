@@ -64,6 +64,446 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JavaScript" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/19/JavaScript/" class="article-date">
+  <time datetime="2021-01-19T02:41:59.000Z" itemprop="datePublished">2021-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/19/JavaScript/">JavaScript</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><ul>
+<li>一门客户端脚本语言<ul>
+<li>运行在客户端浏览器中，每一个浏览器都有一个JavaScript的解析引擎</li>
+<li>脚本语言：不需要编译，直接就可以被浏览器解析执行</li>
+</ul>
+</li>
+<li><strong>功能</strong><ul>
+<li>可以来增强用户和html页面的交互过程，可以来控制html元素，让页面有一些动态的效果，增强用户的体验</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-基本语法"><a href="#2-基本语法" class="headerlink" title="2. 基本语法"></a>2. 基本语法</h1><ol>
+<li><p>与html结合方式</p>
+<ul>
+<li><p>内部JS</p>
+<p>定义script标签.标签体内容就是JS代码</p>
+</li>
+<li><p>外部JS</p>
+<p>定义script标签,通过src属性引入外部的JS文件</p>
+</li>
+<li><p>注意:</p>
+<ol>
+<li>script可以定义多个,可以定义在html页面的任意地方.但是定义的位置会影响执行顺序</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>注释</p>
+<ul>
+<li>单行注释  //</li>
+<li>多行注释 /*  */</li>
+</ul>
+</li>
+<li><p>数据类型</p>
+<ul>
+<li>原始数据类型：<ul>
+<li>number：数字。整数 / 小数 / NAN</li>
+<li>string：字符串</li>
+<li>boolean：true  /  false</li>
+<li>null：对象为空的占位符</li>
+<li>undefined：未定义。如果一个变量没有给初始化值，则默认赋值undefined</li>
+</ul>
+</li>
+<li>引用数据类型：对象</li>
+</ul>
+</li>
+<li><p>变量</p>
+<ul>
+<li>一小块存储数据的内存空间</li>
+<li>Java是强类型语言，JavaScript是弱类型语言<ul>
+<li>强类型：在开辟变量存储空间时，定义了空间将来存储的数据的数据类型。只能存储固定类型的数据</li>
+<li>弱类型：在开辟变量存储空间时，不定义将来的存储数据类型，可以存放任意类型的数据</li>
+</ul>
+</li>
+<li>语法：var 变量名 = 初试化值</li>
+</ul>
+</li>
+<li><p>运算符</p>
+<ul>
+<li><p>一元运算符</p>
+</li>
+<li><p>算数/比较运算符</p>
+<ul>
+<li>全等于===：类型也必须相同</li>
+</ul>
+</li>
+<li><p>逻辑运算符</p>
+<p>&amp;&amp; || ！</p>
+<ul>
+<li>其他类型装boolean<ol>
+<li>number：0或者NAN为假，其他为真</li>
+<li>string：除恶空字符串。其他都是true</li>
+<li>null和undefined：false</li>
+<li>对象：所有对象都是true</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>三元运算符 ? : </p>
+</li>
+</ul>
+</li>
+<li><p>流程控制语句</p>
+<ul>
+<li>if…..else….</li>
+<li>switch<ul>
+<li>在Java中可以接收的数据类型：byte、int、short、char、枚举、String</li>
+<li>在JS中，可以接收任意类型的数据</li>
+</ul>
+</li>
+<li>while</li>
+<li>do……while</li>
+<li>for</li>
+</ul>
+</li>
+<li><p>特殊语法</p>
+<ul>
+<li><p>变量的定义使用var关键字，也可以不用</p>
+<p>使用var：定义的是局部变量</p>
+<p>不使用var：定义的是全局变量</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-基本对象"><a href="#3-基本对象" class="headerlink" title="3. 基本对象"></a>3. 基本对象</h1><ol>
+<li><p><strong>Array</strong></p>
+<ul>
+<li>创建<ul>
+<li>var arr = new Array(元素列表);</li>
+<li>var arr = new Array(默认长度);</li>
+<li>var arr = [元素列表];</li>
+</ul>
+</li>
+<li>特点<ul>
+<li>在JS中，数组元素是可变的</li>
+<li>JS中，数组长度也是可变的</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>join(参数)：将数组中的元素按照指定的分隔符拼接为字符串</li>
+<li>push()：向数组的末尾添加一个或更多元素，并返回新的长度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Boolean</strong></p>
+</li>
+<li><p><strong>Date</strong></p>
+<ul>
+<li>创建<ul>
+<li>var date = new Date();</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>toLocalString()：返回当前date对象对应的时间本地字符串格式</li>
+<li>getTime()：返回当前时间对象描述时间到1970年1月1号的毫秒值差</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Math</strong></p>
+<ul>
+<li>创建<ul>
+<li>Math对象不用创建，直接使用 Math.方法名</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>random()：返回0~1之间的随机数。[0,1)</li>
+<li>cell(x)：对数字进行向上舍入</li>
+<li>floor(x)：向下舍入</li>
+<li>round(x)：把数四舍五入为最接近的整数</li>
+</ul>
+</li>
+<li>属性<ul>
+<li>PI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Number</strong></p>
+</li>
+<li><p><strong>String</strong></p>
+</li>
+<li><p><strong>RegExp</strong>：正则表达式对象</p>
+<ul>
+<li><p>正则表达式：定义字符串的组成规则</p>
+<ul>
+<li><p>定义单个字符：[]，如 [a]，[ab]，[a<del>zA</del>Z0~9]</p>
+</li>
+<li><p>\d ：单个数字字符</p>
+</li>
+<li><p>\w：单个单词字符</p>
+</li>
+<li><p>量词符号：</p>
+<p>*表示出现0次或多次</p>
+<p>？表示出现0次或1次</p>
+<p>+表示出现1次或多次</p>
+<p>{m,n} m&lt;=数量&lt;=n，m如果缺省表示最多n次；n如果缺省表示最少m次</p>
+<p>如 <code>\w&#123;6,12&#125;</code></p>
+</li>
+<li><p>开始结束符号：开始^  结束$</p>
+</li>
+</ul>
+</li>
+<li><p>正则对象</p>
+<ul>
+<li>创建<ol>
+<li>var reg = new RegExp(“正则表达式”);</li>
+<li>var reg = /正则表达式/ ;</li>
+</ol>
+</li>
+<li>方法<ol>
+<li>test(字符串)：验证字符串是否符合规范</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Global</strong></p>
+<ul>
+<li><p>特点：全局对象，封装的方法不需要对象可以直接调用。 方法名()</p>
+</li>
+<li><p>方法</p>
+<ul>
+<li><p>encodeURI(str)：URL编码</p>
+<p>decodeURI(str)：URL解码</p>
+</li>
+<li><p>encodeURIComponent(str)：URL编码</p>
+<p>decodeURIComponent(str)：URL解码</p>
+</li>
+<li><p>parseInt()：将字符串转换为数字，逐一判断每一个字符是否是数字，知道不是数字为止，将数字部分转为number</p>
+</li>
+<li><p>isNAN()：判断是否是NAN   </p>
+<p>如： var a = NAN;  a == NAN; //false</p>
+<p>​        isNAN(a);//true</p>
+</li>
+<li><p>eval()：将JavaScript字符串转换为脚本代码来执行</p>
+</li>
+</ul>
+</li>
+<li><p>URL编码：</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Function</strong>：函数对象</p>
+<ul>
+<li>创建<ul>
+<li>var fun = new Function(形式参数列表，方法体)</li>
+<li>function 方法名称(形式参数列表)  {   方法体  }</li>
+<li>var 方法名 = function()  {  方法体  }</li>
+</ul>
+</li>
+<li>属性<ul>
+<li>length：形参的个数</li>
+</ul>
+</li>
+<li>特点<ul>
+<li>方法定义时形参的类型不用写，返回值类型也不写</li>
+<li>方法是一个对象，如果定义名称相同的方法，会覆盖</li>
+<li><strong>在JS中，方法的调用只与方法名称有关，和参数列表无关</strong></li>
+<li><strong>在方法声明中有一个隐藏的内置对象(数组)，arguments，封装所有的实际参数</strong></li>
+</ul>
+</li>
+<li>调用<ul>
+<li>方法名称(实际参数列表)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/01/19/JavaScript/" data-id="cknhe7buv001sows6f7foeeru" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CSS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/18/CSS/" class="article-date">
+  <time datetime="2021-01-18T02:40:58.000Z" itemprop="datePublished">2021-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/18/CSS/">CSS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><ul>
+<li>层叠样式表。页面美化和布局控制</li>
+<li>层叠：多个样式可以作用在同一个html的元素山，同时生效</li>
+<li>好处<ul>
+<li>将内容展示和样式控制分离，降低耦合度</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-CSS使用"><a href="#2-CSS使用" class="headerlink" title="2. CSS使用"></a>2. CSS使用</h1><ul>
+<li><p>CSS和html结合使用</p>
+<ol>
+<li><p>内联样式</p>
+<p>在标签内使用style属性指定css代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;color: antiquewhite&quot;</span>&gt;</span>你好<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内部样式</p>
+<p>在head标签内，定义style标签，style标签体的内容就是css代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        div&#123;</span><br><span class="line">            color: brown;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--内部样式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>你好<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>外部样式</p>
+<ol>
+<li>定义CSS资源文件</li>
+<li>在head标签内，定义link标签引入外部资源文件</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;../CSS/a.css&quot;</span>&gt;</span></span><br><span class="line">    或者</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="keyword">@import</span> <span class="string">&quot;../CSS/a.css&quot;</span>;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">a.css文件</span><br><span class="line">div&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>css语法</p>
+<ul>
+<li><p>格式</p>
+<p>选择器{</p>
+<p>​    属性名1：属性值1;</p>
+<p>​    属性名2：属性值2</p>
+<p>​    …….</p>
+<p>}</p>
+</li>
+<li><p>选择器：筛选具有相似特征的元素</p>
+<p>每一对属性需要使用;隔开，最后一对属性可以不需要</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-选择器"><a href="#3-选择器" class="headerlink" title="3. 选择器"></a>3. 选择器</h1><h2 id="3-1-基本选择器"><a href="#3-1-基本选择器" class="headerlink" title="3.1 基本选择器"></a>3.1 基本选择器</h2><ol>
+<li>id选择器：选择具体的id属性值的元素。<code>#id属性值&#123;&#125;</code></li>
+<li>元素选择器：选择具有相同标签名称的元素</li>
+<li>类选择器：选择具有相同的class属性值的元素   <code>.class属性值&#123;&#125;</code></li>
+</ol>
+<h2 id="3-2-扩展选择器"><a href="#3-2-扩展选择器" class="headerlink" title="3.2 扩展选择器"></a>3.2 扩展选择器</h2><ul>
+<li><p>选择所有元素   <code>*&#123;&#125;</code></p>
+</li>
+<li><p>并集选择器：<code>选择器1,选择器2&#123;&#125;</code></p>
+</li>
+<li><p>后代元素选择器：选择指定父元素的指定的子元素，<code>父元素&gt;子元素&#123;&#125;</code></p>
+</li>
+<li><p>子元素选择器：选择指定元素内的指定后代元素，<code>祖先元素 子元素&#123;&#125;</code></p>
+</li>
+<li><p>属性选择器：选择元素名称，属性名=属性值的元素，<code>元素名称[属性名=&quot;属性值&quot;]</code></p>
+</li>
+<li><p>伪类选择器：选择一些元素具有的状态，<code>元素:状态&#123;&#125;</code></p>
+<p>如：<code>&lt;a&gt;</code>的状态</p>
+<p>​            link：初始化的状态</p>
+<p>​            visited：被访问过的状态</p>
+<p>​            active：正在访问状态</p>
+<p>​            hover：鼠标悬浮状态</p>
+</li>
+</ul>
+<h1 id="4-CSS属性"><a href="#4-CSS属性" class="headerlink" title="4. CSS属性"></a>4. CSS属性</h1><ol>
+<li><p>字体、文本</p>
+<ul>
+<li><p>font_size：字体大小</p>
+</li>
+<li><p>color：文本颜色</p>
+</li>
+<li><p>text_align：对齐方式</p>
+</li>
+<li><p>line_height：行高</p>
+</li>
+</ul>
+</li>
+<li><p>背景</p>
+<ul>
+<li>background</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">296px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">&quot;../HTML/示意图.PNG&quot;</span>) repeat center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>边框</p>
+<ul>
+<li>border：边框  <code>border:1px solid red;</code></li>
+</ul>
+</li>
+<li><p>尺寸</p>
+<ul>
+<li>width：宽度</li>
+<li>height：高度</li>
+</ul>
+</li>
+<li><p>盒子模型：控制布局</p>
+<ul>
+<li><p>margin：外边距</p>
+</li>
+<li><p>padding：内边距。默认情况下内边距会影响到整个盒子的大小。</p>
+<p>​                 <code>box-sizing: border-box;</code>设置盒子的属性，让width和height就是最终盒子的大小</p>
+</li>
+<li><p>float：浮动</p>
+<ul>
+<li>right</li>
+<li>left</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/01/18/CSS/" data-id="cknhe7bu3000aows68ju871rj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-HTML" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/01/16/HTML/" class="article-date">
@@ -895,134 +1335,6 @@
 
 
   
-    <article id="post-IDEA导入JDBC的jar包" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/12/06/IDEA%E5%AF%BC%E5%85%A5JDBC%E7%9A%84jar%E5%8C%85/" class="article-date">
-  <time datetime="2020-12-06T03:46:14.000Z" itemprop="datePublished">2020-12-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/06/IDEA%E5%AF%BC%E5%85%A5JDBC%E7%9A%84jar%E5%8C%85/">IDEA导入JDBC的jar包</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-JDBC基本概念"><a href="#1-JDBC基本概念" class="headerlink" title="1. JDBC基本概念"></a>1. JDBC基本概念</h1><ul>
-<li>概念：Java Database Connectivity ，Java语言操作数据库</li>
-</ul>
-<h2 id="1-1-本质"><a href="#1-1-本质" class="headerlink" title="1.1 本质"></a>1.1 本质</h2><p>定义了所有操作所有关系型数据库的规则（接口），各个数据库厂商实现接口实现数据库驱动jar包。我们可以使用这套接口（JDBC）编程，真正执行的代码是驱动jar包中的实现类。</p>
-<p><strong>简单理解：假如现在有一个Person接口，其中有一个方法eat，Worker实现类继承这个接口。Person  p = new Worker();  p.eat(); 这里执行的是Worker中实现了的方法。JDBC也是类似，编程时用接口类型调用方法，真正执行的是导入的jar包中实现类对应的实现方法。</strong></p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBC%E6%9C%AC%E8%B4%A8.PNG"></p>
-<h1 id="2-IDEA导入JDBC的jar包–方法一"><a href="#2-IDEA导入JDBC的jar包–方法一" class="headerlink" title="2. IDEA导入JDBC的jar包–方法一"></a>2. IDEA导入JDBC的jar包–方法一</h1><ul>
-<li><p>下载对应MySQL厂商的驱动jar包：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/connector/j/">https://dev.mysql.com/downloads/connector/j/</a></p>
-<p>Select Operating System：Platfrom Independent</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar%E5%8C%85%E4%B8%8B%E8%BD%BD.png"></p>
-</li>
-<li><p>找到mysql-connector-java-8.0.22.jar</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/jar.png"></p>
-</li>
-<li><p>为方便管理，先将jar包复制到项目下面的libs目录下，然后右键libs点击Add as Library</p>
-</li>
-</ul>
-<p>![](<a target="_blank" rel="noopener" href="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/add">https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/add</a> as liabrary.png)</p>
-<ul>
-<li>Level选择Project Liabrary或者Module Liabrary</li>
-</ul>
-<p>![](<a target="_blank" rel="noopener" href="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/add">https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/add</a> as liabrary2.png)</p>
-<h1 id="IDEA导入JDBC的jar包–方法二"><a href="#IDEA导入JDBC的jar包–方法二" class="headerlink" title="IDEA导入JDBC的jar包–方法二"></a>IDEA导入JDBC的jar包–方法二</h1><ul>
-<li>点击file –&gt;project structure </li>
-<li>选择Modules–&gt;Dependencies–&gt; + –&gt;JARs or Directories…</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar.png"></p>
-<ul>
-<li>选择jar包，点击OK</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar1.png"></p>
-<ul>
-<li>继续选择jar包，点击OK </li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar3.png"></p>
-<ul>
-<li>在External Libraries中可以看到jar包</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar4.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/12/06/IDEA%E5%AF%BC%E5%85%A5JDBC%E7%9A%84jar%E5%8C%85/" data-id="cknhe7bug000yows68b7e0w23" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-navicat连接的文件目录" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/12/04/navicat%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95/" class="article-date">
-  <time datetime="2020-12-04T02:32:57.000Z" itemprop="datePublished">2020-12-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/04/navicat%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95/">navicat连接的文件目录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="建立连接时高级选项中的设置位置"><a href="#建立连接时高级选项中的设置位置" class="headerlink" title="建立连接时高级选项中的设置位置"></a>建立连接时高级选项中的设置位置</h1><ul>
-<li>这个设置位置所填写的文件夹路径表示本次数据库连接中编写的查询文件等所在的位置</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/navicat%E6%96%B0%E5%BB%BA%E8%BF%9E%E6%8E%A5%E7%9B%AE%E5%BD%95%E9%80%89%E6%8B%A9.PNG"></p>
-<ul>
-<li>本次连接所建立的数据库有test和test_file，上面所设置的目录文件中会包含这两个文件，test和test_file文件中存放的是本次连接下的查询sql、备份备份文件，不包含表。</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/navicat%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%AE%E5%BD%95.PNG"></p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/navicat%E8%BF%9E%E6%8E%A5%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6.PNG"></p>
-<h1 id="编辑链接中的日志文件"><a href="#编辑链接中的日志文件" class="headerlink" title="编辑链接中的日志文件"></a>编辑链接中的日志文件</h1><ul>
-<li>在【工具栏】中选择【选项】中的【文件位置】可以自定义日志位置</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/logfile.PNG"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/12/04/navicat%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95/" data-id="cknhe7bw10044ows61ofrbq0l" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1073,6 +1385,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/16/MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">MyBatis注解开发</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
           </li>
         
@@ -1082,14 +1402,6 @@
         
           <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
           </li>
         
       </ul>

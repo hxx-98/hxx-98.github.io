@@ -64,6 +64,134 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-IDEA导入JDBC的jar包" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/12/06/IDEA%E5%AF%BC%E5%85%A5JDBC%E7%9A%84jar%E5%8C%85/" class="article-date">
+  <time datetime="2020-12-06T03:46:14.000Z" itemprop="datePublished">2020-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/06/IDEA%E5%AF%BC%E5%85%A5JDBC%E7%9A%84jar%E5%8C%85/">IDEA导入JDBC的jar包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-JDBC基本概念"><a href="#1-JDBC基本概念" class="headerlink" title="1. JDBC基本概念"></a>1. JDBC基本概念</h1><ul>
+<li>概念：Java Database Connectivity ，Java语言操作数据库</li>
+</ul>
+<h2 id="1-1-本质"><a href="#1-1-本质" class="headerlink" title="1.1 本质"></a>1.1 本质</h2><p>定义了所有操作所有关系型数据库的规则（接口），各个数据库厂商实现接口实现数据库驱动jar包。我们可以使用这套接口（JDBC）编程，真正执行的代码是驱动jar包中的实现类。</p>
+<p><strong>简单理解：假如现在有一个Person接口，其中有一个方法eat，Worker实现类继承这个接口。Person  p = new Worker();  p.eat(); 这里执行的是Worker中实现了的方法。JDBC也是类似，编程时用接口类型调用方法，真正执行的是导入的jar包中实现类对应的实现方法。</strong></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBC%E6%9C%AC%E8%B4%A8.PNG"></p>
+<h1 id="2-IDEA导入JDBC的jar包–方法一"><a href="#2-IDEA导入JDBC的jar包–方法一" class="headerlink" title="2. IDEA导入JDBC的jar包–方法一"></a>2. IDEA导入JDBC的jar包–方法一</h1><ul>
+<li><p>下载对应MySQL厂商的驱动jar包：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/connector/j/">https://dev.mysql.com/downloads/connector/j/</a></p>
+<p>Select Operating System：Platfrom Independent</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar%E5%8C%85%E4%B8%8B%E8%BD%BD.png"></p>
+</li>
+<li><p>找到mysql-connector-java-8.0.22.jar</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/jar.png"></p>
+</li>
+<li><p>为方便管理，先将jar包复制到项目下面的libs目录下，然后右键libs点击Add as Library</p>
+</li>
+</ul>
+<p>![](<a target="_blank" rel="noopener" href="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/add">https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/add</a> as liabrary.png)</p>
+<ul>
+<li>Level选择Project Liabrary或者Module Liabrary</li>
+</ul>
+<p>![](<a target="_blank" rel="noopener" href="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/add">https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/add</a> as liabrary2.png)</p>
+<h1 id="IDEA导入JDBC的jar包–方法二"><a href="#IDEA导入JDBC的jar包–方法二" class="headerlink" title="IDEA导入JDBC的jar包–方法二"></a>IDEA导入JDBC的jar包–方法二</h1><ul>
+<li>点击file –&gt;project structure </li>
+<li>选择Modules–&gt;Dependencies–&gt; + –&gt;JARs or Directories…</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar.png"></p>
+<ul>
+<li>选择jar包，点击OK</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar1.png"></p>
+<ul>
+<li>继续选择jar包，点击OK </li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar3.png"></p>
+<ul>
+<li>在External Libraries中可以看到jar包</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDBCjar4.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/12/06/IDEA%E5%AF%BC%E5%85%A5JDBC%E7%9A%84jar%E5%8C%85/" data-id="cknhe7bug000yows68b7e0w23" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-navicat连接的文件目录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/12/04/navicat%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95/" class="article-date">
+  <time datetime="2020-12-04T02:32:57.000Z" itemprop="datePublished">2020-12-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/04/navicat%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95/">navicat连接的文件目录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="建立连接时高级选项中的设置位置"><a href="#建立连接时高级选项中的设置位置" class="headerlink" title="建立连接时高级选项中的设置位置"></a>建立连接时高级选项中的设置位置</h1><ul>
+<li>这个设置位置所填写的文件夹路径表示本次数据库连接中编写的查询文件等所在的位置</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/navicat%E6%96%B0%E5%BB%BA%E8%BF%9E%E6%8E%A5%E7%9B%AE%E5%BD%95%E9%80%89%E6%8B%A9.PNG"></p>
+<ul>
+<li>本次连接所建立的数据库有test和test_file，上面所设置的目录文件中会包含这两个文件，test和test_file文件中存放的是本次连接下的查询sql、备份备份文件，不包含表。</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/navicat%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%AE%E5%BD%95.PNG"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/navicat%E8%BF%9E%E6%8E%A5%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6.PNG"></p>
+<h1 id="编辑链接中的日志文件"><a href="#编辑链接中的日志文件" class="headerlink" title="编辑链接中的日志文件"></a>编辑链接中的日志文件</h1><ul>
+<li>在【工具栏】中选择【选项】中的【文件位置】可以自定义日志位置</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/logfile.PNG"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/12/04/navicat%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95/" data-id="cknhe7bw10044ows61ofrbq0l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-navicat备份数据库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/12/03/navicat%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
@@ -1104,101 +1232,6 @@
 
 
   
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/11/26/test/" class="article-date">
-  <time datetime="2020-11-26T09:17:52.956Z" itemprop="datePublished">2020-11-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="迷茫中（github-io无法访问，尚未解决）"><a href="#迷茫中（github-io无法访问，尚未解决）" class="headerlink" title="迷茫中（github.io无法访问，尚未解决）"></a>迷茫中（github.io无法访问，尚未解决）</h1><ul>
-<li>网址hxx-98.github.io访问出现了问题，让其他朋友亲戚试着打开这个网址，发现有的可以，但有的不行，很是困惑，不知道后期会不会恢复。</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/github2.png"></p>
-<ul>
-<li>不知所以的排查中，虽然还是没解决……..</li>
-<li>GitHub能正常访问，检查自己的GitHub用户名就是hxx-98，仓库名和域名均设置正确………..</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/GitHub.png"></p>
-<ul>
-<li>ping一下看看，怎么成了回环地址。</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/1fcd49f1ba65ddf068f0ea85b4feaed.png"></p>
-<ul>
-<li>看看hosts文件（C:\Windows\System32\drivers\etc），是不是被改了，好像并没有哎。。。。</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/e1917c22d9f624605ebc22d69a7a7b1.png"></p>
-<ul>
-<li>逐渐放弃，文章可以部署上去，只是现在自己电脑没法访问了，纠结了下，自我安慰可以当个笔记用吧。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/11/26/test/" data-id="cknhe7bwb004kows63rrs590w" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/11/26/hello-world/" class="article-date">
-  <time datetime="2020-11-26T09:06:56.376Z" itemprop="datePublished">2020-11-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/26/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/11/26/hello-world/" data-id="cknhe7bvt003oows6h0nv2vk2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1249,6 +1282,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/16/MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">MyBatis注解开发</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
           </li>
         
@@ -1258,14 +1299,6 @@
         
           <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
           </li>
         
       </ul>

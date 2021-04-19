@@ -64,6 +64,98 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-对象的创建和使用-IDEA-Java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/12/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8-IDEA-Java/" class="article-date">
+  <time datetime="2020-08-12T04:33:08.000Z" itemprop="datePublished">2020-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/12/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8-IDEA-Java/">对象的创建和使用(IDEA-Java-导包)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h1><ul>
+<li>在src目录下选择或者新建一个包，再该目录下右键创建Java class，在属性名处使用快捷键Alt+insert或者右键选择Generate可以快速生成get和set方法。</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/get%E5%92%8Cset.PNG"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/parent.PNG"></p>
+<ul>
+<li>项目中包和类目录结构，<strong>当使用到的类和main不在一个包路径下时，需要使用import关键字导入所在类包。IDEA中输入类名时会自动出现import代码。</strong></li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/IDEA%E6%96%B0%E5%BB%BA%E7%B1%BB.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/12/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8-IDEA-Java/" data-id="cknhe7bwy0065ows60sfqbeiq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java内存分布" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/12/Java%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/" class="article-date">
+  <time datetime="2020-08-12T02:54:12.000Z" itemprop="datePublished">2020-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/12/Java%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/">Java内存分布</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java的内存划分为5个部分"><a href="#Java的内存划分为5个部分" class="headerlink" title="Java的内存划分为5个部分"></a>Java的内存划分为5个部分</h1><ol>
+<li>栈区（Stack）：存放方法中的局部变量：方法的参数，方法{}内部的变量。<strong>方法的运行一定在栈中</strong></li>
+<li>堆区（Heap）：<strong>用new分配的变量都在堆中</strong>，堆内存中的东西都有一个16进制的地址。</li>
+<li>方法区（Method Area）：存储.class相关信息，包含方法的信息。</li>
+<li>本地方法栈（Native Method Stack）：与操作系统相关</li>
+<li>寄存器（pc Register）：和CPU相关</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/12/Java%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/" data-id="cknhe7buz001yows6001hejem" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数组(java)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/12/%E6%95%B0%E7%BB%84(java)/" class="article-date">
@@ -711,213 +803,6 @@
 
 
   
-    <article id="post-多态" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/13/%E5%A4%9A%E6%80%81/" class="article-date">
-  <time datetime="2020-04-13T03:21:12.000Z" itemprop="datePublished">2020-04-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/13/%E5%A4%9A%E6%80%81/">多态</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><h2 id="1-多态的基本概念"><a href="#1-多态的基本概念" class="headerlink" title="1 多态的基本概念"></a>1 多态的基本概念</h2><p><strong>多态是C++面向对象三大特性之一</strong></p>
-<p>多态分为两类</p>
-<ul>
-<li>静态多态: 函数重载 和 运算符重载属于静态多态，复用函数名</li>
-<li>动态多态: 派生类和虚函数实现运行时多态</li>
-</ul>
-<p><strong>多态满足条件：</strong> </p>
-<ul>
-<li>有继承关系</li>
-<li>子类重写父类中的虚函数</li>
-</ul>
-<p><strong>多态使用：</strong>父类指针或引用指向子类对象</p>
-<p><strong>静态多态和动态多态区别：</strong></p>
-<ul>
-<li><strong>静态多态的函数地址早绑定  -  编译阶段确定函数地址</strong></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;动物在说话&quot;</span>&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span>:</span><span class="keyword">public</span> Animal&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;小猫在说话&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//地址早绑定，在编译阶段就确定了函数地址 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dospeak</span><span class="params">(Animal &amp;animal)</span></span>&#123;</span><br><span class="line">	animal.speak();</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Cat cat;</span><br><span class="line">	dospeak(cat); <span class="comment">//Animal &amp;animal = cat </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">动物在说话</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>动态多态的函数地址晚绑定  -  运行阶段确定函数地址</strong></p>
-<p>如果函数地址在编译阶段就能确定，那么静态联编<br>如果函数地址在运行阶段才能确定，就是动态联编</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//函数前面加上virtual关键字，变成虚函数，那么编译器在编译的时候就不能确定函数调用了。</span></span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span></span>&#123; <span class="comment">//虚函数 </span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;动物在说话&quot;</span>&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span>:</span><span class="keyword">public</span> Animal&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//重写 函数返回值类型 函数名 参数列表完全相同</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;小猫在说话&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小猫在说话</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-纯虚函数和抽象类"><a href="#2-纯虚函数和抽象类" class="headerlink" title="2 纯虚函数和抽象类"></a>2 纯虚函数和抽象类</h2><ul>
-<li><p>在多态中，通常父类中虚函数的实现是毫无意义的，主要都是调用子类重写的内容，因此可以将虚函数改为<strong>纯虚函数</strong>。当类中有了纯虚函数，这个类也称为<strong>抽象类</strong>。</p>
-</li>
-<li><p>纯虚函数语法：<code>virtual 返回值类型 函数名 （参数列表）= 0 ;</code></p>
-</li>
-<li><p><strong>抽象类特点</strong>：</p>
-<ul>
-<li>无法实例化对象</li>
-<li>子类必须重写抽象类中的纯虚函数，否则也属于抽象类</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="comment">//类中只要有一个纯虚函数就称为抽象类</span></span><br><span class="line">		<span class="comment">//抽象类无法实例化对象</span></span><br><span class="line">		<span class="comment">//子类必须重写父类中的纯虚函数，否则也属于抽象类</span></span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>= <span class="number">0</span>;<span class="comment">//纯虚函数 </span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span>:</span><span class="keyword">public</span> Animal&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;小猫在说话&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dospeak</span><span class="params">(Animal &amp;animal)</span></span>&#123;</span><br><span class="line">	animal.speak();</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Animal *base = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="comment">//Base b;//错误，抽象类无法实例化对象</span></span><br><span class="line">	<span class="comment">//base = new Animal; //错误，抽象类无法实例化对象</span></span><br><span class="line">	base = <span class="keyword">new</span> Cat;</span><br><span class="line">	base-&gt;speak();</span><br><span class="line">	<span class="keyword">delete</span> base; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-虚析构和纯虚析构"><a href="#3-虚析构和纯虚析构" class="headerlink" title="3 虚析构和纯虚析构"></a>3 虚析构和纯虚析构</h2><ul>
-<li><p>多态使用时，如果子类中有属性开辟到堆区，那么父类指针在释放时无法调用到子类的析构代码。</p>
-</li>
-<li><p>解决方式：将父类中的析构函数改为<strong>虚析构</strong>或者<strong>纯虚析构</strong></p>
-</li>
-<li><p>虚析构和纯虚析构共性：</p>
-<ul>
-<li>可以解决父类指针释放子类对象</li>
-<li>都需要有具体的函数实现</li>
-</ul>
-</li>
-<li><p>虚析构和纯虚析构区别：如果是纯虚析构，该类属于抽象类，无法实例化对象</p>
-</li>
-<li><p>虚析构语法：<code>virtual ~类名()&#123;&#125;</code></p>
-</li>
-<li><p>纯虚析构语法：</p>
-<p><code> virtual ~类名() = 0;</code></p>
-<p><code>类名::~类名()&#123;&#125;</code></p>
-</li>
-<li><p>**示例：下面这个例子，父类指针析构时不会调用子类的析构函数，导致如果子类有数据在堆区但是释放不了，内存泄漏 **</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>= <span class="number">0</span>;<span class="comment">//纯虚函数 </span></span><br><span class="line">		Animal()&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Animal的构造函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		~Animal()&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Animal的析构函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span>:</span><span class="keyword">public</span> Animal&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		Cat(<span class="built_in">string</span> name)&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Cat的构造函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">			m_name = <span class="keyword">new</span> <span class="built_in">string</span>(name);<span class="comment">//创建在堆区 </span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;*m_name&lt;&lt;<span class="string">&quot;小猫在说话&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		~Cat()&#123;</span><br><span class="line">			<span class="keyword">if</span>(m_name!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Cat的析构函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">				<span class="keyword">delete</span> m_name;</span><br><span class="line">				m_name = <span class="literal">NULL</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="built_in">string</span> *m_name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dospeak</span><span class="params">(Animal &amp;animal)</span></span>&#123;</span><br><span class="line">	animal.speak();</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Animal *base = <span class="keyword">new</span> Cat(<span class="string">&quot;Tom&quot;</span>);</span><br><span class="line">	base-&gt;speak();</span><br><span class="line">	<span class="keyword">delete</span> base; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>运行结果：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Animal的构造函数</span><br><span class="line">Cat的构造函数</span><br><span class="line">Tom小猫在说话</span><br><span class="line">Animal的析构函数</span><br></pre></td></tr></table></figure>
-
-<p><strong>将父类的析构函数修改为虚函数后</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">virtual ~Animal()&#123;</span><br><span class="line">	cout&lt;&lt;&quot;Animal的析构函数&quot;&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>运行结果：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Animal的构造函数</span><br><span class="line">Cat的构造函数</span><br><span class="line">Tom小猫在说话</span><br><span class="line">Cat的析构函数</span><br><span class="line">Animal的析构函数</span><br></pre></td></tr></table></figure>
-
-<p><strong>将父类的析构函数修改为纯虚析构后，必须要在类外实现，防止父类有堆区数据</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>= <span class="number">0</span>;<span class="comment">//纯虚函数 </span></span><br><span class="line">		Animal()&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Animal的构造函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">virtual</span> ~Animal() = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Animal::~Animal()&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Animal的纯虚析构&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/04/13/%E5%A4%9A%E6%80%81/" data-id="cknhe7bww005zows66ltv8gvo" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-继承" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/12/%E7%BB%A7%E6%89%BF/" class="article-date">
-  <time datetime="2020-04-12T10:19:05.000Z" itemprop="datePublished">2020-04-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/12/%E7%BB%A7%E6%89%BF/">继承</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><h2 id="1-语法"><a href="#1-语法" class="headerlink" title="1 语法"></a>1 语法</h2><ul>
-<li><p>继承的好处：可以减少重复的代码</p>
-</li>
-<li><p>class A : public B; </p>
-<p>A 类称为子类 或 派生类</p>
-<p>B 类称为父类 或 基类</p>
-</li>
-<li><p><strong>派生类中的成员，包含两大部分</strong>：</p>
-<p>一类是从基类继承过来的，一类是自己增加的成员。</p>
-<p>从基类继承过过来的表现其共性，而新增的成员体现了其个性。</p>
-</li>
-</ul>
-<h2 id="2-继承方式"><a href="#2-继承方式" class="headerlink" title="2 继承方式"></a>2 继承方式</h2><p><strong>继承方式一共有三种：</strong></p>
-<ul>
-<li>公共继承</li>
-<li>保护继承</li>
-<li>私有继承</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/clip_image002.png"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">int</span> A;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> B;</span><br><span class="line">	<span class="keyword">protected</span>:</span><br><span class="line">		<span class="keyword">int</span> C;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son1</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">			A = <span class="number">10</span>;</span><br><span class="line">			<span class="comment">//B = 20;//报错， 父类中的私有成员，子类不可访问 </span></span><br><span class="line">			C = <span class="number">30</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son2</span>:</span><span class="keyword">protected</span> Base&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">			A = <span class="number">10</span>;<span class="comment">//仍是公有成员 </span></span><br><span class="line">			<span class="comment">//B = 20;//报错， 父类中的私有成员，子类不可访问 </span></span><br><span class="line">			C = <span class="number">30</span>;<span class="comment">//仍是保护成员 </span></span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son3</span>:</span><span class="keyword">private</span> Base&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">			A = <span class="number">10</span>;<span class="comment">//仍是公有成员 </span></span><br><span class="line">			<span class="comment">//B = 20;//报错， 父类中的私有成员，子类不可访问 </span></span><br><span class="line">			C = <span class="number">30</span>;<span class="comment">//仍是保护成员 </span></span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//公有继承 </span></span><br><span class="line">	Son1 s1;</span><br><span class="line">	s1.func();</span><br><span class="line">	s1.A = <span class="number">100</span>;</span><br><span class="line"><span class="comment">//	s1.C = 200;//报错，在公有继承后仍是保护成员，不支持类外访问 </span></span><br><span class="line">	<span class="comment">//保护继承 </span></span><br><span class="line">	Son2 s2;</span><br><span class="line">	s2.func();</span><br><span class="line"><span class="comment">//	s2.A = 1000;//报错，保护继承后除私有成员外，其余在子类中均为保护成员 </span></span><br><span class="line">	Son3 s3;</span><br><span class="line">	s3.func();	</span><br><span class="line"><span class="comment">//	s3.A = 1000;//报错 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-继承中的对象模型"><a href="#3-继承中的对象模型" class="headerlink" title="3 继承中的对象模型"></a>3 继承中的对象模型</h2><p><strong>父类中私有成员也被子类继承下去了，只是由编译器隐藏后访问不到。</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">int</span> A;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> B;</span><br><span class="line">	<span class="keyword">protected</span>:</span><br><span class="line">		<span class="keyword">int</span> C;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son1</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">int</span> D; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//父类中所有非静态成员属性都会被子类继承下去 </span></span><br><span class="line">	Son1 s1;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof Son1 = &quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(Son1)&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//输出 16</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-继承中的构造和析构顺序"><a href="#4-继承中的构造和析构顺序" class="headerlink" title="4 继承中的构造和析构顺序"></a>4 继承中的构造和析构顺序</h2><p><strong>子类继承父类后，当创建子类对象，也会调用父类的构造函数。先构造父类，析构一般和构造顺序相反。</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	Base()&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Base的构造函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Base()&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Base的析构函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	 Son()&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Son的构造函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Son()&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Son的析构函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Base b;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	Son s1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Base的构造函数</span><br><span class="line">Base的构造函数</span><br><span class="line">Son的构造函数</span><br><span class="line">Son的析构函数</span><br><span class="line">Base的析构函数</span><br><span class="line">Base的析构函数</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-继承中同名处理方式"><a href="#5-继承中同名处理方式" class="headerlink" title="5 继承中同名处理方式"></a>5 继承中同名处理方式</h2><p><strong>子类与父类出现同名的成员：</strong></p>
-<ul>
-<li>访问子类同名成员   直接访问即可</li>
-<li>访问父类同名成员   需要加作用域</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">int</span> A;</span><br><span class="line">		Base()&#123;</span><br><span class="line">			A = <span class="number">100</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Base - func()调用&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Base - func(int a)调用&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	 <span class="keyword">int</span> A;</span><br><span class="line">	Son()&#123;</span><br><span class="line">		A = <span class="number">200</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Son - func()调用&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Son s;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Son下的m_A = &quot;</span> &lt;&lt; s.A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Base下的m_A = &quot;</span> &lt;&lt; s.Base::A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	s.func();</span><br><span class="line">	s.Base::func();</span><br><span class="line">	s.Base::func(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-继承中同名静态成员处理方式"><a href="#6-继承中同名静态成员处理方式" class="headerlink" title="6 继承中同名静态成员处理方式"></a>6 继承中同名静态成员处理方式</h2><p><strong>静态成员和非静态成员出现同名，处理方式一致</strong></p>
-<ul>
-<li>访问子类同名成员   直接访问即可</li>
-<li>访问父类同名成员   需要加作用域</li>
-</ul>
-<p><strong>示例：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> A;</span><br><span class="line">		<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Base的静态成员函数&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> Base::A = <span class="number">100</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span>:</span><span class="keyword">public</span> Base&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> A;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> Son::A = <span class="number">200</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//通过对象访问 </span></span><br><span class="line">	Son s;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Son下的m_A = &quot;</span> &lt;&lt; s.A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Base下的m_A = &quot;</span> &lt;&lt; s.Base::A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//通过类名访问</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Son下的m_A = &quot;</span> &lt;&lt; Son::A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Base下的m_A = &quot;</span> &lt;&lt; Son::Base::A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	Son::Base::func(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="7-多继承语法"><a href="#7-多继承语法" class="headerlink" title="7 多继承语法"></a>7 多继承语法</h2><p>C++允许<strong>一个类继承多个类</strong>，多继承可能会引发父类中有同名成员出现，需要加作用域区分</p>
-<p>语法：<code> class 子类 ：继承方式 父类1 ， 继承方式 父类2...</code></p>
-<p>示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base1</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Base1()&#123;</span><br><span class="line">		m_A = <span class="number">100</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> m_A;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base2</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Base2()&#123;</span><br><span class="line">		m_A = <span class="number">200</span>;  <span class="comment">//开始是m_B 不会出问题，但是改为mA就会出现不明确</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> m_A;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//语法：class 子类：继承方式 父类1 ，继承方式 父类2 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> :</span> <span class="keyword">public</span> Base2, <span class="keyword">public</span> Base1 </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Son()&#123;</span><br><span class="line">		m_C = <span class="number">300</span>;</span><br><span class="line">		m_D = <span class="number">400</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> m_C;</span><br><span class="line">	<span class="keyword">int</span> m_D;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//多继承容易产生成员同名的情况</span></span><br><span class="line"><span class="comment">//通过使用类名作用域可以区分调用哪一个基类的成员</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Son s;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;sizeof Son = &quot;</span> &lt;&lt; <span class="keyword">sizeof</span>(s) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; s.Base1::m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; s.Base2::m_A &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	test01();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/04/12/%E7%BB%A7%E6%89%BF/" data-id="cknhe7bxw0083ows63yt6d5fb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -968,6 +853,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/16/MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">MyBatis注解开发</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
           </li>
         
@@ -977,14 +870,6 @@
         
           <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
           </li>
         
       </ul>

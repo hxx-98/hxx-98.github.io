@@ -64,6 +64,167 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MVC开发模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/01/MVC%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2021-03-01T06:33:02.000Z" itemprop="datePublished">2021-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/01/MVC%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F/">MVC开发模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-演进"><a href="#1-演进" class="headerlink" title="1.演进"></a>1.演进</h1><ol>
+<li>早期只有servlet，只能使用response输出标签数据</li>
+<li>后来出现jsp，简化了servlet的开发，但是如果过度使用jsp，在sp中写大量的Java代码，又写html等，会容易难于分工和维护</li>
+<li>再后来Java的web开发借鉴MVC开发模式，使得程序的设计更加合理性</li>
+</ol>
+<h1 id="2-MVC"><a href="#2-MVC" class="headerlink" title="2.MVC"></a>2.MVC</h1><ol>
+<li>M：Model，模型。JavaBean<ul>
+<li>完成具体的业务操作，如查询数据库，封装对象</li>
+</ul>
+</li>
+<li>V：View，视图。jsp<ul>
+<li>展示数据</li>
+</ul>
+</li>
+<li>C：Controller，控制器。servlet<ul>
+<li>获取用户的输入  </li>
+<li>调用模型</li>
+<li>将数据交给视图进行展示</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/03/01/MVC%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F/" data-id="cknhe7bv10024ows6cggd4o1f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Session服务器端会话技术" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/02/16/Session%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" class="article-date">
+  <time datetime="2021-02-16T08:56:35.000Z" itemprop="datePublished">2021-02-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/16/Session%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/">Session服务器端会话技术</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><ul>
+<li><p>服务器端会话技术，在<strong>一次会话的多次请求间共享数据</strong>，将数据保存在服务器端的对象HttpSession中。</p>
+</li>
+<li><p>获取session对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取session</span></span><br><span class="line">HttpSession session = request.getSession();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用HttpSession对象方法</p>
+<ol>
+<li>Object getAttribute(String name)</li>
+<li>void setAttribute(String name,Object value)</li>
+<li>void removeAttribute(String name)</li>
+</ol>
+</li>
+</ul>
+<h1 id="2-原理"><a href="#2-原理" class="headerlink" title="2.原理"></a>2.原理</h1><ul>
+<li><p>session的实现是依赖于cookie的。</p>
+<p>客户端浏览器访问服务器SessionDemo1资源时，该资源doget或者doPost方法中如果是第一次使用request.getSeesion()获取session对象，会在内存中创建一个session对象，并赋予一个ID值，服务器端的响应消息中携带<strong>set-cookie:JSESSION=ID值</strong>，浏览器保存该信息为cookie中。</p>
+<p>当客户端再次访问服务器资源时，再请求消息中包含<strong>cookie:JSESSION=ID值</strong>信息，服务器端再次使用request.getSeesion()获取session信息会在内存中查找是否有对应ID值的session对象。</p>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/session1.PNG"></p>
+<h1 id="3-session细节"><a href="#3-session细节" class="headerlink" title="3.session细节"></a>3.session细节</h1><ol>
+<li><p>当客户端关闭后，服务器端不关闭，两次获取session是否为同一个？</p>
+<ul>
+<li>默认情况下 不是</li>
+<li>如果需要获取同一个对象，则可以创建cookie，键为JSESSION，设置最大存活时间，让cookie持久化保存</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    <span class="comment">//获取session</span></span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line">    System.out.println(session);</span><br><span class="line">    <span class="comment">//获取数据</span></span><br><span class="line">    Object msg = session.getAttribute(<span class="string">&quot;msg&quot;</span>);</span><br><span class="line">    <span class="comment">//手动将cookie JSESSIONID修改为当前session ID</span></span><br><span class="line">    Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;JSESSIONID&quot;</span>, session.getId());</span><br><span class="line">    cookie.setMaxAge(<span class="number">60</span>);</span><br><span class="line">    response.addCookie(cookie);</span><br><span class="line">    System.out.println(msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>客户端不关闭,服务器关闭后,两次获取的session时同一个吗?</p>
+<ul>
+<li><p>不是同一个,但是要确保数据不丢失</p>
+<p>session的钝化：在服务器正常关闭之前，将session对象序列化到硬盘上</p>
+<p>session的活化：在服务器启动后，将session文件转化为内存中的session对象即可，原session中数据不会丢失,但是session对象ID不一样。</p>
+</li>
+<li><p>tomcat服务器会自动进行钝化和活化，SESSION.ser文件存放在服务器安装目录下的work目录中，但是IDEA钝化时会将SESSION.ser文件存放在web项目<strong>CATALINA_BASE目录下的\work\Catalina\localhost\项目名称</strong>文件夹中，但是重新启动服务器时会先删除work目录，然后重新建立一个work目录，所以不会活化。</p>
+</li>
+</ul>
+</li>
+<li><p>session的失效时间</p>
+<ul>
+<li>服务器关闭</li>
+<li>session对象调用invaliddate()</li>
+<li>session默认失效时间 30分钟,也可以在tomcat安装目录下的conf文件夹中的web.xml进行设置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="4-session和cookie的区别"><a href="#4-session和cookie的区别" class="headerlink" title="4.session和cookie的区别"></a>4.session和cookie的区别</h1><ul>
+<li><p>session运行在服务器端，cookie运行在客户端</p>
+</li>
+<li><p>cookie有大小和个数限制，session没有大小限制，而是和服务器的内存大小有关</p>
+</li>
+<li><p>cookie有安全隐患，通过拦截或本地文件找到cookie后来可以进行攻击</p>
+</li>
+<li><p>session保存在服务器一段时间后才会消失，session过多会增加服务器的压力</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/02/16/Session%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" data-id="cknhe7bvh0032ows6el8920c0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JSP简单学习" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/02/16/JSP%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" class="article-date">
@@ -760,274 +921,6 @@
 
 
   
-    <article id="post-IDEA-右键new-servlet" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/31/IDEA-%E5%8F%B3%E9%94%AEnew-servlet/" class="article-date">
-  <time datetime="2021-01-31T12:56:43.000Z" itemprop="datePublished">2021-01-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/31/IDEA-%E5%8F%B3%E9%94%AEnew-servlet/">IDEA 右键new servlet</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>![](<a target="_blank" rel="noopener" href="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/new">https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/new</a> servlet.PNG)</p>
-<p>![](<a target="_blank" rel="noopener" href="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/new">https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/new</a> servlet1.PNG)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/01/31/IDEA-%E5%8F%B3%E9%94%AEnew-servlet/" data-id="cknhe7buf000wows63v2j4vwc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-HTTP-request" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/30/HTTP-request/" class="article-date">
-  <time datetime="2021-01-30T09:27:53.000Z" itemprop="datePublished">2021-01-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/30/HTTP-request/">HTTP-request</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-HTTP协议"><a href="#1-HTTP协议" class="headerlink" title="1.HTTP协议"></a>1.HTTP协议</h1><ul>
-<li><p>概念：Hyber Text Transfer Protocal 超文本传输协议</p>
-</li>
-<li><p>定义了客户端和服务器端通信时，发送数据的格式</p>
-</li>
-<li><p>特点：</p>
-<ol>
-<li>基于TCP/IP的高级协议</li>
-<li>默认端口号80</li>
-<li>基于请求/响应模型：一次请求对应一次响应</li>
-<li>无状态：每次请求之间相互独立，不能交互数据</li>
-</ol>
-</li>
-<li><p>历史版本</p>
-<ul>
-<li>1.0版本：每次请求都会重新建立连接</li>
-<li>1.1版本：复用连接</li>
-</ul>
-</li>
-</ul>
-<h1 id="2-HTTP请求消息数据格式"><a href="#2-HTTP请求消息数据格式" class="headerlink" title="2.HTTP请求消息数据格式"></a>2.HTTP请求消息数据格式</h1><ol>
-<li><p><strong>请求行</strong></p>
-<p>请求方式  请求url   请求协议/版本</p>
-<ul>
-<li>GET<ol>
-<li>请求参数在请求行中，在url后</li>
-<li>请求的url长度有限制</li>
-</ol>
-</li>
-<li>POST<ol>
-<li>请求参数在请求体中</li>
-<li>请求的url长度没有限制</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p><strong>请求头</strong>：请求头名称：请求头值，键值对格式</p>
-<ul>
-<li>Host：请求的主机</li>
-<li>User-Agent：浏览器告诉服务器浏览器版本信息。可以在服务器端获取该头的信息，解决浏览器的兼容性问题</li>
-<li>Accept：本浏览器可以接受的资源格式</li>
-<li>Accept-Lanuage：支持语言环境</li>
-<li>Accept-Encoding：压缩格式</li>
-<li>Referer：告诉服务器，当前请求从哪里来。<ol>
-<li>防盗链</li>
-<li>统计工作</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p><strong>请求空行</strong></p>
-<p>空行，分割POST请求消息的请求头和请求体</p>
-</li>
-<li><p><strong>请求体</strong>（正文）</p>
-<ul>
-<li>封装POST请求消息的请求参数</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-请求响应原理"><a href="#3-请求响应原理" class="headerlink" title="3.请求响应原理"></a>3.请求响应原理</h1><ol>
-<li>tomcat服务器会根据请求url中的资源路径，创建对应的servlet对象。</li>
-<li><strong>tomcat服务器会创建request和response对象</strong>，request对象中封装请求消息数据。</li>
-<li>tomcat将request和response两个对象传递给service方法，并且调用service</li>
-<li>在service方法中可以<strong>通过request对象获取请求消息数据</strong>，<strong>通过response对象设置响应消息数据。</strong></li>
-<li>服务器在给浏览器做出响应之前，会从response对象中取设置的响应消息数据。</li>
-</ol>
-<h1 id="4-request对象"><a href="#4-request对象" class="headerlink" title="4.request对象"></a>4.request对象</h1><h2 id="4-1request对象继承体系结构"><a href="#4-1request对象继承体系结构" class="headerlink" title="4.1request对象继承体系结构"></a>4.1request对象继承体系结构</h2><ul>
-<li>ServletRequest：接口</li>
-<li>HttpServletRequest：接口，继承ServletRequest</li>
-<li>org.apache.catalina.connector.RequestFacade：实现HttpServletRequest接口</li>
-</ul>
-<h2 id="4-2request功能"><a href="#4-2request功能" class="headerlink" title="4.2request功能"></a>4.2request功能</h2><ul>
-<li><p><strong>获取请求消息数据</strong></p>
-<ol>
-<li><p><strong>获取请求行数据</strong></p>
-<p>eg. GET /test/demo?name=zhangsan HTTP/1.1</p>
-<ul>
-<li><p>获取请求方式：String getMethod();   GET</p>
-</li>
-<li><p><strong>获取虚拟目录：String getContextPath();    /test</strong></p>
-</li>
-<li><p>获取Servlet路径：String getServletPath();    /demo</p>
-</li>
-<li><p>获取GET方式请求参数：String getQueryString();      name=zhangsan</p>
-</li>
-<li><p><strong>获取请求URI(统一资源标识符)：String getRequestURI();         /test/demo</strong></p>
-<p>获取请求URL(统一资源定位符)：String getRequestURL();     <a target="_blank" rel="noopener" href="http://localhost:8080/test/demo">http://localhost:8080/test/demo</a></p>
-</li>
-<li><p>获取请求协议：String getProtocol：  HTTP/1.1</p>
-</li>
-<li><p>获取客户机的IP地址：String getRemoteAddr();</p>
-</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/requestdemo1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">requestdemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(request.getMethod());</span><br><span class="line">        System.out.println(request.getContextPath());</span><br><span class="line">        System.out.println(request.getServletPath());</span><br><span class="line">        System.out.println(request.getQueryString());</span><br><span class="line">        System.out.println(request.getRequestURI());</span><br><span class="line">        System.out.println(request.getRequestURL());</span><br><span class="line">        System.out.println(request.getProtocol());</span><br><span class="line">        System.out.println(request.getRemoteAddr());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*输入的链接：http://localhost:8080/test/requestdemo1?name=zhangsan</span></span><br><span class="line"><span class="comment">GET</span></span><br><span class="line"><span class="comment">/test</span></span><br><span class="line"><span class="comment">/requestdemo1</span></span><br><span class="line"><span class="comment">name=zhangsan</span></span><br><span class="line"><span class="comment">/test/requestdemo1</span></span><br><span class="line"><span class="comment">http://localhost:8080/test/requestdemo1</span></span><br><span class="line"><span class="comment">HTTP/1.1</span></span><br><span class="line"><span class="comment">0:0:0:0:0:0:0:1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><strong>获取请求头数据</strong><ul>
-<li>String getHeader(String name)：通过请求头的名称获取请求头的值</li>
-<li>Enumeration &lt; String &gt;getHeaderNames()：获取所有的请求头名称</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/requestdemo2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">requestdemo2</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取请求头数据</span></span><br><span class="line">        <span class="comment">//获取所有请求头名称</span></span><br><span class="line">        Enumeration&lt;String&gt; headerNames = request.getHeaderNames();</span><br><span class="line">        <span class="keyword">while</span> (headerNames.hasMoreElements())&#123;</span><br><span class="line">            String name = headerNames.nextElement();</span><br><span class="line">            <span class="comment">//根据名称获取请求头的值</span></span><br><span class="line">            String value = request.getHeader(name);</span><br><span class="line">            System.out.println(name+<span class="string">&quot;----&gt;&quot;</span>+value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//简单防盗链</span></span><br><span class="line">        String referer = request.getHeader(<span class="string">&quot;referer&quot;</span>);</span><br><span class="line">        System.out.println(referer);</span><br><span class="line">        <span class="comment">// http://localhost/test/requestdemo2</span></span><br><span class="line">        <span class="keyword">if</span> (referer!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (referer.contains(<span class="string">&quot;/test&quot;</span>))&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;播放&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;不播放&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<ol start="3">
-<li><p><strong>获取请求体数据</strong></p>
-<ul>
-<li><p>请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数</p>
-</li>
-<li><p>步骤</p>
-<p>(1) 获取流对象，字节流或字符流</p>
-<ul>
-<li>BufferedReader getReader()：获取字符输入流，只能操作字符数据</li>
-<li>ServletInputStream()：获取字节输入流，可以操作所有数据类型</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取请求消息体</span></span><br><span class="line">        BufferedReader br = request.getReader();</span><br><span class="line">        <span class="comment">//读取数据</span></span><br><span class="line">        String line = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> ((line= br.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>(2) 从流对象中拿数据</p>
-</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><p><strong>获取请求参数通用方式</strong></p>
-<ol>
-<li><p>String getParameter(String name)：根据参数名称获取参数值  username=hxx</p>
-</li>
-<li><p>String[] getParameterValues(String name)：根据参数名称获取参数值的数组 hobby=xx&amp;hobby=yy</p>
-</li>
-<li><p>Enumeration&lt; String &gt;getParameterNames()：获取所有请求的参数名称</p>
-</li>
-<li><p>Map&lt; String,String[] &gt;  getParameterMap()：获取所有参数的map集合</p>
-</li>
-<li><p><strong>中文乱码问题：</strong></p>
-<p>get方式：tomcat8已经将get方式乱码问题解决</p>
-<p>post方式：会乱码，需要在获取参数前设置编码 <strong>request.setCharacterEncoding(“utf-8”);</strong></p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    <span class="comment">//设置流的编码,要和所对应的页面格式相同</span></span><br><span class="line">    request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">    <span class="comment">//POST 请求参数</span></span><br><span class="line">    <span class="comment">//根据参数名称获取参数值</span></span><br><span class="line">    String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">    System.out.println(username);</span><br><span class="line"></span><br><span class="line">    String[] hobbies = request.getParameterValues(<span class="string">&quot;hobby&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (String hobby : hobbies) &#123;</span><br><span class="line">        System.out.println(hobby);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取所有请求参数的名称</span></span><br><span class="line">    Enumeration&lt;String&gt; parameterNames = request.getParameterNames();</span><br><span class="line">    <span class="keyword">while</span>(parameterNames.hasMoreElements())&#123;</span><br><span class="line">        <span class="comment">//参数名字</span></span><br><span class="line">        String name = parameterNames.nextElement();</span><br><span class="line">        <span class="comment">//根据参数名字获取参数值</span></span><br><span class="line">        String parameter = request.getParameter(name);</span><br><span class="line">        System.out.println(name+<span class="string">&quot;----&gt;&quot;</span>+parameter);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取所有参数的map集合</span></span><br><span class="line">    Map&lt;String, String[]&gt; parameterMap = request.getParameterMap();</span><br><span class="line">    <span class="comment">//获取键值</span></span><br><span class="line">    Set&lt;String&gt; keySet = parameterMap.keySet();</span><br><span class="line">    <span class="comment">//根据键值获取值</span></span><br><span class="line">    <span class="keyword">for</span> (String name : keySet) &#123;</span><br><span class="line">        String[] values = parameterMap.get(name);</span><br><span class="line">        <span class="keyword">for</span> (String value : values) &#123;</span><br><span class="line">            System.out.println(value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>请求转发:一种在服务器内部的资源跳转方式</strong></p>
-<ol>
-<li><p>通过request对象获取请求转发器对象</p>
-<p>RequestDispatcher getRequestDispacher(String path)：参数为转发资源的路径</p>
-</li>
-<li><p>使用RequestDispatcher对象进行转发</p>
-<p>forward(ServletRequest request, ServletResponse response)</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getRequestDispatcher(<span class="string">&quot;/requestdemo5&quot;</span>).forward(request,response);</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>特点<ul>
-<li>浏览器地址栏路径不发生变化</li>
-<li>只能转发到当前服务器内部资源中</li>
-<li>转发是一次请求</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p><strong>共享数据</strong></p>
-<ul>
-<li>域对象：一个有作用范围的对象，可以在范围内共享数据</li>
-<li>request域：代表一次请求，一般用于请求转发的多个资源中共享数据</li>
-<li>方法<ol>
-<li>setAttribute(String name,Object obj)：存储数据</li>
-<li>Object  setAttribute(String name)：通过键获取值</li>
-<li>removeAttribute(String name)：通过键移除键值对</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/requestdemo4&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">requestdemo4</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//设置request域</span></span><br><span class="line">        request.setAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;hxx&quot;</span>);</span><br><span class="line">        <span class="comment">//转发到demo5</span></span><br><span class="line">        request.getRequestDispatcher(<span class="string">&quot;/requestdemo5&quot;</span>).forward(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet(&quot;/requestdemo5&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">requestdemo5</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;demo5--------&quot;</span>);</span><br><span class="line">        <span class="comment">//获取request域值</span></span><br><span class="line">        Object msg = request.getAttribute(<span class="string">&quot;msg&quot;</span>);</span><br><span class="line">        System.out.println(msg);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<ul>
-<li><p>获取ServletContext对象</p>
-<ul>
-<li>servletContext getServletContext()</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/01/30/HTTP-request/" data-id="cknhe7buc000oows600yy8c2j" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1078,6 +971,14 @@
       <ul>
         
           <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/16/MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">MyBatis注解开发</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/15/MyBatis%E7%BC%93%E5%AD%98/">MyBatis缓存</a>
           </li>
         
@@ -1087,14 +988,6 @@
         
           <li>
             <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/11/MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81SQL/">MyBatis映射文件的动态SQL</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/09/MyBatis%E4%BA%8B%E5%8A%A1/">MyBatis事务</a>
           </li>
         
       </ul>
