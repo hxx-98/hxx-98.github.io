@@ -64,6 +64,104 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java之IDEA下载和环境变量配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/07/Java%E4%B9%8BIDEA%E4%B8%8B%E8%BD%BD%E5%92%8C%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2020-08-07T03:59:50.000Z" itemprop="datePublished">2020-08-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/07/Java%E4%B9%8BIDEA%E4%B8%8B%E8%BD%BD%E5%92%8C%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/">Java之IDEA配置JDK</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="IDEA下载与安装"><a href="#IDEA下载与安装" class="headerlink" title="IDEA下载与安装"></a>IDEA下载与安装</h1><ul>
+<li>首先去IDEA官网上下载所需版本的IDEA，网址是<a target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/">https://www.jetbrains.com/idea/</a>.</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/idea%E4%B8%8B%E8%BD%BD1.png"></p>
+<ul>
+<li>点击DOWNLOAD，选择想要的版本</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/idea%E4%B8%8B%E8%BD%BD2.png"></p>
+<ul>
+<li><p>然后选择自己的安装目录开始安装就可以. </p>
+</li>
+<li><p>安装好后第一次开始运行时会弹出下面提示框,询问是否导入之前的设置项.</p>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/idea%E4%B8%8B%E8%BD%BD3.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/idea%E4%B8%8B%E8%BD%BD4.png"></p>
+<h1 id="JDK下载与安装"><a href="#JDK下载与安装" class="headerlink" title="JDK下载与安装"></a>JDK下载与安装</h1><ul>
+<li>配置环境变量之前需要下载安装JDK，官网网址是　<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase-downloads.html">https://www.oracle.com/java/technologies/javase-downloads.html</a>，但是下载速度比较慢.</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDK%E4%B8%8B%E8%BD%BD1.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/JDK%E4%B8%8B%E8%BD%BD2.png"></p>
+<ul>
+<li>可以选择华为镜像站 <a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/jdk/">https://repo.huaweicloud.com/java/jdk/</a>(可能没有更新到最新版本,但下载速度很快).</li>
+<li>下载之后安装好JDK即可</li>
+</ul>
+<h1 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h1><ul>
+<li>右击我的电脑,点击属性,点击高级系统设置</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F1.png"></p>
+<ul>
+<li>点击高级里面的环境变量</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F2.png"></p>
+<ul>
+<li>在系统变量中新建,变量为JAVA_HOME，值为 JDK 的安装路径</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F3.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F4.png"></p>
+<ul>
+<li>找到Path,点击编辑,新建一项,所填内容是 %JAVA_HOME%\bin ,并将其上移到第一项</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F5.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F6.png"></p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F7.png"></p>
+<h1 id="IDEA创建Java项目配置SDK"><a href="#IDEA创建Java项目配置SDK" class="headerlink" title="IDEA创建Java项目配置SDK"></a>IDEA创建Java项目配置SDK</h1><ul>
+<li>点击configure下的Structure for new project</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/sdk1.PNG"></p>
+<ul>
+<li>在 project settings中编辑SDK,选择ADD SDK</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/sdk2.PNG"></p>
+<ul>
+<li>选择JDK的安装目录,点击OK,再点击Apply</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/sdk3.PNG"></p>
+<ul>
+<li>点击New Project时新建JAVA项目,便不需要再选择SDK了</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/sdk5.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/07/Java%E4%B9%8BIDEA%E4%B8%8B%E8%BD%BD%E5%92%8C%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/" data-id="cknhe7bux001uows63m6kf824" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-多态" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/13/%E5%A4%9A%E6%80%81/" class="article-date">
@@ -1808,226 +1906,6 @@
 
 
   
-    <article id="post-数据库复习笔记二" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" class="article-date">
-  <time datetime="2020-03-11T13:02:56.000Z" itemprop="datePublished">2020-03-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/">《数据库系统概论》(王珊  萨师煊)复习笔记（二）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="第二章-关系数据库"><a href="#第二章-关系数据库" class="headerlink" title="第二章  关系数据库"></a>第二章  关系数据库</h1><h2 id="1-关系数据结构及形式化定义"><a href="#1-关系数据结构及形式化定义" class="headerlink" title="1 关系数据结构及形式化定义"></a>1 关系数据结构及形式化定义</h2><ol>
-<li><p>二维表：逻辑结构，从用户角度，关系模型中数据的逻辑结构是一张二维表</p>
-</li>
-<li><p>建立在集合代数的基础上</p>
-</li>
-<li><p>域：一组具有相同数据类型的值的集合</p>
-</li>
-<li><p><strong>笛卡尔积</strong>：给定一组域D1，D2，…，Dn，这些域中可以有相同的。</p>
-<p>D1×D2×…×Dn ＝｛（d1，d2，…，dn）｜di属于Di，i＝1，2，…，n｝</p>
-<p><strong>元组</strong>：笛卡尔积中每一个元素（d1，d2，…，dn）叫作一个n元组（n-tuple）或简称元组(Tuple)<br>(张三，计算机专业，男)等都是元组 ，通常用t表示<br><strong>分量</strong>：笛卡尔积元素（d1，d2，…，dn）中的每一个值di叫作一个分量。张三，计算机专业，男等都是分量<br><strong>基数</strong>：若Di（i＝1，2，…，n）为有限集，其基数为mi（i＝1，2，…，n），则D1×D2×…×Dn的基数M为：M = M1<em>M2</em>…..*Mn</p>
-<p><strong>表示方法</strong>：笛卡尔积可表示为一个二维表，表中的每行对应一个元组，表中的每列对应一个域</p>
-<p>示例：D1为教师集合（T）= {t1，t2}， D2为学生集合（S）= {s1，s2 ，s3}，D3为课程集合（C）= {c1，c2}<br>则D1×D2×D3是个三元组集合，元组个数为2×3×2，是所有可能的（教师，学生，课程）元组集合</p>
-<p><strong>子集</strong></p>
-</li>
-</ol>
-<ul>
-<li>关系<br>   D1×D2×…×Dn的子集叫作在域D1，D2，…，Dn上的关系，表示为R（D1，D2，…，Dn）<br>R：关系名<br>   n：关系的目或度（Degree）<ul>
-<li>元组<br>关系中的每个元素是关系中的元组，通常用t表示。</li>
-<li>单元关系与二元关系<br>当n=1时，称该关系为单元关系（Unary relation）或一元关系<br>当n=2时，称该关系为二元关系（Binary relation）</li>
-</ul>
-</li>
-<li>关系的表示<br>   关系也是一个二维表，表的每行对应一个元组，表的每列对应一个域<ul>
-<li>属性<br>关系中不同列可以对应相同的域，为了加以区分，必须对每列起一个名字，称为属性。n目关系必有n个属性</li>
-</ul>
-</li>
-</ul>
-<ol start="5">
-<li><p>候选码（Candidate key）：若关系中的某一属性组的值能唯一地标识一个元组，则称该属性组为候选码。简单的情况：候选码只包含一个属性</p>
-</li>
-<li><p>全码（All-key）：最极端的情况：关系模式的所有属性组是这个关系模式的候选码，称为全码</p>
-</li>
-<li><p>主码：若一个关系有多个候选码，则选定其中一个为主码（Primary key）</p>
-</li>
-<li><p>主属性：候选码的诸属性称为主属性（Prime attribute）<br>不包含在任何侯选码中的属性称为非主属性（ Non-Prime attribute）或非码属性（Non-key attribute）</p>
-</li>
-<li><p>三类关系<br>基本关系（基本表或基表）：实际存在的表，是实际存储数据的逻辑表示<br>查询表：查询结果对应的表<br>视图表：由基本表或其他视图表导出的表，是虚表，不对应实际存储的数据</p>
-</li>
-<li><p>关系模式：是型，是对关系的描述，是静态的、稳定的</p>
-<ul>
-<li>是元素集合的结构</li>
-<li>元组语义以及完整性约束条件</li>
-<li>属性间的数据依赖关系集合</li>
-</ul>
-<p>通常简记为R (U)    或    R (A1，A2，…，An)    R: 关系名      A1，A2，…，An  : 属性名</p>
-</li>
-<li><p>关系数据库<br>在一个给定的应用领域中，所有关系的集合构成一个关系数据库</p>
-</li>
-</ol>
-<ul>
-<li>型：关系数据库模式，包括若干域的定义；在这些域上定义的若干关系模式。</li>
-<li>值：关系模式在某一时刻对应的关系的集合，简称为关系数据库</li>
-</ul>
-<h2 id="2-关系操作"><a href="#2-关系操作" class="headerlink" title="2 关系操作"></a>2 关系操作</h2><ol>
-<li>常用的关系操作<ul>
-<li>查询：选择、投影、连接、除、并、交、差</li>
-<li>数据更新：插入、删除、修改，查询的表达能力是其中最主要的部分</li>
-<li><strong>选择、投影、并、差、笛卡尔积是5种基本操作</strong></li>
-</ul>
-</li>
-<li>操作特点：<ul>
-<li>集合操作方式：操作的对象和结果都是集合，一次一集合的方式</li>
-<li>高度非过程化：只要指出“做什么”，不需要描述“怎么做”</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-关系代数"><a href="#3-关系代数" class="headerlink" title="3 关系代数"></a>3 关系代数</h2><ol>
-<li>关系数据库语言分类<ul>
-<li><strong>关系代数语言</strong>：用对关系的运算来表达查询要求。代表：ISBL</li>
-<li><strong>关系演算语言</strong>：用谓词来表达查询要求<br>元组关系演算语言：谓词变元的基本对象是元组变量。代表：APLHA, QUEL<br>域关系演算语言：谓词变元的基本对象是域变量。代表：QBE</li>
-<li><strong>关系代数和关系演算是相互等价的</strong></li>
-<li>具有关系代数和关系演算<strong>双重特点</strong>的语言。代表：SQL（Structured Query Language） </li>
-</ul>
-</li>
-<li>定义：关系数据库的一种抽象的查询语言，用对关系的运算来表达查询。</li>
-<li>要素：运算对象（关系）、关系运算符</li>
-<li>关系代数运算符</li>
-</ol>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6.PNG"></p>
-<ol start="5">
-<li><p>交</p>
-<ul>
-<li><p>R和S：具有相同的目n；相应的属性取自同一个域</p>
-</li>
-<li><p>R∩S：仍为n目关系，由既属于R又属于S的元组组成</p>
-<p>R∩S = { t|t 属于 R ∧ t 属于S }</p>
-</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E4%BA%A4%E9%9B%86%E4%B8%BE%E4%BE%8B.PNG"></p>
-</li>
-<li><p>差</p>
-<ul>
-<li><p>R和S：具有相同的目n，相应的属性取自同一个域</p>
-</li>
-<li><p>R - S ：仍为n目关系，由属于R而不属于S的所有元组组成     </p>
-<p>R -S = { t|t属于R ∧ t属于S }  </p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%B7%AE%E9%9B%86.PNG"></p>
-</li>
-</ul>
-</li>
-<li><p>并</p>
-<ul>
-<li><p>R和S:具有相同的目n（即两个关系都有n个属性），相应的属性取自同一个域</p>
-</li>
-<li><p>R∪S ：仍为n目关系，由属于R或属于S的元组组成   R∪S = { t|t 属于 R ∨ t 属于S }</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%B9%B6%E9%9B%86.PNG"></p>
-</li>
-</ul>
-</li>
-<li><p>笛卡尔积</p>
-<ul>
-<li>严格地讲应该是广义的笛卡尔积（Extended Cartesian Product）<br>R: n目关系，k1个元组<br>S: m目关系，k2个元组</li>
-<li>R×S<br>列：（n+m）列元组的集合，元组的前n列是关系R的一个元组，后m列是关系S的一个元组<br>行：k1×k2个元组</li>
-</ul>
-</li>
-</ol>
-<img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/笛卡尔积.PNG" style="zoom:80%;" />
-
-<ol start="5">
-<li><p>选择</p>
-<ul>
-<li><p>在关系R中选择满足给定条件的元组   F(R)={t | t 属于 R ^F(t) = ‘真’}</p>
-<p>F是选择的条件， F(t)要么为真，要么为假。F的形式：由逻辑运算符连接关系表达式而成</p>
-</li>
-</ul>
-<img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/选择运算.PNG" style="zoom:80%;" />
-</li>
-<li><p>投影</p>
-<p>从关系R中取若干列组成新的关系（从列的角度），投影的结果中要去掉相同的行</p>
-<img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/投影.PNG" style="zoom:80%;" />
-</li>
-<li><p>连接</p>
-<p>连接操作是从两个关系的广义笛卡尔积中选择属性间满足一定条件的元组。通常写为：</p>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E8%BF%9E%E6%8E%A5%E5%AE%9A%E4%B9%89.PNG"></p>
-<img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/连接.PNG" style="zoom:80%;" />
-</li>
-<li><p>等值连接和自然连接</p>
-<p>等值连接：从关系R与S的广义笛卡尔积中选取A、B属性值相等的那些元组</p>
-<p>自然连接：若R和S具有相同的属性组（来自相同的域，表示相同的含义），且连接的运算符θ为“=”，在连接的结果中去掉重复的属性组</p>
-<img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/等值自然连接.PNG" style="zoom:80%;" />
-</li>
-<li><p>外连接<br>如果把舍弃的元组也保存在结果关系中，而在其他属性上填空值(Null)，这种连接就叫做外连接。</p>
-</li>
-<li><p>左外连接<br>如果只把左边关系R中要舍弃的元组保留就叫做左外连接。</p>
-</li>
-<li><p>右外连接<br>如果只把右边关系S中要舍弃的元组保留就叫做右外连接。</p>
-</li>
-<li><p>象集</p>
-<p>关系R(X , Z)，X、 Z是属性组，x是X上的取值，定义x在R中的象集为从R中选出在X上取值为x的元组，去掉X上的分量，只留Z上的分量    Zx = { t[Z] | t属于R 且 t[X]= x }</p>
-<img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/象集.PNG" style="zoom:80%;" />
-</li>
-<li><p>除</p>
-<ul>
-<li>给定关系R（X，Y）和S（Y，Z），其中X，Y，Z为属性组。R中的Y与S中的Y可以有不同的属性名，但必须出自相同的值域。</li>
-<li>R与S的除运算得到一个新的关系P（X），P是R中满足下列条件的元组在X属性列上的投影：元组在X上分量值x的象集Yx包含S在Y上投影的集合。</li>
-</ul>
-<img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/除.PNG" style="zoom:80%;" />
-
-</li>
-</ol>
-<h2 id="4-关系的完整性"><a href="#4-关系的完整性" class="headerlink" title="4 关系的完整性"></a>4 关系的完整性</h2><ol>
-<li>实体完整性和参照完整性：关系模型必须满足的完整性约束条件，称为关系的两个不变性，应该由关系系统自动支持。</li>
-<li>用户定义的完整性： 应用领域需要遵循的约束条件，体现了具体领域中的语义约束 </li>
-<li>实体完整性：若属性A是基本关系R的主属性，则属性A不能取空值</li>
-<li>外码<ul>
-<li>设F是基本关系R的一个或一组属性，但不是关系R的码。如果F与基本关系S的主码Ks相对应，则称F是基本关系R的外码</li>
-<li>基本关系R称为参照关系（Referencing  Relation）</li>
-<li>基本关系S称为被参照关系（Referenced Relation）或目标关系（Target Relation）</li>
-<li>例：学生关系的“专业号”与专业关系的主码“专业号”相对应<br>“专业号”属性是学生关系的外码<br>专业关系是被参照关系，学生关系为参照关系</li>
-<li>关系R和S不一定是不同的关系</li>
-<li>目标关系S的主码Ks 和参照关系的外码F必须定义在同一个（或一组）域上</li>
-<li>外码并不一定要与相应的主码同名，当外码与相应的主码属于不同关系时，往往取相同的名字，以便于识别 </li>
-</ul>
-</li>
-<li>参照完整性<ul>
-<li>若属性（或属性组）F是基本关系R的外码，它与基本关系S的主码Ks相对应（基本关系R和S不一定是不同的关系），则对于R中每个元组在F上的值必须为：<ul>
-<li>或者取空值（F的每个属性值均为空值）</li>
-<li>或者等于S中某个元组的主码值</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" data-id="cknhe7bxc006yows693kt3xj8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA%E3%80%8B/" rel="tag">《数据库系统概论》</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -2078,7 +1956,11 @@
       <ul>
         
           <li>
-            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+            <a href="/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring的依赖注入</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC和实例化bean的配置</a>
           </li>
         
           <li>
@@ -2091,10 +1973,6 @@
         
           <li>
             <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
       </ul>

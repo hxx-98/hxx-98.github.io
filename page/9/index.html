@@ -64,6 +64,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Map集合-Java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/22/Map%E9%9B%86%E5%90%88-Java/" class="article-date">
+  <time datetime="2020-08-22T11:04:54.000Z" itemprop="datePublished">2020-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/22/Map%E9%9B%86%E5%90%88-Java/">Map集合-Java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Map集合概述"><a href="#Map集合概述" class="headerlink" title="Map集合概述"></a>Map集合概述</h1><ol>
+<li>双列集合每一个元素包括两个值key和value，两者数据类型可以相同，也可以不用</li>
+<li>key不可以重复，value可以重复</li>
+<li>key和value一一对应</li>
+</ol>
+<h1 id="Map常用子类"><a href="#Map常用子类" class="headerlink" title="Map常用子类"></a>Map常用子类</h1><ul>
+<li><strong>HashMap</strong>:无序集合，底层是哈希表。当存储自定义类型键值，需要重写toString和equals方法。</li>
+<li><strong>LinkedHashMap</strong>：HashMap的子类，有序集合，存储和取出顺序相同。</li>
+</ul>
+<h1 id="Map常用方法"><a href="#Map常用方法" class="headerlink" title="Map常用方法"></a>Map常用方法</h1><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/Map%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.PNG"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;hxx&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        map.put(<span class="string">&quot;qzy&quot;</span>, <span class="number">23</span>);</span><br><span class="line">        <span class="comment">//使用Map集合中的方法entryset，将Map集合中的Entry对象存储到set集合中</span></span><br><span class="line">        Set&lt;Map.Entry&lt;String, Integer&gt;&gt; set = map.entrySet();</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, Integer&gt; entry : set) &#123;</span><br><span class="line">            String key = entry.getKey();</span><br><span class="line">            Integer value = entry.getValue();</span><br><span class="line">            System.out.println(key + <span class="string">&quot;----&quot;</span> + value);</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/08/22/Map%E9%9B%86%E5%90%88-Java/" data-id="cknhe7bv30028ows6dv071dyy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Collections工具类-Java" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/22/Collections%E5%B7%A5%E5%85%B7%E7%B1%BB-Java/" class="article-date">
@@ -715,75 +765,6 @@ System.out.println(date);
 
 
   
-    <article id="w-模拟发红包案例-Java" class="article article-type-w" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/08/19/%E6%A8%A1%E6%8B%9F%E5%8F%91%E7%BA%A2%E5%8C%85%E6%A1%88%E4%BE%8B-Java/" class="article-date">
-  <time datetime="2020-08-19T07:31:27.000Z" itemprop="datePublished">2020-08-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/19/%E6%A8%A1%E6%8B%9F%E5%8F%91%E7%BA%A2%E5%8C%85%E6%A1%88%E4%BE%8B-Java/">模拟发红包案例-Java</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="模拟发红包"><a href="#模拟发红包" class="headerlink" title="模拟发红包"></a>模拟发红包</h1><ul>
-<li>结构分析</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%8F%91%E7%BA%A2%E5%8C%85%E6%A1%88%E4%BE%8B.PNG"></p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><ul>
-<li>User类</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private double money;</span><br><span class="line"></span><br><span class="line">    public User() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User(String name, double money) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">        this.money &#x3D; money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;显示信息</span><br><span class="line">    public void show() &#123;</span><br><span class="line">        System.out.println(&quot;我叫：&quot; + this.name + &quot;剩余金额：&quot; + this.money);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double getMoney() &#123;</span><br><span class="line">        return money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMoney(double money) &#123;</span><br><span class="line">        this.money &#x3D; money;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Manager类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Manager</span> <span class="keyword">extends</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Manager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Manager</span><span class="params">(String name, <span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name, money);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发平均红包</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Double&gt; <span class="title">send</span><span class="params">(<span class="keyword">double</span> totoalMoney, <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**红包金额平等</span></span><br><span class="line"><span class="comment">         //存放若干红包金额</span></span><br><span class="line"><span class="comment">         ArrayList&lt;Integer&gt; integerArrayList = new ArrayList&lt;&gt;();</span></span><br><span class="line"><span class="comment">         if (totoalMoney &gt; super.getMoney()) &#123;</span></span><br><span class="line"><span class="comment">         System.out.println(&quot;余额不足！&quot;);</span></span><br><span class="line"><span class="comment">         return integerArrayList;</span></span><br><span class="line"><span class="comment">         &#125;</span></span><br><span class="line"><span class="comment">         int avg = totoalMoney / count;//均分</span></span><br><span class="line"><span class="comment">         int mod = totoalMoney % count;//余数</span></span><br><span class="line"><span class="comment">         //修改余额</span></span><br><span class="line"><span class="comment">         super.setMoney(super.getMoney() - totoalMoney);</span></span><br><span class="line"><span class="comment">         for (int i = 0; i &lt; count - 1; i++) &#123;</span></span><br><span class="line"><span class="comment">         integerArrayList.add(avg);</span></span><br><span class="line"><span class="comment">         &#125;</span></span><br><span class="line"><span class="comment">         //最后一个人分红包</span></span><br><span class="line"><span class="comment">         int last = mod + avg;</span></span><br><span class="line"><span class="comment">         integerArrayList.add(last);</span></span><br><span class="line"><span class="comment">         return integerArrayList;</span></span><br><span class="line"><span class="comment">         **/</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//随机分配金额，最少一分钱。最多不超过剩下金额平均值的2倍</span></span><br><span class="line">        <span class="comment">//公式：0.01 + random.nextInt(leftMoney /leftCount * 2)</span></span><br><span class="line"></span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="comment">//totoalMoney最多两位小数，计算完强转为int</span></span><br><span class="line">        <span class="keyword">int</span> leftMoney = (<span class="keyword">int</span>) (totoalMoney* <span class="number">100</span>);<span class="comment">//转换成分计算</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftCount = count;</span><br><span class="line">        <span class="keyword">int</span> max = leftMoney / leftCount * <span class="number">2</span>;</span><br><span class="line">        ArrayList&lt;Double&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">//随机发前count-1个</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> money = r.nextInt(leftMoney / leftCount * <span class="number">2</span>) + <span class="number">1</span>;</span><br><span class="line">            list.add((<span class="keyword">double</span>) money / <span class="number">100</span>);</span><br><span class="line">            leftMoney -= money;</span><br><span class="line">            leftCount--;</span><br><span class="line">        &#125;</span><br><span class="line">        list.add((<span class="keyword">double</span>) leftMoney / <span class="number">100</span>);</span><br><span class="line">        <span class="keyword">super</span>.setMoney(<span class="keyword">super</span>.getMoney()-totoalMoney);</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>Member类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Member</span> <span class="keyword">extends</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Member</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Member</span><span class="params">(String name, <span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name, money);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receive</span><span class="params">(ArrayList&lt;Double&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//随机获取一个集合中的索引编号</span></span><br><span class="line">        <span class="keyword">int</span> index = <span class="keyword">new</span> Random().nextInt(list.size());</span><br><span class="line">        <span class="comment">//根据索引，从集合中删除，得到被删除的红包金额</span></span><br><span class="line">        <span class="keyword">double</span> delta = list.remove(index);</span><br><span class="line">        <span class="comment">//加法，重新设置剩余金额</span></span><br><span class="line">        <span class="keyword">super</span>.setMoney(<span class="keyword">super</span>.getMoney() + delta);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>主类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       Manager manager = <span class="keyword">new</span> Manager(<span class="string">&quot;hxx&quot;</span>, <span class="number">100</span>);</span><br><span class="line">       Member one = <span class="keyword">new</span> Member(<span class="string">&quot;qzy&quot;</span>, <span class="number">0</span>);</span><br><span class="line">       Member two = <span class="keyword">new</span> Member(<span class="string">&quot;zyx&quot;</span>, <span class="number">0</span>);</span><br><span class="line">       Member third = <span class="keyword">new</span> Member(<span class="string">&quot;wn&quot;</span>, <span class="number">0</span>);</span><br><span class="line">       Member four = <span class="keyword">new</span> Member(<span class="string">&quot;hxs&quot;</span>,<span class="number">0</span>);</span><br><span class="line">       <span class="comment">//发红包</span></span><br><span class="line">       ArrayList&lt;Double&gt; list = manager.send(<span class="number">3.1</span>, <span class="number">4</span>);</span><br><span class="line">       <span class="comment">//分红包</span></span><br><span class="line">       one.receive(list);</span><br><span class="line">       two.receive(list);</span><br><span class="line">       third.receive(list);</span><br><span class="line">       four.receive(list);</span><br><span class="line"></span><br><span class="line">       manager.show();</span><br><span class="line"></span><br><span class="line">       one.show();</span><br><span class="line">       two.show();</span><br><span class="line">       third.show();</span><br><span class="line">       four.show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>运行结果</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我叫：hxx剩余金额：<span class="number">96.9</span></span><br><span class="line">我叫：qzy剩余金额：<span class="number">0.56</span></span><br><span class="line">我叫：zyx剩余金额：<span class="number">0.66</span></span><br><span class="line">我叫：wn剩余金额：<span class="number">0.67</span></span><br><span class="line">我叫：hxs剩余金额：<span class="number">1.21</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/08/19/%E6%A8%A1%E6%8B%9F%E5%8F%91%E7%BA%A2%E5%8C%85%E6%A1%88%E4%BE%8B-Java/" data-id="cknhe7bxk007jows6ban68jet" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -834,7 +815,11 @@ System.out.println(date);
       <ul>
         
           <li>
-            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+            <a href="/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring的依赖注入</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC和实例化bean的配置</a>
           </li>
         
           <li>
@@ -847,10 +832,6 @@ System.out.println(date);
         
           <li>
             <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
       </ul>

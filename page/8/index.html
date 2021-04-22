@@ -64,6 +64,94 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-方法引用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/26/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" class="article-date">
+  <time datetime="2020-11-26T09:45:31.000Z" itemprop="datePublished">2020-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/26/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/">方法引用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h1><ul>
+<li><p>双冒号<code>::</code>式引用运算符，其所在的表达式被称为方法引用</p>
+</li>
+<li><p><strong>当对象和方法已经存在时，可以使用方法引用优化Lambda表达式</strong></p>
+</li>
+<li><p>分析：</p>
+<p>下面程序中Lambda表达式的目的：打印参数传递的字符串<br> 在<code>printstring</code>中把参数s传递给了<code>System.out</code>对象，调用out中的方法<code>println</code>对字符串输出<br> 因为<code>System.out</code>对象和<code>println</code>已经存在，所以可使用方法引用优化表达式<br> 使用<code>System.out</code>直接引用<code>println</code>方法</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DemoInterface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(String s)</span></span>;<span class="comment">//打印字符串的抽象方法</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoPrintable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printstring</span><span class="params">(DemoInterface p)</span></span>&#123;</span><br><span class="line">        p.print(<span class="string">&quot;HelloWorld&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        printstring((s)-&gt;&#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;);</span><br><span class="line">        printstring(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="实现引用成员方法"><a href="#实现引用成员方法" class="headerlink" title="实现引用成员方法"></a>实现引用成员方法</h1><ul>
+<li>自定义一个类<code>MethodReObject</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodReObject</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MethodReObject</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MethodReObject</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义一个成员方法，传递字符串，把字符串大写输出</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printUppercase</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">        System.out.println(s.toUpperCase());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123; <span class="comment">//静态成员方法</span></span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello&quot;</span>);;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-通过对象引用成员方法"><a href="#1-通过对象引用成员方法" class="headerlink" title="1. 通过对象引用成员方法"></a>1. 通过对象引用成员方法</h2><ul>
+<li>定义一个接口<code>DemoInterface</code>，包含一个抽象方法<code>print</code></li>
+<li>在主类中定义<code>printstring</code>方法，参数为接口<code>DemoInterface</code>类型，方法中调用接口的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DemoInterface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(String s)</span></span>;<span class="comment">//打印字符串的抽象方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printstring</span><span class="params">(DemoInterface p)</span></span>&#123;</span><br><span class="line">        p.print(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        printstring((s)-&gt;&#123;</span><br><span class="line">            MethodReObject mp = <span class="keyword">new</span> MethodReObject();</span><br><span class="line">            mp.printUppercase(s);</span><br><span class="line">        &#125;);</span><br><span class="line">        MethodReObject object = <span class="keyword">new</span> MethodReObject();</span><br><span class="line">        printstring(object::printUppercase);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-通过类名引用静态方法"><a href="#2-通过类名引用静态方法" class="headerlink" title="2. 通过类名引用静态方法"></a>2. 通过类名引用静态方法</h2><ul>
+<li>定义一个函数式接口<code>Calcable</code>，包含抽象方法可以计算两个数的和</li>
+<li>在主类中定义方法<code>method1</code>,参数传递<code>Calcable</code>接口，调用其中的给抽象方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Calcable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">method1</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,Calcable p)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> p.cal(a,b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r = method1(<span class="number">1</span>,<span class="number">2</span>,MethodReObject::calc); <span class="comment">//通过类名引用静态方法</span></span><br><span class="line">        System.out.println(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-通过super和this引用成员方法"><a href="#3-通过super和this引用成员方法" class="headerlink" title="3. 通过super和this引用成员方法"></a>3. 通过super和this引用成员方法</h2><ul>
+<li><p>如果存在继承关系，当Lambda中需要super调用时，也可以使用方法引用进行替代</p>
+</li>
+<li><p>this代表当前对象，如果需要引用的方法就是当前类中的成员方法，可以使用 <code>this::成员方法</code> 来进行方法引用</p>
+<ul>
+<li><p>定义函数式接口<code>Greetable</code></p>
+</li>
+<li><p>定义子类<code>SubReObject</code> 继承 <code>MethodReObject</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Greetable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greet</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SubReObject</span> <span class="keyword">extends</span> <span class="title">MethodReObject</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello,i&#x27;m hxx&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义一个方法参数传递函数式接口Greetable</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">(Greetable g)</span></span>&#123;</span><br><span class="line">        g.greet();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义一个方法调用method</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        method2(()-&gt;&#123;</span><br><span class="line">            MethodReObject obj = <span class="keyword">new</span> MethodReObject();<span class="comment">//创建父类对象</span></span><br><span class="line">            obj.sayHello();</span><br><span class="line">        &#125;);</span><br><span class="line">        method2(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">super</span>.sayHello();</span><br><span class="line">        &#125;);</span><br><span class="line">        method2(<span class="keyword">super</span>::sayHello);</span><br><span class="line">        method2(<span class="keyword">this</span>::sayHello);<span class="comment">//通过this引用本类的方法</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> SubReObject().show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-类的构造器引用"><a href="#4-类的构造器引用" class="headerlink" title="4. 类的构造器引用"></a>4. 类的构造器引用</h2><ul>
+<li>构造器引用使用 <code>类名称::new</code> 的格式表示</li>
+<li>定义函数式接口<code>ObjectBuilder</code> ，创建一个<code>MethodReObject</code>对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ObjectBuilder</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个MethodReObject对象</span></span><br><span class="line">    <span class="function">MethodReObject <span class="title">BuilderObject</span><span class="params">(String name)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">(String name,ObjectBuilder ob)</span></span>&#123;</span><br><span class="line">        MethodReObject object = ob.BuilderObject(name);</span><br><span class="line">        System.out.println(object.getName());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        method2(<span class="string">&quot;hxx&quot;</span>,(String name)-&gt;&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> MethodReObject(name);</span><br><span class="line">        &#125;);</span><br><span class="line">        method2(<span class="string">&quot;hxx&quot;</span>,MethodReObject::<span class="keyword">new</span>);<span class="comment">//构造器引用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-数组的构造器引用"><a href="#5-数组的构造器引用" class="headerlink" title="5. 数组的构造器引用"></a>5. 数组的构造器引用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ArrayBuilder</span> </span>&#123;</span><br><span class="line">    <span class="comment">//定义一个创建int类型数组的方法，参数传递数组的长度，返回创建好的int类型数组</span></span><br><span class="line">    <span class="keyword">int</span> []builderArray(<span class="keyword">int</span> len);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] creatArray(<span class="keyword">int</span> len,ArrayBuilder ab)&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = ab.builderArray(len);</span><br><span class="line">        <span class="keyword">return</span> array;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//调用creatArray方法</span></span><br><span class="line">        <span class="keyword">int</span>[] array = creatArray(<span class="number">3</span>, len -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//int[]引用new</span></span><br><span class="line">        <span class="keyword">int</span>[] array1 = creatArray(<span class="number">3</span>, <span class="keyword">int</span>[]::<span class="keyword">new</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2020/11/26/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" data-id="cknhe7bxh007bows61a9d7rw8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/26/test/" class="article-date">
@@ -989,56 +1077,6 @@
 
 
   
-    <article id="post-Map集合-Java" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/08/22/Map%E9%9B%86%E5%90%88-Java/" class="article-date">
-  <time datetime="2020-08-22T11:04:54.000Z" itemprop="datePublished">2020-08-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/22/Map%E9%9B%86%E5%90%88-Java/">Map集合-Java</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Map集合概述"><a href="#Map集合概述" class="headerlink" title="Map集合概述"></a>Map集合概述</h1><ol>
-<li>双列集合每一个元素包括两个值key和value，两者数据类型可以相同，也可以不用</li>
-<li>key不可以重复，value可以重复</li>
-<li>key和value一一对应</li>
-</ol>
-<h1 id="Map常用子类"><a href="#Map常用子类" class="headerlink" title="Map常用子类"></a>Map常用子类</h1><ul>
-<li><strong>HashMap</strong>:无序集合，底层是哈希表。当存储自定义类型键值，需要重写toString和equals方法。</li>
-<li><strong>LinkedHashMap</strong>：HashMap的子类，有序集合，存储和取出顺序相同。</li>
-</ul>
-<h1 id="Map常用方法"><a href="#Map常用方法" class="headerlink" title="Map常用方法"></a>Map常用方法</h1><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/Map%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.PNG"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;hxx&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        map.put(<span class="string">&quot;qzy&quot;</span>, <span class="number">23</span>);</span><br><span class="line">        <span class="comment">//使用Map集合中的方法entryset，将Map集合中的Entry对象存储到set集合中</span></span><br><span class="line">        Set&lt;Map.Entry&lt;String, Integer&gt;&gt; set = map.entrySet();</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, Integer&gt; entry : set) &#123;</span><br><span class="line">            String key = entry.getKey();</span><br><span class="line">            Integer value = entry.getValue();</span><br><span class="line">            System.out.println(key + <span class="string">&quot;----&quot;</span> + value);</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/08/22/Map%E9%9B%86%E5%90%88-Java/" data-id="cknhe7bv30028ows6dv071dyy" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1089,7 +1127,11 @@
       <ul>
         
           <li>
-            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+            <a href="/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring的依赖注入</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC和实例化bean的配置</a>
           </li>
         
           <li>
@@ -1102,10 +1144,6 @@
         
           <li>
             <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
       </ul>

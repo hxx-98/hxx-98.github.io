@@ -64,6 +64,163 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-DOM" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/20/DOM/" class="article-date">
+  <time datetime="2021-01-20T02:53:15.000Z" itemprop="datePublished">2021-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/20/DOM/">DOM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-DOM简单学习"><a href="#1-DOM简单学习" class="headerlink" title="1. DOM简单学习"></a>1. DOM简单学习</h1><ul>
+<li><p>功能：获取html文档内容</p>
+</li>
+<li><p>代码：获取页面标签(元素)对象 Element</p>
+<ul>
+<li>document.getElementById(id值)</li>
+</ul>
+</li>
+<li><p>操作Element对象</p>
+<ol>
+<li>修改属性值<ul>
+<li>明确获取的对象是哪一个</li>
+<li>查看API文档，查找其中可以设置的属性</li>
+</ul>
+</li>
+<li>修改标签体内容<ul>
+<li>属性：innerHTML<ol>
+<li>获取元素对象</li>
+<li>使用innerHTML属性修改标签体内容</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../img/off.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;开灯&quot;</span> <span class="attr">id</span>=<span class="string">&quot;light&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">&quot;on&quot;</span>&gt;</span>关灯<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> light = <span class="built_in">document</span>.getElementById(<span class="string">&quot;light&quot;</span>);</span></span><br><span class="line"><span class="javascript">    alert(<span class="string">&quot;换图片&quot;</span>);</span></span><br><span class="line"><span class="javascript">    light.src = <span class="string">&quot;../img/on.gif&quot;</span>;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> h1 = <span class="built_in">document</span>.getElementById(<span class="string">&quot;on&quot;</span>);</span></span><br><span class="line"><span class="javascript">    h1.innerHTML=<span class="string">&quot;关灯&quot;</span>;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h1 id="2-DOM概念"><a href="#2-DOM概念" class="headerlink" title="2. DOM概念"></a>2. DOM概念</h1><ul>
+<li><p>Document Object Model文档对象模型</p>
+</li>
+<li><p>将标记语言文档的各个组成部分，封装为对象。可以使用这些对象，对标记语言文档进行CRUD的动态操作。</p>
+</li>
+<li><p>W3C DOM 标准被分为 3 个不同的部分：</p>
+<ul>
+<li><p>核心 DOM - 针对任何结构化文档的标准模型</p>
+<ul>
+<li><p>Document：文档对象</p>
+</li>
+<li><p>Element：元素对象</p>
+</li>
+<li><p>Attribute：属性对象</p>
+</li>
+<li><p>Text：文本对象</p>
+</li>
+<li><p>Comment:注释对象</p>
+</li>
+<li><p>Node：节点对象，其他5个的父对象</p>
+</li>
+</ul>
+</li>
+<li><p>XML DOM - 针对 XML 文档的标准模型</p>
+</li>
+<li><p>HTML DOM - 针对 HTML 文档的标准模型</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-Document对象"><a href="#3-Document对象" class="headerlink" title="3.Document对象"></a>3.Document对象</h1><ol>
+<li>创建：在html dom模型中可以使用window对象获取</li>
+<li>方法<ul>
+<li>获取Element对象<ul>
+<li>getElementById()： 根据id属性值获取元素对象。id属性值一般唯一</li>
+<li>getElementsByTagName()：根据元素名称获取元素对象们。返回值是一个数组</li>
+<li>getElementsByClassName():根据Class属性值获取元素对象们。返回值是一个数组</li>
+<li>getElementsByName(): 根据name属性值获取元素对象们。返回值是一个数组</li>
+</ul>
+</li>
+<li>创建其他DOM对象：<ul>
+<li>createAttribute(name)</li>
+<li>createComment()</li>
+<li>createElement()</li>
+<li>createTextNode()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="4-Element"><a href="#4-Element" class="headerlink" title="4.Element"></a>4.Element</h1><ol>
+<li><p>获取/创建：通过document来获取和创建</p>
+</li>
+<li><p>方法：</p>
+<ul>
+<li><p>removeAttribute()：删除属性</p>
+</li>
+<li><p>setAttribute()：设置属性</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;a&gt;链接&lt;/a&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;button&quot;</span>id=<span class="string">&quot;btn_set&quot;</span>value=<span class="string">&quot;设置属性&quot;</span>&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;button&quot;</span>id=<span class="string">&quot;btn_del&quot;</span>value=<span class="string">&quot;删除属性&quot;</span>&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&quot;btn_set&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> tagName_a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&quot;a&quot;</span>)[<span class="number">0</span>];</span><br><span class="line">    btn.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        tagName_a.setAttribute(<span class="string">&quot;href&quot;</span>,<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> btndel = <span class="built_in">document</span>.getElementById(<span class="string">&quot;btn_del&quot;</span>);</span><br><span class="line">    btndel.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        tagName_a.removeAttribute(<span class="string">&quot;href&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-Node"><a href="#5-Node" class="headerlink" title="5.Node"></a>5.Node</h1><ol>
+<li><p>特点：所有dom对象都可以被认为是一个节点</p>
+</li>
+<li><p>方法：</p>
+<p>CRUD dom树：</p>
+<ul>
+<li>appendChild()：向节点的子节点列表的结尾添加新的子节点。</li>
+<li>removeChild()    ：删除（并返回）当前节点的指定子节点。</li>
+<li>replaceChild()：用新节点替换一个子节点。</li>
+</ul>
+</li>
+<li><p>属性</p>
+<p>parentNode：返回当前节点的父节点</p>
+</li>
+</ol>
+<h1 id="6-HTML-DOM"><a href="#6-HTML-DOM" class="headerlink" title="6.HTML DOM"></a>6.HTML DOM</h1><ol>
+<li>标签体的设置和获取：innerHTML</li>
+<li>使用html元素对象的饿属性</li>
+<li>控制样式<ul>
+<li>使用元素的style属性来设置</li>
+<li>提前定义类选择器的样式，通过元素的className属性来设置其class属性值</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>HTMLDOM<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-class">.d1</span>&#123;</span></span><br><span class="line">            border: 1px solid blue;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;div&quot;</span>&gt;</span></span><br><span class="line">    div</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;div1&quot;</span>&gt;</span></span><br><span class="line">    div</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">&quot;div&quot;</span>);</span></span><br><span class="line"><span class="javascript">    div.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        div.style.border = <span class="string">&quot;1px red solid&quot;</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//font-size----&gt;fontSize</span></span></span><br><span class="line"><span class="javascript">        div.style.fontSize=<span class="string">&quot;50px&quot;</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">&quot;div1&quot;</span>);</span></span><br><span class="line"><span class="javascript">    div1.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        div1.className=<span class="string">&quot;d1&quot;</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> innerHTML = div.innerHTML;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//div中替换一个文本输入框</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    //div.innerHTML = &quot;<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span>&gt;</span>&quot;;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//在div中追加一个文本输入框</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    div.innerHTML += &quot;<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span>&gt;</span>&quot;;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/01/20/DOM/" data-id="cknhe7bu7000fows64hpiav3z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JavaScript" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/01/19/JavaScript/" class="article-date">
@@ -1291,50 +1448,6 @@
 
 
   
-    <article id="post-MySQL启动时出现系统错误5-拒绝访问" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/12/06/MySQL%E5%90%AF%E5%8A%A8%E6%97%B6%E5%87%BA%E7%8E%B0%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF5-%E6%8B%92%E7%BB%9D%E8%AE%BF%E9%97%AE/" class="article-date">
-  <time datetime="2020-12-06T07:12:22.000Z" itemprop="datePublished">2020-12-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/06/MySQL%E5%90%AF%E5%8A%A8%E6%97%B6%E5%87%BA%E7%8E%B0%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF5-%E6%8B%92%E7%BB%9D%E8%AE%BF%E9%97%AE/">MySQL启动时出现系统错误5.拒绝访问</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MySQL启动时出现系统错误5-拒绝访问的解决办法"><a href="#MySQL启动时出现系统错误5-拒绝访问的解决办法" class="headerlink" title="MySQL启动时出现系统错误5.拒绝访问的解决办法"></a>MySQL启动时出现系统错误5.拒绝访问的解决办法</h1><ul>
-<li>以管理员身份运行cmd</li>
-<li>进入MySQL安装目录下的bin目录</li>
-<li>执行net start mysql 或者mysqld –console</li>
-</ul>
-<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF5.PNG"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2020/12/06/MySQL%E5%90%AF%E5%8A%A8%E6%97%B6%E5%87%BA%E7%8E%B0%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF5-%E6%8B%92%E7%BB%9D%E8%AE%BF%E9%97%AE/" data-id="cknhe7bva002mows6fo0ohpkw" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1385,7 +1498,11 @@
       <ul>
         
           <li>
-            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+            <a href="/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring的依赖注入</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC和实例化bean的配置</a>
           </li>
         
           <li>
@@ -1398,10 +1515,6 @@
         
           <li>
             <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
       </ul>

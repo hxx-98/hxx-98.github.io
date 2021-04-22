@@ -64,6 +64,95 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-spring的依赖注入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time datetime="2021-04-21T08:13:20.000Z" itemprop="datePublished">2021-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring的依赖注入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果是经常变化的数据，并不适用于注入的方式</p>
+<p>能注入的数据有三类</p>
+<ul>
+<li>基本类型和String</li>
+<li>其他bean类型（在配置文件或者注解配置过的bean）</li>
+<li>复杂类型/集合类型</li>
+</ul>
+<p>注入方式</p>
+<ul>
+<li>使用构造函数提供</li>
+<li>使用set方法提供</li>
+<li>使用注解提供</li>
+</ul>
+<h1 id="构造函数注入"><a href="#构造函数注入" class="headerlink" title="构造函数注入"></a>构造函数注入</h1><p>就是使用类中的构造函数，给成员变量赋值。注意，赋值的操作不是我们自己做的，而是通过配置的方式，让 spring 框架来为我们注入。</p>
+<p>优势：在获取bean对象时，注入数据是必须的操作，否则对象无法创建成功</p>
+<p>缺点：改变了bean对象的实例化方式，使我们创建对象时，如果用不到这些数据，也必须提供。</p>
+<p><strong>要求：类中需要提供一个对应参数列表的构造函数。</strong></p>
+<p><strong>标签：constructor-arg</strong>，它的属性有：</p>
+<ul>
+<li><p><strong>index</strong>：指定参数在构造函数参数列表的索引位置，索引位置从0开始</p>
+</li>
+<li><p><strong>type</strong>：指定参数在构造函数中的数据类型，该数据类型也是构造函数中某个或某些参数的类型</p>
+</li>
+<li><p><strong>name</strong>：指定参数在构造函数中的名称 </p>
+</li>
+<li><p><strong>value</strong>：它能赋的值是基本数据类型和 String 类型</p>
+</li>
+<li><p><strong>ref</strong>：它能赋的值是其他 bean 类型，也就是说，必须得是在配置文件中配置过的 bean</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">user</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果是经常变化的数据，并不适用于注入的方式</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">user</span><span class="params">(String name, Integer age, Date birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;!--配置user,构造函数注入--&gt;</span><br><span class="line">&lt;bean id=<span class="string">&quot;user&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;cn.hxx.domain.user&quot;</span>&gt;</span><br><span class="line">    &lt;constructor-arg name=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;韩晓璇&quot;</span>/&gt;</span><br><span class="line">    &lt;constructor-arg name=<span class="string">&quot;age&quot;</span> value=<span class="string">&quot;18&quot;</span>/&gt;</span><br><span class="line">    &lt;constructor-arg name=<span class="string">&quot;birthday&quot;</span> ref=<span class="string">&quot;date&quot;</span>/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;!--配置一个日期对象--&gt;</span><br><span class="line">&lt;bean id=&quot;date&quot; class=&quot;java.util.Date&quot;&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="set方法注入"><a href="#set方法注入" class="headerlink" title="set方法注入"></a>set方法注入</h1><ol>
+<li><p>在类中提供需要注入成员的 set 方法，通过配置文件给 bean 中的属性传值：使用 set 方法的方式</p>
+</li>
+<li><p>涉及的标签：<strong>property</strong></p>
+<p><strong>name</strong>：找的是类中 set 方法后面的部分</p>
+<p><strong>ref</strong>：给属性赋值是其他 bean 类型的</p>
+<p><strong>value</strong>：给属性赋值是基本数据类型和 string 类型的</p>
+</li>
+<li><p>优势：创建对象没有明显的限制，可以直接使用默认构造函数</p>
+</li>
+<li><p>缺点：如果某个成员必须有值，则获取对象时可能set方法没有执行</p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">user1</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果是经常变化的数据，并不适用于注入的方式</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(Date birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;!--set方法注入--&gt;</span><br><span class="line">&lt;bean id=<span class="string">&quot;user1&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;cn.hxx.domain.user1&quot;</span>&gt;</span><br><span class="line">    &lt;property name=&quot;age&quot; value=&quot;18&quot;&gt;&lt;/property&gt;</span><br><span class="line">    &lt;property name=&quot;name&quot; value=&quot;韩晓璇&quot;&gt;&lt;/property&gt;</span><br><span class="line">    &lt;property name=&quot;birthday&quot; ref=&quot;date&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="复杂方式注入"><a href="#复杂方式注入" class="headerlink" title="复杂方式注入"></a>复杂方式注入</h1><p>注入集合数据：list结构的：array、list、set；Map结构的：map、entry、props、prop</p>
+<p>在注入集合数据时，只要结构相同，标签可以互换</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">user2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String[] myStrs;</span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; myList;</span><br><span class="line">    <span class="keyword">private</span> Set mySet;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String,String&gt; myMap;</span><br><span class="line">    <span class="keyword">private</span> Properties myProps;</span><br><span class="line">	<span class="comment">//提供setter方法</span></span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">&#125;    </span><br><span class="line">&lt;bean id=<span class="string">&quot;user3&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;cn.hxx.domain.user2&quot;</span>&gt;</span><br><span class="line">    &lt;property name=<span class="string">&quot;myStrs&quot;</span>&gt;</span><br><span class="line">        &lt;array&gt;</span><br><span class="line">            &lt;value&gt;AAA&lt;/value&gt;</span><br><span class="line">        &lt;/array&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property name=<span class="string">&quot;myList&quot;</span>&gt;</span><br><span class="line">        &lt;list&gt;</span><br><span class="line">            &lt;value&gt;AAA&lt;/value&gt;</span><br><span class="line">        &lt;/list&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property name=<span class="string">&quot;myMap&quot;</span>&gt;</span><br><span class="line">        &lt;map&gt;</span><br><span class="line">            &lt;entry key=&quot;testa&quot; value=&quot;aaa&quot;&gt;&lt;/entry&gt;</span><br><span class="line">            &lt;entry key=<span class="string">&quot;testb&quot;</span>&gt;</span><br><span class="line">                &lt;value&gt;bbb&lt;/value&gt;</span><br><span class="line">            &lt;/entry&gt;</span><br><span class="line">        &lt;/map&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property name=<span class="string">&quot;myProps&quot;</span>&gt;</span><br><span class="line">        &lt;props&gt;</span><br><span class="line">            &lt;prop key=&quot;ccc&quot;&gt;ccc&lt;/prop&gt;</span><br><span class="line">        &lt;/props&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" data-id="cknsbogaw0000vgs6e0s6e2gj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-spring的IOC" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/04/19/spring%E7%9A%84IOC/" class="article-date">
@@ -78,7 +167,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+      <a class="article-title" href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC和实例化bean的配置</a>
     </h1>
   
 
@@ -86,13 +175,69 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="1-控制反转"><a href="#1-控制反转" class="headerlink" title="1.控制反转"></a>1.控制反转</h1><p>IOC：Inversion of Control，把创建对象的权利交给框架。包括依赖注入和依赖查找</p>
+<p>作用：削减计算机程序的耦合（依赖关系）</p>
+<h1 id="2-使用-spring-的-IOC-解决程序耦合"><a href="#2-使用-spring-的-IOC-解决程序耦合" class="headerlink" title="2.使用 spring 的 IOC 解决程序耦合"></a>2.使用 spring 的 IOC 解决程序耦合</h1><p>spring依赖配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-context --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建接口和实现类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AccountService</span> </span>&#123;</span><br><span class="line">    <span class="comment">//。。。。</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">AccountService</span> </span>&#123;</span><br><span class="line"><span class="comment">//。。。。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在类路径下或者类路径下的resources中创建一个任意名字的xml文件，给配置文件导入约束；并让spring管理资源</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--把对象的创建交给spring管理--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- bean 标签：用于配置让 spring 创建对象，并且存入 ioc 容器之中</span></span><br><span class="line"><span class="comment">     id 属性：对象的唯一标识。</span></span><br><span class="line"><span class="comment">     class 属性：指定要创建对象的全限定类名</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;cn.hxx.service.impl.AccountServiceImpl&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试是否配置成功</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/*获取spring的IOC核心容器，并根据id获取对象*/</span></span><br><span class="line">        <span class="comment">//获取核心容器对象</span></span><br><span class="line">        ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;bean.xml&quot;</span>);</span><br><span class="line">        <span class="comment">//根据id获取bean对象</span></span><br><span class="line">        AccountService accountService = ac.getBean(<span class="string">&quot;accountService&quot;</span>, AccountService.class);</span><br><span class="line">        System.out.println(accountService);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-Spring-基于-XML-的-IOC-细节"><a href="#3-Spring-基于-XML-的-IOC-细节" class="headerlink" title="3.Spring 基于 XML 的 IOC 细节"></a>3.Spring 基于 XML 的 IOC 细节</h1><h2 id="1-spring-中工厂的类结构图"><a href="#1-spring-中工厂的类结构图" class="headerlink" title="1.spring 中工厂的类结构图"></a>1.spring 中工厂的类结构图</h2><p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/spring%E5%B7%A5%E5%8E%82%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.PNG"></p>
+<h2 id="3-2BeanFactory-和-ApplicationContext-的区别"><a href="#3-2BeanFactory-和-ApplicationContext-的区别" class="headerlink" title="3.2BeanFactory 和 ApplicationContext 的区别"></a>3.2BeanFactory 和 ApplicationContext 的区别</h2><p>BeanFactory时spring容器中的顶层接口，ApplicationContext 时它的子接口</p>
+<p>BeanFactory：在创建核心容器时，创建对象采用的策略是<strong>延迟加载</strong>的方式，即根据id获取对象的时候才会真正的创建对象，适用于创建多例对象</p>
+<p>ApplicationContext ：在创建核心容器时，创建对象采用的是<strong>立即加载</strong>的方式，一读完配置文件马上就创建配置文件中配置的对象，适用于创建单例对象</p>
+<h2 id="3-3ApplicationContext-接口的实现类"><a href="#3-3ApplicationContext-接口的实现类" class="headerlink" title="3.3ApplicationContext 接口的实现类"></a>3.3ApplicationContext 接口的实现类</h2><p>ClassPathXmlApplicationContext：它是从类的根路径下加载配置文件 </p>
+<p>FileSystemXmlApplicationContext：它是从磁盘路径上加载配置文件，配置文件可以在磁盘的任意位置。</p>
+<p>**AnnotationConfigApplicationContext:**当我们使用注解配置容器对象时，需要使用此类来创建 spring 容器。它用来读取注解。</p>
+<h1 id="4-IOC-中-bean-标签和管理对象细节"><a href="#4-IOC-中-bean-标签和管理对象细节" class="headerlink" title="4. IOC 中 bean 标签和管理对象细节"></a>4. IOC 中 bean 标签和管理对象细节</h1><h2 id="4-1bean标签"><a href="#4-1bean标签" class="headerlink" title="4.1bean标签"></a>4.1bean标签</h2><p><strong>作用</strong>：配置让spring创建对象</p>
+<p><strong>属性：</strong></p>
+<p>id：给对象在容器中提供一个唯一标识。用于获取对象。</p>
+<p>class：指定类的全限定类名。用于反射创建对象。默认情况下调用无参构造函数。<br>scope：指定对象的作用范围。</p>
+<ul>
+<li>singleton :默认值，单例的.</li>
+<li>prototype :多例的.</li>
+</ul>
+<p>request :WEB 项目中,Spring 创建一个 Bean 的对象,将对象存入到 request 域中.</p>
+<p>session :WEB 项目中,Spring 创建一个 Bean 的对象,将对象存入到 session 域中.</p>
+<p>global session :WEB 项目中,应用在集群环境的会话范围（全局会话范围）。如果没有集群环境那globalSession                             相当于 session.</p>
+<p>init-method：指定类中的初始化方法名称。</p>
+<p>destroy-method：指定类中销毁方法名称。</p>
+<h2 id="4-2实例化-Bean-的三种方式"><a href="#4-2实例化-Bean-的三种方式" class="headerlink" title="4.2实例化 Bean 的三种方式"></a>4.2<strong>实例化</strong> <strong>Bean</strong> <strong>的三种方式</strong></h2><p><strong>第一种方式：使用默认无参构造函数</strong>。在默认情况下：它会根据默认无参构造函数来创建类对象。如果 bean 中没有默认无参构造函数，将会创建失败。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.itheima.service.impl.AccountServiceImpl&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>第二种方式：spring 管理实例工厂— 使用实例工厂的方法创建对象</strong></p>
+<p>该类可能存在于jar包中，无法修改源码提供默认构造器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 模拟一个实例工厂，创建业务层实现类</span><br><span class="line">* 此工厂创建对象，必须现有工厂实例对象，再调用方法</span><br><span class="line">*/</span><br><span class="line">public class InstanceFactory &#123;</span><br><span class="line">    public static AccountService createAccountService()&#123;</span><br><span class="line">        return new AccountServiceImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">    此种方式是：</span></span><br><span class="line"><span class="comment">     先把工厂的创建交给 spring 来管理。</span></span><br><span class="line"><span class="comment">     然后在使用工厂的 bean 来调用里面的方法</span></span><br><span class="line"><span class="comment">     factory-bean 属性：用于指定实例工厂 bean 的 id。</span></span><br><span class="line"><span class="comment">     factory-method 属性：用于指定实例工厂中创建对象的方法。</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--spring 管理静态工厂-使用静态工厂的方法创建对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;instanceFactory&quot;</span> <span class="attr">class</span>=<span class="string">&quot;cn.hxx.factory.InstanceFactory&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountService&quot;</span> <span class="attr">factory-bean</span>=<span class="string">&quot;instanceFactory&quot;</span> <span class="attr">factory-method</span>=<span class="string">&quot;createAccountService&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>第三种方式：spring 管理静态工厂— 使用静态工厂的方法创建对象</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class staticFactory &#123;</span><br><span class="line">    public static AccountService createAccountService()&#123;</span><br><span class="line">        return new AccountServiceImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">&lt;!-- 此种方式是:</span></span><br><span class="line"><span class="comment">     使用 StaticFactory 类中的静态方法 createAccountService 创建对象，并存入 spring 容器</span></span><br><span class="line"><span class="comment">     id 属性：指定 bean 的 id，用于从容器中获取</span></span><br><span class="line"><span class="comment">     class 属性：指定静态工厂的全限定类名</span></span><br><span class="line"><span class="comment">     factory-method 属性：指定生产对象的静态方法</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;cn.hxx.factory.staticFactory&quot;</span> <span class="attr">factory-method</span>=<span class="string">&quot;createAccountService&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-bean的作用范围和生命周期"><a href="#4-2-bean的作用范围和生命周期" class="headerlink" title="4.2 bean的作用范围和生命周期"></a>4.2 bean的作用范围和生命周期</h2><p>**单例对象：scope=”singleton”**，一个应用只有一个对象的实例。它的作用范围就是整个应用。</p>
+<p>​    生命周期：</p>
+<p>​        对象出生：当应用加载，创建容器时，对象就被创建了。<strong>init-method属性</strong></p>
+<p>​        对象活着：只要容器在，对象一直活着。</p>
+<p>​        对象死亡：当应用卸载，销毁容器时，对象就被销毁了。<strong>init-destroy属性</strong></p>
+<p>**多例对象：scope=”prototype”**，每次访问对象时，都会重新创建对象实例。</p>
+<p>​    生命周期：</p>
+<p>​        对象出生：当使用对象时，spring框架创建新的对象实例。</p>
+<p>​        对象活着：只要对象在使用中，就一直活着。</p>
+<p>​        对象死亡：当对象长时间不用，且没有别的对象引用时，会被 java 的垃圾回收器回收。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;cn.hxx.service.impl.AccountServiceImpl&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;prototype&quot;</span> <span class="attr">init-method</span>=<span class="string">&quot;init&quot;</span> <span class="attr">destroy-method</span>=<span class="string">&quot;destroy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
       <a data-url="http://hxx-98.github.io/2021/04/19/spring%E7%9A%84IOC/" data-id="ckno8rqpm0001j4s6883z17ku" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
+
     </footer>
   </div>
   
@@ -804,124 +949,6 @@
 
 
   
-    <article id="post-MyBatis的CRUD" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/04/08/MyBatis%E7%9A%84CRUD/" class="article-date">
-  <time datetime="2021-04-08T01:15:07.000Z" itemprop="datePublished">2021-04-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/08/MyBatis%E7%9A%84CRUD/">MyBatis的CRUD</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="根据ID查询"><a href="#根据ID查询" class="headerlink" title="根据ID查询"></a>根据ID查询</h1><p>1.持久层接口添加fndById</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">User <span class="title">findById</span><span class="params">(Integer id)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>2.在用户的映射配置文件中配置</p>
-<p><strong>细节：</strong></p>
-<p><strong>resultType</strong> <strong>属性：</strong>用于指定结果集的类型。</p>
-<p><strong>parameterType</strong> <strong>属性</strong>：用于指定传入参数的类型。</p>
-<p><strong>sql语句中使用#{}字符：</strong> 它代表占位符，相当于原来 jdbc 部分所学的 **?**，都是用于执行语句时替换实际的数据。具体的数据是由#{}里面的内容决定的。</p>
-<p>**#{}**中内容的写法：由于数据类型是基本类型，所以此处可以随意写。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findById&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;cn.hxx.domain.User&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;Integer&quot;</span>&gt;</span></span><br><span class="line">	select * from user where id=#&#123;uid&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="添加操作"><a href="#添加操作" class="headerlink" title="添加操作"></a>添加操作</h1><p>1.在持久层接口添加新增方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertOneUser</span><span class="params">(User user)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>2.在用户的映射配置文件中配置</p>
-<p><strong>细节：</strong></p>
-<p>parameterType 属性：代表参数的类型，因为我们要传入的是一个类的对象，所以类型就写<strong>类的全名称。</strong></p>
-<p>#{}中内容的写法：由于我们保存方法的参数是 一个 User 对象，此处要写 User 对象中的属性名称。它用的是 ognl 表达式。</p>
-<p>新增用户之前用户ID为null，新增成功之后ID不为null</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertOneUser&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;cn.hxx.domain.User&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--新增用户后，同时还要返回当前新增用户的 id 值，因为 id 是由数据库的自动增长来实现的，所以		就相当于我们要在新增后将自动增长 auto_increment 的值返回。keyProperty对应类中属性，				keyColumn对应表中名--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span> <span class="attr">keyColumn</span>=<span class="string">&quot;id&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;int&quot;</span> <span class="attr">order</span>=<span class="string">&quot;AFTER&quot;</span>&gt;</span></span><br><span class="line">            select last_insert_id();</span><br><span class="line">        <span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line">        insert into user (username,address,sex,birthday) values (#&#123;username&#125;,#&#123;address&#125;,#&#123;sex&#125;,#&#123;birthday&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="更新操作"><a href="#更新操作" class="headerlink" title="更新操作"></a>更新操作</h1><p>1.在持久层接口中添加更新方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteById</span><span class="params">(Integer id)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>2.配置文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;updateUser&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;cn.hxx.domain.User&quot;</span>&gt;</span></span><br><span class="line">    update user set username=#&#123;username&#125; where id=#&#123;id&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h1><p>1.在持久层接口中添加删除方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteById</span><span class="params">(Integer id)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>2.配置文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;deleteById&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;Integer&quot;</span>&gt;</span></span><br><span class="line">   delete from user where id=#&#123;uid&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h1><p>1.在持久层接口中添加查询方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;User&gt; <span class="title">findByName</span><span class="params">(String name)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>2.配置文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findByName&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;String&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;cn.hxx.domain.User&quot;</span>&gt;</span></span><br><span class="line">	select * from user where username like #&#123;name&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>3.测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; users = userDao.findByName(<span class="string">&quot;%王%&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在控制台输出的语句是：</p>
-<p><code>Preparing select *from user where username like ?</code>  我们在配置文件中没有加入%来作为模糊查询的条件，所以在传入字符串实参时，就需要给定模糊查询的标识%。配置文件中的#{username}也只是一个占位符，所以 SQL 语句显示为“？”。</p>
-<h1 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h1><p>1.在持久层接口中添加聚合方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findTotal</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>2.配置文件</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">&quot;findTotal&quot;</span> resultType=<span class="string">&quot;int&quot;</span>&gt;</span><br><span class="line">	<span class="function">select <span class="title">count</span><span class="params">(id)</span> from user</span>;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="MyBatis和JDBC编程的比较"><a href="#MyBatis和JDBC编程的比较" class="headerlink" title="MyBatis和JDBC编程的比较"></a>MyBatis和JDBC编程的比较</h1><ol>
-<li>数据库链接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库链接池可解决此问题。</li>
-</ol>
-<p>解决：在 SqlMapConfig.xml 中配置数据链接池，使用连接池管理数据库链接。</p>
-<ol start="2">
-<li>Sql 语句写在代码中造成代码不易维护，实际应用 sql 变化的可能较大，sql 变动需要改变 java 代码。</li>
-</ol>
-<p>解决：将 Sql 语句配置在 XXXXmapper.xml 文件中与 java 代码分离。</p>
-<ol start="3">
-<li>向 sql 语句传参数麻烦，因为 sql 语句的 where 条件不一定，可能多也可能少，占位符需要和参数对应。</li>
-</ol>
-<p>解决：Mybatis 自动将 java 对象映射至 sql 语句，通过 statement 中的 parameterType 定义输入参数的类型。</p>
-<ol start="4">
-<li>对结果集解析麻烦，sql 变化导致解析代码变化，且解析前需要遍历，如果能将数据库记录封装成 pojo 对</li>
-</ol>
-<p>象解析比较方便。</p>
-<p>解决：Mybatis 自动将 sql 执行结果映射至 java 对象，通过 statement 中的 resultType 定义输出结果的类型。</p>
-<h1 id="OGNL表达式"><a href="#OGNL表达式" class="headerlink" title="OGNL表达式"></a>OGNL表达式</h1><p>全称：Object Graphic Navigation Language</p>
-<p>通过对象的取值方式来获取数据，在写法上把get省略了。比如，我们获取用户的名称，在类中：user.getUsername();  在OGNL表达式写法：user.username。</p>
-<p>#{user.username}它会先去找 user 对象，然后在 user 对象中找到 username 属性，并调用getUsername()方法把值取出来。但是我们在 parameterType 属性上指定了实体类名称，所以可以省略 user.，而直接写username。</p>
-<p>#{}或者${}中的值为pojo属性名称</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;updateUser&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;cn.hxx.domain.User&quot;</span>&gt;</span></span><br><span class="line">	update user set username=#&#123;username&#125; where id=#&#123;id&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="ResultMap结果集"><a href="#ResultMap结果集" class="headerlink" title="ResultMap结果集"></a>ResultMap结果集</h1><p>resultMap 标签可以在<strong>查询的列名和实体类的属性名称不一致时</strong>，建立对应关系。从而实现封装。</p>
-<p>在 select 标签中使用 resultMap 属性指定引用即可。<strong>同时 resultMap 可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括 pojo 对象和 list 实现一对一查询和一对多查询</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- resultMap 建立 User 实体和数据库表的对应关系</span></span><br><span class="line"><span class="comment">type 属性：指定实体类的全限定类名</span></span><br><span class="line"><span class="comment">id 属性：给定一个唯一标识，是给查询 select 标签引用用的。</span></span><br><span class="line"><span class="comment">--&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;cn.hxx.domain.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;userMap&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">    id 标签：用于指定主键字段</span></span><br><span class="line"><span class="comment">    result 标签：用于指定非主键字段</span></span><br><span class="line"><span class="comment">    column 属性：用于指定数据库列名</span></span><br><span class="line"><span class="comment">    property 属性：用于指定实体类属性名称</span></span><br><span class="line"><span class="comment">    --&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;userId&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;username&quot;</span> <span class="attr">property</span>=<span class="string">&quot;userName&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">property</span>=<span class="string">&quot;userSex&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;address&quot;</span> <span class="attr">property</span>=<span class="string">&quot;userAddress&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;birthday&quot;</span> <span class="attr">property</span>=<span class="string">&quot;userBirthday&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>映射配置：<strong>原来的resultType修改为配置resultMap=”userMap”</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findAll&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;userMap&quot;</span>&gt;</span></span><br><span class="line">	select * from user</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/04/08/MyBatis%E7%9A%84CRUD/" data-id="cknhe7bv8002jows64j23192k" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -972,7 +999,11 @@
       <ul>
         
           <li>
-            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+            <a href="/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring的依赖注入</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC和实例化bean的配置</a>
           </li>
         
           <li>
@@ -985,10 +1016,6 @@
         
           <li>
             <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
       </ul>

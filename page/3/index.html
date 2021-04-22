@@ -64,6 +64,105 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-redis概念和下载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/30/redis%E6%A6%82%E5%BF%B5%E5%92%8C%E4%B8%8B%E8%BD%BD/" class="article-date">
+  <time datetime="2021-03-30T12:50:42.000Z" itemprop="datePublished">2021-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/30/redis%E6%A6%82%E5%BF%B5%E5%92%8C%E4%B8%8B%E8%BD%BD/">redis概念和下载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-关系型数据库和非关系型数据库"><a href="#1-关系型数据库和非关系型数据库" class="headerlink" title="1.关系型数据库和非关系型数据库"></a>1.关系型数据库和非关系型数据库</h1><ul>
+<li><p>redis是一款高性能的NOSQL系列的非关系性数据库</p>
+</li>
+<li><p>NOSQL和关系型数据库的对比</p>
+<ol>
+<li><p>优点</p>
+<p>1）成本：nosql数据库简单易部署，相比关系型数据库价格便宜</p>
+<p>2）查询速度：nosql数据库将数据存储在缓存之中，关系型数据库将数据存储在硬盘中，所以nosql查询速度要快</p>
+<p>3）存储数据的格式：nosql的存储格式是key:value形式、文档、图片等，所以可以存储基础类型以及对象或者是集合等格式，而数据库则只支持基础类型</p>
+<p>4）扩展性：关系型数据库由类似join这样的多表查询机制的限制，导致扩展较难</p>
+</li>
+<li><p>缺点</p>
+<p>1）维护的工具资料有限，因为nosql是新技术</p>
+<p>2）不提供对sql的支持</p>
+<p>3）不提供关系型数据库对事物的处理</p>
+</li>
+</ol>
+</li>
+<li><p>非关系型数据库的优势</p>
+<p>1）性能nosql是基于键值对的，可以想象成表中的主键和值的对应关系，而且不需要经过sql层的解析，所以性能非常高</p>
+<p>2）可扩展性同样也是因为基于键值对，数据之间没有耦合性，所以容易水平扩展 </p>
+</li>
+<li><p>关系型数据库的优势</p>
+<p>1）复杂查询可以用sql语句方便的在一个表和多个表之间查询</p>
+<p>2）事务支持使得对于安全性能很高的数据访问要求得以实现</p>
+</li>
+<li><p>总结</p>
+<p>在通常情况下将数据存储在关系型数据库中，在nosql的数据库中备份存储关系数据库的存储</p>
+</li>
+</ul>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/%E5%85%B3%E7%B3%BB%E5%9E%8B%E5%92%8C%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B.PNG"></p>
+<h1 id="2-什么是redis"><a href="#2-什么是redis" class="headerlink" title="2.什么是redis"></a>2.什么是redis</h1><ul>
+<li>redis是用C语言开发的一个开源的高性能键值对（key-value）数据库，官方提供测试数据，50个并发执行100000个请求，读的速度是110000次/s，写的速度是81000次/s，且redis通过提供多种键值数据类型来适应不同场景下的存储需求。</li>
+<li>目前为止redis支持的键值数据类型如下：<ol>
+<li>字符串类型 String</li>
+<li>哈希类型 hash</li>
+<li>列表类型 list</li>
+<li>集合类型 set</li>
+<li>有序集合类型 sortedset</li>
+</ol>
+</li>
+<li>redis的应用场景<ol>
+<li>缓存（数据查询、短链接、新闻内容、商品内容等）</li>
+<li>聊天室的在线好友列表</li>
+<li>任务队列（秒杀、抢购、12306等）</li>
+<li>应用排行榜</li>
+<li>网站访问统计</li>
+<li>数据过期处理（可以精确到毫秒）</li>
+<li>分布式集群架构中的session分离</li>
+</ol>
+</li>
+</ul>
+<h1 id="3-redis下载安装"><a href="#3-redis下载安装" class="headerlink" title="3.redis下载安装"></a>3.redis下载安装</h1><p>Windows版本下载地址：<a target="_blank" rel="noopener" href="https://github.com/MicrosoftArchive/redis/releases">https://github.com/MicrosoftArchive/redis/releases</a></p>
+<p>解压后可直接使用</p>
+<ul>
+<li>redis.windows.conf：配置文件</li>
+<li>redis-cli.exe：redis的客户端</li>
+<li>redis-server.exe：redis的服务器端</li>
+</ul>
+<p>使用：先启动服务器，然后启动客户端，输入命令存储</p>
+<p><img src="https://reborn-photo-url.oss-cn-beijing.aliyuncs.com/oss:/hxx_photo/redis1.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hxx-98.github.io/2021/03/30/redis%E6%A6%82%E5%BF%B5%E5%92%8C%E4%B8%8B%E8%BD%BD/" data-id="cknhe7bw4004aows68mnqevgp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-注册时异步检测用户名是否已经存在" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/03/30/%E6%B3%A8%E5%86%8C%E6%97%B6%E5%BC%82%E6%AD%A5%E6%A3%80%E6%B5%8B%E7%94%A8%E6%88%B7%E5%90%8D%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8/" class="article-date">
@@ -1196,110 +1295,6 @@
 
 
   
-    <article id="post-EL表达式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/03/01/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
-  <time datetime="2021-03-01T07:44:25.000Z" itemprop="datePublished">2021-03-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/01/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/">EL表达式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h1><ol>
-<li><p>Expression Language 表达式语言</p>
-</li>
-<li><p>作用：替换和简化jsp页面中Java代码的编写</p>
-</li>
-<li><p>语法：${  EL表达式 }</p>
-</li>
-<li><p>注意：jsp默认支持EL表达式，可以设置不解析表达式</p>
-<p>方法一：设置jsp中page指令中的：isELIgonred=”true”，忽略当前jsp页面中的所有EL表达式</p>
-<p>方法二： <code>\$&#123;EL表达式&#125;</code> 忽略当前这个EL表达式</p>
-</li>
-</ol>
-<h1 id="2-EL运算符"><a href="#2-EL运算符" class="headerlink" title="2.EL运算符"></a>2.EL运算符</h1><ol>
-<li><p>算术运算符：+  -  *   /(div)   %(mod)</p>
-</li>
-<li><p>比较运算符：&gt; &lt;    &gt;=  &lt;=   ==   !=</p>
-</li>
-<li><p>逻辑运算符：&amp;&amp;(and)    ||(or)    !(not)</p>
-</li>
-<li><p><strong>空运算符：empty  用于判断字符串、集合、数组对象是否为null并且长度是否为0</strong></p>
-<p> <code>$&#123;empty str&#125;</code></p>
-<p> <code>$&#123;not empty str&#125;</code></p>
-</li>
-</ol>
-<h1 id="3-EL获取值"><a href="#3-EL获取值" class="headerlink" title="3.EL获取值"></a>3.EL获取值</h1><ol>
-<li><p>EL表达式只能从域对象中获取值</p>
-</li>
-<li><p>**语法一：${域名称.键名}**，从指定域中获取指定键的值，如果获取不到则不会显示任何内容（空字符串）</p>
-<ul>
-<li><p>pageScope——-&gt;pageContext域</p>
-</li>
-<li><p>requestScope——&gt;request域</p>
-</li>
-<li><p>sessionScope——&gt;session</p>
-</li>
-<li><p>applicationScope——&gt;application(servletContext)</p>
-</li>
-<li><p>举例：在pageContext中存储，<strong>pageContext.setAttribute(“msg”,”hxx”);</strong></p>
-<p>​            获取值，**${pageScope.msg}**</p>
-</li>
-</ul>
-</li>
-<li><p>**语法二：${键名}**，表示依次从最小的域中查找是否又该键对应的值，直到找到为止。</p>
-</li>
-<li><p><strong>获取对象的值，对象的属性来获取,${域名称.键名.属性名}，本质上会调用对象的getter方法</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Date date;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * 逻辑视图</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBirStr</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (date!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="comment">//格式化日期对象</span></span><br><span class="line">            SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">            <span class="comment">//返回字符串</span></span><br><span class="line">            <span class="keyword">return</span> sdf.format(date);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;%--通过对象的属性来获取--%&gt;</span><br><span class="line">&lt;%  </span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setDate(<span class="keyword">new</span> Date());</span><br><span class="line">    request.setAttribute(<span class="string">&quot;u&quot;</span>,user);</span><br><span class="line">%&gt;</span><br><span class="line">$&#123;u.birStr&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>List集合：${域名称.键名[索引]}，越界时不显示任何内容</strong></p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    list.add(<span class="string">&quot;hxxx&quot;</span>);</span><br><span class="line">    list.add(user);</span><br><span class="line">    request.setAttribute(<span class="string">&quot;l&quot;</span>,list);</span><br><span class="line">%&gt;</span><br><span class="line">$&#123;requestScope.l&#125;&lt;br&gt;</span><br><span class="line">$&#123;l[<span class="number">0</span>]&#125;&lt;br&gt;</span><br><span class="line">&lt;%--越界什么都不显示--%&gt;</span><br><span class="line">$&#123;l[<span class="number">10</span>]&#125;&lt;br&gt;</span><br><span class="line">$&#123;l[<span class="number">1</span>].date&#125;&lt;br&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Map：**${域名称.键名[“key名称”]}   或   ${域名称.键名.key名称}**     </p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;requestScope.m&#125;&lt;br&gt;</span><br><span class="line">$&#123;m.name&#125;&lt;br&gt;</span><br><span class="line">$&#123;m[<span class="string">&quot;name&quot;</span>]&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h1 id="4-隐式对象"><a href="#4-隐式对象" class="headerlink" title="4.隐式对象"></a>4.隐式对象</h1><ol>
-<li><p>EL表达式中有11个隐式对象</p>
-</li>
-<li><p>pageContext</p>
-<ul>
-<li>获取jsp其他八个内置对象</li>
-</ul>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--在jsp中动态获取虚拟目录--%&gt;</span><br><span class="line">$&#123;pageContext.request.contextPath&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hxx-98.github.io/2021/03/01/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="cknhe7bu9000iows6aozme93c" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaweb/" rel="tag">javaweb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1350,7 +1345,11 @@
       <ul>
         
           <li>
-            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC</a>
+            <a href="/2021/04/21/spring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring的依赖注入</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/19/spring%E7%9A%84IOC/">spring的IOC和实例化bean的配置</a>
           </li>
         
           <li>
@@ -1363,10 +1362,6 @@
         
           <li>
             <a href="/2021/04/14/MyBatis%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/">MyBatis延迟加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/13/MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">MyBatis多表查询</a>
           </li>
         
       </ul>
